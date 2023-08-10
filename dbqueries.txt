@@ -8,7 +8,17 @@ To create admin table:
 CREATE TABLE admin(id varchar(12) NOT NULL PRIMARY KEY, password varchar(40) NOT NULL);
 
 To create user table:
-CREATE TABLE user(id varchar(12) NOT NULL PRIMARY KEY, password varchar(40) NOT NULL DEFAULT "1234", name varchar(40) NOT NULL,designation varchar(10) NOT NULL DEFAULT 'ASSOCIATE', doj DATE NOT NULL , dob DATE NOT NULL , gender varchar(6) NOT NULL , department varchar(10) NOT NULL , contact int NOT NULL , check(gender in('Male','Female','Other')));
+CREATE TABLE user(id varchar(12) NOT NULL PRIMARY KEY,
+    password varchar(40) NOT NULL DEFAULT "1234", 
+    name varchar(40) NOT NULL,
+    designation varchar(10) NOT NULL DEFAULT 'ASSOCIATE', 
+    doj DATE NOT NULL , 
+    dob DATE NOT NULL , 
+    gender varchar(6) NOT NULL , 
+    department varchar(10) NOT NULL , 
+    contact int NOT NULL , 
+    check(gender in('Male','Female','Other'))
+    valid int DEFAULT 0 NOT NULL);
 
 To create item table:
 CREATE TABLE item(item_id varchar(12) NOT NULL PRIMARY KEY,description varchar(45) NOT NULL,
