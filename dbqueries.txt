@@ -1,0 +1,19 @@
+SQL Commands:
+
+To create a database : 
+CREATE DATABASE loanSystem;
+USE loanSystem;
+
+To create admin table:
+CREATE TABLE admin(id varchar(12) NOT NULL PRIMARY KEY, password varchar(40) NOT NULL);
+
+To create user table:
+CREATE TABLE user(id varchar(12) NOT NULL PRIMARY KEY, password varchar(40) NOT NULL DEFAULT "1234", name varchar(40) NOT NULL,designation varchar(10) NOT NULL DEFAULT 'ASSOCIATE', doj DATE NOT NULL , dob DATE NOT NULL , gender varchar(6) NOT NULL , department varchar(10) NOT NULL , contact int NOT NULL , check(gender in('Male','Female','Other')));
+
+To create item table:
+CREATE TABLE item(item_id varchar(12) NOT NULL PRIMARY KEY,description varchar(45) NOT NULL,
+issue_status varchar(1) NOT NULL DEFAULT 'N' ,item_category varchar(30) NOT NULL,item_value int NOT NULL,item_make varchar(25) NOT NULL);
+
+To create loan_card table:
+CREATE TABLE loan_card(loan_id varchar(12) NOT NULL PRIMARY KEY, loan_type varchar(40) not null, duration int not null, emp_id varchar(12) not null, item_id varchar(12) not null, interest float not null, issue_date date not null, valid int NOT NULL DEFAULT 0, CONSTRAINT fk_borrower FOREIGN KEY (emp_id) REFERENCES user(id), CONSTRAINT fk_item FOREIGN KEY (item_id) REFERENCES item(item_id));
+
