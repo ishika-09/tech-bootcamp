@@ -1,0 +1,20 @@
+server:
+  port : 9999
+spring:
+  application:
+    name: loan-system
+  datasource:
+    url: jdbc:mariadb://localhost/loan-system
+    username: root
+    password: Password@1
+  jpa:
+    hibernate: 
+      ddl-auto: create
+    show-sql: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - '*'    
+    
