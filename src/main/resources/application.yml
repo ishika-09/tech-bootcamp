@@ -11,10 +11,18 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+      
 management:
   endpoints:
     web:
       exposure:
         include:
         - '*'    
-
+security:
+  user:
+    name: admin
+    password: admin
+    
