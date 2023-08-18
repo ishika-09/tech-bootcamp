@@ -1,35 +1,49 @@
 import React, {useState} from 'react';
 import {MDBContainer, MDBTabs, MDBTabsItem, MDBTabsLink, MDBTabsContent,  MDBCol, MDBTabsPane, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
-
+import axios from 'axios';
 function Login() {
     const [justifyActive, setJustifyActive] = useState('tab1');;
-    const [username, setUsername] = useState("");
-    const [password, setPasssword] = useState(0);
-
+    const [username, setUsername] = useState();
+    const [password, setPasssword] = useState("");
+    const [backendURL,setBackendURL] = useState("http://localhost:8081/users/login");
 
     const handleJustifyClick = (value) => {
+
+      if(justifyActive === "tab1")
+        setBackendURL("http://localhost:8081/users/login");
+      else
+        setBackendURL("http://localhost:8081/admins/login");
       if (value === justifyActive) {
-        const backendURL = "http://localhost:8081/users/login";
         return;
       }
-  
+      
+
       setJustifyActive(value);
-      const backendURL = "http://localhost:8081/admin/login";
     };
+    
+    
+    
 
     function handleSubmit(){
       axios.post(backendURL,{
         id:username,
         password:password
       },{headers:{"Content-Type":"application/json"}})
-      .then((response)=> {console.log(loginSuccessful)});
+      .then(()=> {
+        console.log("loginSuccessful");
+        if(justifyActive === "tab1")
+          window.location.href = '/userDashboard';
+        else
+          window.location.href = '/adminDashboard';
+        
+    });
     }
 
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom container h-100">
       <MDBRow>
         <MDBCol col='10' md='6'>
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid" alt="Sample image" width="90%"/>
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" className="img-fluid" alt="Sample image" width="90%"/>
         </MDBCol>
         <MDBCol col='4' md='6' className='container-fluid'>
             <MDBTabs pills justify className='mb-3 d-flex flex-row justify-content-between'>
@@ -49,8 +63,8 @@ function Login() {
 
             <MDBTabsPane show={justifyActive === 'tab1'}>
 
-            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='form1' type='email'/>
-            <MDBInput wrapperClass='mb-4' onChnage={e=> setPasssword(e.target.value)} value = {password} label='Password' id='form2' type='password'/>
+            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='form1' type='number'/>
+            <MDBInput wrapperClass='mb-4' onChange={e=> setPasssword(e.target.value)} value = {password} label='Password' id='form2' type='password'/>
 
             <div className="d-flex justify-content-between mx-4 mb-4">
                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
@@ -65,8 +79,8 @@ function Login() {
 
             <MDBTabsPane show={justifyActive === 'tab2'}>
 
-            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='form1' type='email'/>
-            <MDBInput wrapperClass='mb-4' onChnage={e=> setPasssword(e.target.value)} value = {password} label='Password' id='form2' type='password'/>
+            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='form1' type='number'/>
+            <MDBInput wrapperClass='mb-4' onChange={e=> setPasssword(e.target.value)} value = {password} label='Password' id='form2' type='password'/>
 
             <div className="d-flex justify-content-between mx-4 mb-4">
                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />

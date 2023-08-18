@@ -25,11 +25,11 @@ function BasicExample() {
         <Navbar.Collapse id="basic-navbar-nav" className='align-items-end'>
           <Nav className="me-auto">
             <Nav.Link href="/" className='text-white'>Home</Nav.Link>
-            <Button className="m-2" variant="light" href="/login">Login</Button>
-            <Button className="m-2" variant="danger">Logout</Button>
+            {/* <Button className="m-2" variant="light" href="/login">Login</Button> */}
+            {/* <Button className="m-2" variant="danger">Logout</Button> */}
             <span className='text-white float-right'>
-              <img src={Man} width="40" height="40"/>
-              <span className='align-middle'>Welcome, Siddhesh</span>
+              {/* <img src={Man} width="40" height="40"/> */}
+              {/* <span className='align-middle'>Welcome, Siddhesh</span> */}
             </span>
           </Nav>
         </Navbar.Collapse>
