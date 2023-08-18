@@ -20,7 +20,6 @@ import lombok.Setter;
 @Table(name="admin")
 public class Admin {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	@Column(name="password", nullable=false)

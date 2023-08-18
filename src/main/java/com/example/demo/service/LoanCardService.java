@@ -1,15 +1,15 @@
 package com.example.demo.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import com.example.demo.model.LoanCard;
+import com.example.demo.dto.LoanCardDto;
 
 public interface LoanCardService {
-	LoanCard createLoanCard(LoanCard loanCard);
 	
-	Optional<LoanCard> findLoanCardById(int id);
-	Optional<LoanCard> deleteLoanCardById(int id);
-	List<LoanCard> getAllLoanCards();
-	LoanCard updateLoanCard(LoanCard loanCard);
+	LoanCardDto createLoanCard(LoanCardDto loanCardDto);
+	List<LoanCardDto> getAllLoanCards();
+	LoanCardDto findLoanCardById(int id);
+	LoanCardDto deleteLoanCardById(int id);
+	LoanCardDto updateLoanCard(LoanCardDto loanCardDto);
+
 }

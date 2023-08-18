@@ -1,7 +1,6 @@
 package com.example.demo.rest;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.Item;
+import com.example.demo.dto.ItemDto;
 import com.example.demo.service.ItemService;
 
 import lombok.AllArgsConstructor;
@@ -23,28 +22,28 @@ public class ItemController {
 
 	private final ItemService itemService;
 	@PostMapping
-	public Item createItem(@RequestBody Item item) {
-		return itemService.createItem(item);
+	public ItemDto createItem(@RequestBody ItemDto itemDto) {
+		return itemService.createItem(itemDto);
 	}
 	
 	@GetMapping("/{id}")
-	public Optional<Item> findItem(@PathVariable("id") int id) {
+	public ItemDto findItem(@PathVariable("id") int id) {
 
-		Optional<Item> o = itemService.findItemById(id);
+		ItemDto o = itemService.findItemById(id);
 		
 		return o;
 	}
 	
 	@DeleteMapping("/{id}")
-	public Optional<Item> deleteItem(@PathVariable("id") int id){
-		Optional<Item> o = itemService.deleteItemById(id);
+	public ItemDto deleteItem(@PathVariable("id") int id){
+		ItemDto o = itemService.deleteItemById(id);
 		
 		return o;
 	}
 	
 	@GetMapping("/all")
-	public List<Item> getAllItem(){
-		List<Item> l= itemService.getAllItems();
+	public List<ItemDto> getAllItem(){
+		List<ItemDto> l= itemService.getAllItems();
 		return l;
 	}
 }
