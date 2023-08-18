@@ -34,8 +34,10 @@ export default function AdminDashboard() {
         Seamless Control: Elevate Loan Card Management Efficienc
         </MDBCardText>
         <hr/>
-        <MDBBtn href="/addLoanCard" className='w-100 my-2'>Add New Loan Cards</MDBBtn>
-        <MDBBtn href="/viewLoanCards" className='w-100 my-2'>View Loan Cards</MDBBtn>
+        {/* <MDBBtn href="/addLoanCard" className='w-100 my-2'>Add New Loan Cards</MDBBtn> */}
+        {/* <MDBBtn href="/viewLoanCards" className='w-100 my-2'>View Loan Cards</MDBBtn> */}
+        <MDBBtn href= "/pendingLoanRequests" className='w-100 my-2'>Show pending Loan requests</MDBBtn>
+        <MDBBtn href="/viewLoanCards" className='w-100 my-2'>Show approved Loans</MDBBtn>
       </MDBCardBody>
     </MDBCard>
     <MDBCard className="m-5">

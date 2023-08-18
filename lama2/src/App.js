@@ -14,6 +14,7 @@ import PurchaseHistory from './Components/PurchaseHistory';
 import UserDashboard from './Components/UserDashboard';
 import AdminDashboard from './Components/AdminDashboard';
 import Footer from './Components/Footer';
+import PendingLoanRequests from './Components/PendingLoanRequests';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       <Route path="/addLoanCard" Component={AddLoanCard}/>
       <Route path="/adminDashboard" element={<AdminDashboard/>}/>
       <Route path="/userDashboard" element={<UserDashboard/>}/>
+      <Route path="/pendingLoanRequests" element={<PendingLoanRequests/>}/>
       {/* <Route path="/" element={<Home/>}/> */}
       <Route path="/viewLoanCards" element={<ViewLoanCards/>}/>
       <Route path="/viewEmployeeDetails" element={<ViewEmployeeDetails/>}/>

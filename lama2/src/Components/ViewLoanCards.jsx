@@ -11,6 +11,7 @@ export default function ViewLoanCards() {
     
     <MDBTableHead>
       <tr>
+        <th scope='col'>Employee ID</th>
         <th scope='col'>Loan Id</th>
         <th scope='col'>Loan Type</th>
         <th scope='col'>Duration</th>
@@ -20,6 +21,7 @@ export default function ViewLoanCards() {
     </MDBTableHead>
     <MDBTableBody>
       <tr>
+        <td>2345</td>
         <td>2651</td>
         <td>Furniture</td>
         <td>2 Month</td>
@@ -35,6 +37,7 @@ export default function ViewLoanCards() {
         </td>
       </tr>
       <tr>
+        <td>6734</td>
         <td>2651</td>
         <td>Furniture</td>
         <td>2 Month</td>
@@ -50,6 +53,7 @@ export default function ViewLoanCards() {
         </td>
       </tr>
       <tr>
+        <td>8756</td>
         <td>2651</td>
         <td>Furniture</td>
         <td>2 Month</td>
@@ -65,6 +69,7 @@ export default function ViewLoanCards() {
         </td>
       </tr>
       <tr>
+        <td>9367</td>
         <td>2651</td>
         <td>Furniture</td>
         <td>2 Month</td>
@@ -80,6 +85,7 @@ export default function ViewLoanCards() {
         </td>
       </tr>
       <tr>
+        <td>5274</td>
         <td>2651</td>
         <td>Furniture</td>
         <td>2 Month</td>
@@ -95,6 +101,7 @@ export default function ViewLoanCards() {
         </td>
       </tr>
       <tr>
+        <td>5555</td>
         <td>2651</td>
         <td>Furniture</td>
         <td>2 Month</td>
