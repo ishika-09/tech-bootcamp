@@ -3,14 +3,27 @@ import {MDBContainer, MDBTabs, MDBTabsItem, MDBTabsLink, MDBTabsContent,  MDBCol
 
 function Login() {
     const [justifyActive, setJustifyActive] = useState('tab1');;
+    const [username, setUsername] = useState("");
+    const [password, setPasssword] = useState(0);
+
 
     const handleJustifyClick = (value) => {
       if (value === justifyActive) {
+        const backendURL = "http://localhost:8081/users/login";
         return;
       }
   
       setJustifyActive(value);
+      const backendURL = "http://localhost:8081/admin/login";
     };
+
+    function handleSubmit(){
+      axios.post(backendURL,{
+        id:username,
+        password:password
+      },{headers:{"Content-Type":"application/json"}})
+      .then((response)=> {console.log(loginSuccessful)});
+    }
 
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom container h-100">
@@ -36,28 +49,33 @@ function Login() {
 
             <MDBTabsPane show={justifyActive === 'tab1'}>
 
-            <MDBInput wrapperClass='mb-4' label='Username' id='form1' type='email'/>
-            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password'/>
+            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='form1' type='email'/>
+            <MDBInput wrapperClass='mb-4' onChnage={e=> setPasssword(e.target.value)} value = {password} label='Password' id='form2' type='password'/>
 
             <div className="d-flex justify-content-between mx-4 mb-4">
                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
                 <a href="!#">Forgot password?</a>
             </div>
 
-            <MDBBtn className="mb-4 w-100">Sign in</MDBBtn>
+            {/* <MDBBtn className="mb-4 w-100">Sign in</MDBBtn> */}
+            <MDBBtn type="submit" onClick ={handleSubmit
+            } className="mb-4 w-100">Sign in</MDBBtn>
 
             </MDBTabsPane>
 
             <MDBTabsPane show={justifyActive === 'tab2'}>
 
-            <MDBInput wrapperClass='mb-4' label='Username' id='form1' type='email'/>
-            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password'/>
+            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='form1' type='email'/>
+            <MDBInput wrapperClass='mb-4' onChnage={e=> setPasssword(e.target.value)} value = {password} label='Password' id='form2' type='password'/>
+
             <div className="d-flex justify-content-between mx-4 mb-4">
                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
                 <a href="!#">Forgot password?</a>
             </div>
 
-            <MDBBtn className="mb-4 w-100">Sign In</MDBBtn>
+            {/* <MDBBtn className="mb-4 w-100">Sign In</MDBBtn> */}
+            <MDBBtn type="submit" onClick ={handleSubmit
+            } className="mb-4 w-100">Sign in</MDBBtn>
 
             </MDBTabsPane>
 
