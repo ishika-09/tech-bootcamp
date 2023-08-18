@@ -46,6 +46,8 @@ public class LoanCard {
 	private Date issue_date;
 	@Column (name = "duration" , nullable = false)
 	private int duration;
+	@Column (name = "valid" , nullable = false)
+	private int valid = 0;
 
 	@Override
 	public String toString() {

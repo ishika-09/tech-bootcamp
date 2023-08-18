@@ -27,7 +27,6 @@ import lombok.Setter;
 @Table(name="user")
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	@Column(name = "name" , nullable = false)
@@ -42,10 +41,12 @@ public class User {
 	private Date doj;
 	@Column (name = "gender" , nullable = false)
 	private String gender;
-	@Column (name = "password" , nullable = false)
-	private String password;
+	@Column (name = "password", columnDefinition = "varchar(255) default '1234' " , nullable = false)
+	private String password = "1234";
 	@Column (name = "contact" , nullable = false)
 	private long contact;
+	@Column (name = "valid" , nullable = false)
+	private int valid = 0;
 	@JsonManagedReference
 	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	private List<LoanCard> loanCards;

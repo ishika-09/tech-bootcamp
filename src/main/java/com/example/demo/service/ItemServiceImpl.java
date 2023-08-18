@@ -3,46 +3,59 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Item;
 import com.example.demo.repo.ItemRepository;
-
+import com.example.demo.dto.ItemDto;
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class ItemServiceImpl implements ItemService {
 
-	private final ItemRepository ItemRepository;
+	private final ItemRepository itemRepository;
+	private final ModelMapper modelMapper;
 	@Override
-	public Item createItem(Item item) {
+	public ItemDto createItem(ItemDto itemDto) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		Item item = modelMapper.map(itemDto, Item.class);
+		Item item2= itemRepository.save(item);
 		
-		return ItemRepository.save(item);
+		return modelMapper.map(item2, ItemDto.class);
 	}
 
 	@Override
-	public Optional<Item> findItemById(int id) {
+	public ItemDto findItemById(int id) {
 		// TODO Auto-generated method stub
-		return ItemRepository.findById(id);
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		Optional<Item> item = itemRepository.findById(id);
+		
+		return modelMapper.map(item, ItemDto.class);
 	}
 
 	@Override
-	public Item updateItem(Item item) {
+	public ItemDto updateItem(ItemDto itemDto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
-	public Optional<Item> deleteItemById(int id) {
-		Optional <Item> o = ItemRepository.findById(id);
-		ItemRepository.deleteById(id);
-		return o;
+	public ItemDto deleteItemById(int id) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		Optional <Item> item = itemRepository.findById(id);
+		itemRepository.deleteById(id);
+		return modelMapper.map(item, ItemDto.class);
 	}
 	
 	@Override
-	public List<Item> getAllItems(){
-		List<Item> l=ItemRepository.findAll();
+	public List<ItemDto> getAllItems(){
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		List<Item> item = itemRepository.findAll();
+		List<ItemDto> l = modelMapper.map(item, new TypeToken<List<ItemDto>>(){}.getType());
 		return l;
 	}
 }

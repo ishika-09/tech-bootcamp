@@ -1,17 +1,16 @@
 package com.example.demo.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import com.example.demo.model.User;
+import com.example.demo.dto.UserDto;
 
 public interface UserService {
 	
-	User createUser(User user);
-	
-	Optional <User> findUserById(int id);
-	Optional <User> deleteUserById(int id);
-	List<User> getAllUsers();
-	User updateUser(User user);
+	UserDto createUser(UserDto userDto);
+	List<UserDto> getAllUsers();
+	UserDto findUserById(int id);
+	UserDto deleteUserById(int id);
+	UserDto updateUser(UserDto userDto);
+	int loginUser(UserDto userDto);
 
 }
