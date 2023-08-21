@@ -1,8 +1,35 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBInput, MDBRadio, MDBRange } from 'mdb-react-ui-kit';
 import Cart from '../Assets/Images/cart.jpg';
+import axios from axios;
 
 function AddItems() {
+
+  const [itemCategory, setItemCategory] = userState("");
+  const [itemDescription, setItemDescription] = useState("");
+  const [itemValue, setItemValue] = useState(0);
+  const [itemStatus, setItemStatus] = useState("");
+  const [itemMake, setItemMake] = useState("");
+  const backendURL = "http://localhost:8081/items/add";
+  function handleSubmit(){
+    axios.post(backendURL,
+      {
+        dob : dob,
+        doj : doj,
+        name : name,
+        designation : designation,
+        department : department,
+        gender : gender
+      },{headers:{"Content-Type" : "application/json"}})
+      .then((response) => {console.log("Item added !!")});
+  }
+  function handleGenderChange(e){
+    if(e.target.value=="option1")
+      setItemStatus("Available")
+    else
+      setItemStatus("OutOfStock")
+  }
+
 
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom">
@@ -12,21 +39,19 @@ function AddItems() {
           <div className='w- 100 m-5'>
             <h3>Item Master Data Details</h3>
             <br/>
-            <MDBInput wrapperClass='mb-4' label='Item Category' id='formControlLg' type='text' size="md"/>
-            <MDBInput wrapperClass='mb-4' label='Item Description' id='formControlLg' type='textarea' size="md"/>
-            <MDBInput wrapperClass='mb-4' label='Item Value' id='formControlLg' type='text' size="md"/>
-            <MDBRadio name='inlineRadio' id='inlineRadio1' value='option1' label='Available' inline />
-            <MDBRadio name='inlineRadio' id='inlineRadio2' value='option2' label='OutOfStock' inline />
-            <MDBInput wrapperClass='mt-2 mb-4' label='Item Make' id='formControlLg' type='text' size="md"/>
-            <MDBRange
-                defaultValue={10}
-                id='customRange'
-                label='Duration'
-                min={1}
-                max={24}
-            />
-            <br/><br/>
-            <MDBBtn className="mb-4 w-100">Add Item Details</MDBBtn>    
+            <select label="Item Category" name="itemCategory" onChange={e => setItemCategory(e.target.value)} id="itemCategory" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+              <option value="Furniture">Furniture</option>
+              <option value="Crockery ">Crockery</option>
+              <option value="Electrical">Electrical</option>
+              <option value="Electronic">Electronic</option>
+              <option value="Plastic">Plastic</option>
+            </select>
+            <MDBInput wrapperClass='mb-4' label='Item Description' onChange={e => setItemDescription(e.target.value)} id='formControlLg' type='textarea' size="md"/>
+            <MDBInput wrapperClass='mb-4' label='Item Value' onChange={e => setItemValue(e.target.value)} id='formControlLg' type='text' size="md"/>
+            <MDBRadio name='inlineRadio' onSelect={e => handleGenderChange(e)} id='inlineRadio1' value='option1' label='Available' inline />
+            <MDBRadio name='inlineRadio'onSelect={e => handleGenderChange(e)}  id='inlineRadio2' value='option2' label='OutOfStock' inline />
+            <MDBInput wrapperClass='mt-2 mb-4' label='Item Make' onChange={e => setItemMake(e.target.value)} id='formControlLg' type='text' size="md"/>
+            <MDBBtn className="mb-4 w-100" type="submit" onClick={handleSubmit}>Add Item Details</MDBBtn>    
           </div>
 
         </MDBCol>

@@ -26,7 +26,7 @@ function UserSignUp()
         gender : gender,
         password : password
       },{headers:{"Content-Type" : "application/json"}})
-      .then((response) => {console.log(dob)});
+      .then((response) => {console.log("Employee registered !!")});
   }
   function handleGenderChange(e){
     if(e.target.value=="option1")
@@ -43,8 +43,8 @@ function UserSignUp()
           <div className='w- 100 m-5'>
             <h3>Customer Sign Up</h3>
             <br/>
-            <MDBInput wrapperClass='mb-4' onChange={e => setName(e.target.value)} value={name} label='Employee Name' id='formControlLg' type='text' size="md"/>
-            <MDBInput wrapperClass='mb-4'  onChange={e => setPassword(e.target.value)} value={password} label='Password' id='form2' type='password'/>
+            <MDBInput wrapperClass='mb-4' onChange={e => setName(e.target.value)} value={name} label='Employee Name' id='userUSername' name="userUSername" type='text' size="md"/>
+            <MDBInput wrapperClass='mb-4'  onChange={e => setPassword(e.target.value)} value={password} label='Password' id='userPassword' name="userPassword" type='password'/>
             <select label="Designation" name="Designation" id="designation" onChange={e => setDesignation(e.target.value)} class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
               <option value="Program Associate">Program Associate</option>
               <option value="Software Engineer">Software Engineer</option>
@@ -59,8 +59,8 @@ function UserSignUp()
               <option value="TCO">TCO</option>
               <option value="CT">CT</option>
             </select>
-            <MDBInput wrapperClass='mb-4' onChange={e => setDob(e.target.value)} value={dob} label='Date of Birth' id='formControlLg' type='date' size="md"/>
-            <MDBInput wrapperClass='mb-4' onChange={e => setDoj(e.target.value)} value={doj} label='Date of Joining' id='formControlLg' type='date' size="md"/>
+            <MDBInput wrapperClass='mb-4' onChange={e => setDob(e.target.value)} value={dob} label='Date of Birth' id='dob' name="name" type='date' size="md"/>
+            <MDBInput wrapperClass='mb-4' onChange={e => setDoj(e.target.value)} value={doj} label='Date of Joining' id='doj' name="doj" type='date' size="md"/>
             <MDBRadio name='inlineRadio' onSelect={e => handleGenderChange(e)} id='inlineRadio1' value='option1' label='Male' inline />
             <MDBRadio name='inlineRadio'onSelect={e => handleGenderChange(e)} id='inlineRadio2' value='option2' label='Female' inline />
             <br/><br/>
