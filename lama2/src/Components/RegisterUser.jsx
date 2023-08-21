@@ -42,8 +42,20 @@ function RegisterUser()
             <h3>Customer Master Data Details</h3>
             <br/>
             <MDBInput wrapperClass='mb-4' onChange={e => setName(e.target.value)} value={name} label='Employee Name' id='formControlLg' type='text' size="md"/>
-            <MDBInput wrapperClass='mb-4' onChange={e => setDesignation(e.target.value)} value={designation} label='Designation' id='formControlLg' type='text' size="md"/>
-            <MDBInput wrapperClass='mb-4' onChange={e => setDepartment(e.target.value)} value={department} label='Departament' id='formControlLg' type='text' size="md"/>
+            <select label="Designation" name="Designation" id="designation" onChange={e => setDesignation(e.target.value)} class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+              <option value="Program Associate">Program Associate</option>
+              <option value="Software Engineer">Software Engineer</option>
+              <option value="Senior Software Engineer">Senior Software Engineer</option>
+              <option value="Manager">Manager</option>
+              <option value="Senior Manager">Senior Manager</option>
+            </select>
+            <select label="Department" name="department" id="department" onChange={e => setDepartment(e.target.value)} class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+              <option value="DTI">DTI</option>
+              <option value="CSBBT">CSBBT</option>
+              <option value="EFT">EFT</option>
+              <option value="TCO">TCO</option>
+              <option value="CT">CT</option>
+            </select>
             <MDBInput wrapperClass='mb-4' onChange={e => setDob(e.target.value)} value={dob} label='Date of Birth' id='formControlLg' type='date' size="md"/>
             <MDBInput wrapperClass='mb-4' onChange={e => setDoj(e.target.value)} value={doj} label='Date of Joining' id='formControlLg' type='date' size="md"/>
             <MDBRadio name='inlineRadio' onSelect={e => handleGenderChange(e)} id='inlineRadio1' value='option1' label='Male' inline />
