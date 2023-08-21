@@ -40,9 +40,21 @@ public class LoanCardController {
 		return o;
 	}
 	
-	@GetMapping("/all")
-	public List<LoanCardDto> getAllLoanCard(){
-		List<LoanCardDto> l= loanCardService.getAllLoanCards();
+	@GetMapping("/allPending")
+	public List<LoanCardDto> getAllPendingLoanCard(){
+		List<LoanCardDto> l= loanCardService.getAllPendingLoanCards();
+		return l;
+	}
+	
+	@GetMapping("/allApproved")
+	public List<LoanCardDto> getAllValidLoanCard(){
+		List<LoanCardDto> l= loanCardService.getAllPendingLoanCards();
+		return l;
+	}
+	
+	@GetMapping("/allActive/{user_id}")
+	public List<LoanCardDto> getAllActiveLoanCard(@PathVariable("user_id") int user_id){
+		List<LoanCardDto> l =loanCardService.getAllActiveLoanCards(user_id);
 		return l;
 	}
 }

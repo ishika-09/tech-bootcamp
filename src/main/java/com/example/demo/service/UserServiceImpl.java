@@ -34,6 +34,8 @@ public class UserServiceImpl implements UserService {
 		if (user == null)
 			return 0;
 		User user1 = user.get();
+		if(user1.getValid() == 0)
+			return 0;
 		if(user1.getPassword().equals(userDto.getPassword()))
 			return 1;
 		return 0;
@@ -62,10 +64,48 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<UserDto> getAllUsers(){
+	public List<UserDto> getAllPendingUsers(){
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		List<User> user = userRepository.findAll();
+		List<User> user = userRepository.findAllPending();
 		List<UserDto> l = modelMapper.map(user, new TypeToken<List<UserDto>>(){}.getType());
 		return l;
+	}
+	
+	@Override
+	public List<UserDto> getAllValidUsers(){
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		List<User> user = userRepository.findAllValid();
+		List<UserDto> l = modelMapper.map(user, new TypeToken<List<UserDto>>(){}.getType());
+		return l;
+	}
+	
+	@Override
+	public void approveUser(UserDto userDto) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		Optional <User> user = userRepository.findById(userDto.getId());
+		if (user == null)
+			return;
+		User user1 = user.get();
+		if(userDto.getValid() == 1) {
+			user1.setValid(1);
+			userRepository.save(user1);
+		}
+		else
+			deleteUserById(userDto.getId());
+	}
+	
+	@Override
+	public int resetPassword(UserDto userDto) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		Optional <User> user = userRepository.findById(userDto.getId());
+		System.out.println(user);
+		if (user.isEmpty())
+			return 0;
+		User user1 = user.get();
+		if(userDto.getDob().equals(user1.getDob())) {
+			user1.setPassword(userDto.getPassword());
+			return 1;
+		}
+		return 0;	
 	}
 }

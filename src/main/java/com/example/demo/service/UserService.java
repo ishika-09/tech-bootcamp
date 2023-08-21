@@ -7,10 +7,12 @@ import com.example.demo.dto.UserDto;
 public interface UserService {
 	
 	UserDto createUser(UserDto userDto);
-	List<UserDto> getAllUsers();
+	List<UserDto> getAllValidUsers();
+	List<UserDto> getAllPendingUsers();
 	UserDto findUserById(int id);
 	UserDto deleteUserById(int id);
 	UserDto updateUser(UserDto userDto);
 	int loginUser(UserDto userDto);
-
+	void approveUser(UserDto userDto);
+	int resetPassword(UserDto userDto);
 }
