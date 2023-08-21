@@ -12,7 +12,6 @@ function AddItems() {
           <div className='w- 100 m-5'>
             <h3>Item Master Data Details</h3>
             <br/>
-            <MDBInput wrapperClass='mb-4' label='Item Id' id='formControlLg' type='text' size="md"/>
             <MDBInput wrapperClass='mb-4' label='Item Category' id='formControlLg' type='text' size="md"/>
             <MDBInput wrapperClass='mb-4' label='Item Description' id='formControlLg' type='textarea' size="md"/>
             <MDBInput wrapperClass='mb-4' label='Item Value' id='formControlLg' type='text' size="md"/>

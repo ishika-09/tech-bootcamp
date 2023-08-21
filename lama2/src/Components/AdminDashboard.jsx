@@ -38,6 +38,7 @@ export default function AdminDashboard() {
         {/* <MDBBtn href="/viewLoanCards" className='w-100 my-2'>View Loan Cards</MDBBtn> */}
         <MDBBtn href= "/pendingLoanRequests" className='w-100 my-2'>Show pending Loan requests</MDBBtn>
         <MDBBtn href="/viewLoanCards" className='w-100 my-2'>Show approved Loans</MDBBtn>
+        <MDBBtn href="/addLoanCard" className='w-100 my-2'>Add Loan Card</MDBBtn>
       </MDBCardBody>
     </MDBCard>
     <MDBCard className="m-5">

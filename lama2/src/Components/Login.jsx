@@ -61,12 +61,15 @@ function Login() {
 
             <MDBTabsPane show={justifyActive === 'tab1'}>
 
-            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='form1' type='text'/>
-            <MDBInput wrapperClass='mb-4' onChange={e=> setPasssword(e.target.value)} value = {password} label='Password' id='form2' type='password'/>
+            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='userUsername' type='text'/>
+            <MDBInput wrapperClass='mb-4' onChange={e=> setPasssword(e.target.value)} value = {password} label='Password' id='userPassword' type='password'/>
 
             <div className="d-flex justify-content-between mx-4 mb-4">
                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
                 <a href="!#">Forgot password?</a>
+            </div>
+            <div class="text-center">
+                  <p>Not a member? <a href="/signup">Register</a></p>
             </div>
 
             {/* <MDBBtn className="mb-4 w-100">Sign in</MDBBtn> */}
@@ -77,8 +80,8 @@ function Login() {
 
             <MDBTabsPane show={justifyActive === 'tab2'}>
 
-            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='form1' type='text'/>
-            <MDBInput wrapperClass='mb-4' onChange={e=> setPasssword(e.target.value)} value = {password} label='Password' id='form2' type='password'/>
+            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='adminUsername' type='text'/>
+            <MDBInput wrapperClass='mb-4' onChange={e=> setPasssword(e.target.value)} value = {password} label='Password' id='adminPassword' type='password'/>
 
             <div className="d-flex justify-content-between mx-4 mb-4">
                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />

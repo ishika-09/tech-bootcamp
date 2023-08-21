@@ -5,24 +5,26 @@ import { useState } from 'react';
 import axios from 'axios';
 
 
-function RegisterUser() 
+function UserSignUp() 
 {
   const [designation,setDesignation] = useState("");
   const [department, setDepartment] = useState("");
   const [dob,setDob] = useState(new Date());
   const [doj,setDoj] = useState(new Date());
   const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
   const [gender, setGender] = useState("");
   const backendURL = "http://localhost:8081/users/register";
   function handleSubmit(){
     axios.post(backendURL,
       {
-        dob : dob,
-        doj : doj,
         name : name,
         designation : designation,
         department : department,
-        gender : gender
+        dob : dob,
+        doj : doj,
+        gender : gender,
+        password : password
       },{headers:{"Content-Type" : "application/json"}})
       .then((response) => {console.log(dob)});
   }
@@ -39,9 +41,10 @@ function RegisterUser()
 
         <MDBCol col='4' md='6'>
           <div className='w- 100 m-5'>
-            <h3>Customer Master Data Details</h3>
+            <h3>Customer Sign Up</h3>
             <br/>
             <MDBInput wrapperClass='mb-4' onChange={e => setName(e.target.value)} value={name} label='Employee Name' id='formControlLg' type='text' size="md"/>
+            <MDBInput wrapperClass='mb-4'  onChange={e => setPassword(e.target.value)} value={password} label='Password' id='form2' type='password'/>
             <MDBInput wrapperClass='mb-4' onChange={e => setDesignation(e.target.value)} value={designation} label='Designation' id='formControlLg' type='text' size="md"/>
             <MDBInput wrapperClass='mb-4' onChange={e => setDepartment(e.target.value)} value={department} label='Departament' id='formControlLg' type='text' size="md"/>
             <MDBInput wrapperClass='mb-4' onChange={e => setDob(e.target.value)} value={dob} label='Date of Birth' id='formControlLg' type='date' size="md"/>
@@ -50,7 +53,7 @@ function RegisterUser()
             <MDBRadio name='inlineRadio'onSelect={e => handleGenderChange(e)} id='inlineRadio2' value='option2' label='Female' inline />
             <br/><br/>
             <MDBBtn type="submit" onClick ={handleSubmit
-            } className="mb-4 w-100">Add Customer Details</MDBBtn>    
+            } className="mb-4 w-100">Sign Up</MDBBtn>    
           </div>
 
         </MDBCol>
@@ -64,4 +67,4 @@ function RegisterUser()
   );
 }
 
-export default RegisterUser;
+export default UserSignUp;

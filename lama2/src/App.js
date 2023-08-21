@@ -17,6 +17,7 @@ import Footer from './Components/Footer';
 import PendingLoanRequests from './Components/PendingLoanRequests';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ApplyLoanCards from './Components/ApplyLoanCard';
+import UserSignUp from './Components/UserSignUp';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Route path="/" Component={Home}/>
       <Route path="/login" Component={Login}/>
       <Route path="/registerUser" Component={RegisterUser}/>
+      <Route path="/signup" Component={UserSignUp}/>
       <Route path="/addItem" Component={AddItems}/>
       <Route path="/addLoanCard" Component={AddLoanCard}/>
       <Route path="/adminDashboard" element={<AdminDashboard/>}/>

@@ -27,6 +27,7 @@ function BasicExample() {
             <Nav.Link href="/" className='text-white'>Home</Nav.Link>
             {/* <Button className="m-2" variant="light" href="/login">Login</Button> */}
             {/* <Button className="m-2" variant="danger">Logout</Button> */}
+            <Button className="m-2" variant="danger" href="/signup">Sign Up</Button>
             <span className='text-white float-right'>
               {/* <img src={Man} width="40" height="40"/> */}
               {/* <span className='align-middle'>Welcome, Siddhesh</span> */}
