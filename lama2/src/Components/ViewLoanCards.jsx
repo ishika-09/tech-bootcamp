@@ -15,7 +15,6 @@ export default function ViewLoanCards() {
         <th scope='col'>Loan Id</th>
         <th scope='col'>Loan Type</th>
         <th scope='col'>Duration</th>
-        <th scope='col'>Edit</th>
         <th scope='col'>Delete</th>
       </tr>
     </MDBTableHead>
@@ -26,96 +25,34 @@ export default function ViewLoanCards() {
         <td>Furniture</td>
         <td>2 Month</td>
         <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
           <MDBBtn outline color='danger' rounded size='sm'>
             Delete
           </MDBBtn>
         </td>
       </tr>
       <tr>
-        <td>6734</td>
+        <td>2345</td>
         <td>2651</td>
         <td>Furniture</td>
         <td>2 Month</td>
         <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
           <MDBBtn outline color='danger' rounded size='sm'>
             Delete
           </MDBBtn>
         </td>
       </tr>
       <tr>
-        <td>8756</td>
+        <td>2345</td>
         <td>2651</td>
         <td>Furniture</td>
         <td>2 Month</td>
         <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
           <MDBBtn outline color='danger' rounded size='sm'>
             Delete
           </MDBBtn>
         </td>
       </tr>
-      <tr>
-        <td>9367</td>
-        <td>2651</td>
-        <td>Furniture</td>
-        <td>2 Month</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
-      <tr>
-        <td>5274</td>
-        <td>2651</td>
-        <td>Furniture</td>
-        <td>2 Month</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
-      <tr>
-        <td>5555</td>
-        <td>2651</td>
-        <td>Furniture</td>
-        <td>2 Month</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
+
     </MDBTableBody>
   </MDBTable>
     </>

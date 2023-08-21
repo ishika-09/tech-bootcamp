@@ -16,22 +16,22 @@ export default function UserDashboard() {
     <div className="container d-flex">  
     <MDBCard className="m-5">
       <MDBCardBody>
-        <MDBCardTitle className="fw-bold">View Loans</MDBCardTitle>
+        <MDBCardTitle className="fw-bold">View Loans History</MDBCardTitle>
         <hr/>
         <MDBCardText>
         Your Loan Portfolio at a Glance: Explore, Understand, Excel
         </MDBCardText>
-        <MDBBtn href="/viewLoanCards" className='w-100 my-2'>Explore</MDBBtn>
+        <MDBBtn href="/viewAppliedLoans" className='w-100 my-2'>Explore</MDBBtn>
       </MDBCardBody>
     </MDBCard>
     <MDBCard className="m-5">
       <MDBCardBody>
-        <MDBCardTitle className="fw-bold">Apply Loan</MDBCardTitle>
+        <MDBCardTitle className="fw-bold">Apply Loan Card</MDBCardTitle>
         <hr/>
         <MDBCardText>
         Empower Your Ambitions: Seamlessly Apply for Your Next Chapter
         </MDBCardText>
-        <MDBBtn href="/applyLoan" className='w-100 my-2'>Apply</MDBBtn>
+        <MDBBtn href="/applyLoanCard" className='w-100 my-2'>Apply</MDBBtn>
       </MDBCardBody>
     </MDBCard>
     <MDBCard className="m-5">

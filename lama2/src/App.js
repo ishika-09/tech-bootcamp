@@ -16,6 +16,7 @@ import AdminDashboard from './Components/AdminDashboard';
 import Footer from './Components/Footer';
 import PendingLoanRequests from './Components/PendingLoanRequests';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ApplyLoanCards from './Components/ApplyLoanCard';
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
       <Route path="/adminDashboard" element={<AdminDashboard/>}/>
       <Route path="/userDashboard" element={<UserDashboard/>}/>
       <Route path="/pendingLoanRequests" element={<PendingLoanRequests/>}/>
-      {/* <Route path="/" element={<Home/>}/> */}
+      <Route path="/applyLoanCard" element={<ApplyLoanCards/>}/>
       <Route path="/viewLoanCards" element={<ViewLoanCards/>}/>
       <Route path="/viewEmployeeDetails" element={<ViewEmployeeDetails/>}/>
       <Route path="/viewItems" element={<ViewItems/>}/>

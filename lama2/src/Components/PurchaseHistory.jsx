@@ -12,6 +12,7 @@ export default function PurchaseHistory() {
     <MDBTableHead>
       <tr>
         <th scope='col'>Item Id</th>
+        <th scope='col'>Loan Card Id</th>
         <th scope='col'>Description</th>
         <th scope='col'>Item Make</th>
         <th scope='col'>Item Category</th>
@@ -21,6 +22,7 @@ export default function PurchaseHistory() {
     <MDBTableBody>
       <tr>
         <td>896754</td>
+        <td>568658</td>
         <td>Tea Table</td>
         <td>Wooden</td>
         <td>Furniture</td>
@@ -28,6 +30,7 @@ export default function PurchaseHistory() {
       </tr>
       <tr>
         <td>896754</td>
+        <td>568658</td>
         <td>Tea Table</td>
         <td>Wooden</td>
         <td>Furniture</td>
@@ -35,6 +38,7 @@ export default function PurchaseHistory() {
       </tr>
       <tr>
         <td>896754</td>
+        <td>568658</td>
         <td>Tea Table</td>
         <td>Wooden</td>
         <td>Furniture</td>
@@ -42,13 +46,7 @@ export default function PurchaseHistory() {
       </tr>
       <tr>
         <td>896754</td>
-        <td>Tea Table</td>
-        <td>Wooden</td>
-        <td>Furniture</td>
-        <td>5000</td>
-      </tr>
-      <tr>
-        <td>896754</td>
+        <td>568658</td>
         <td>Tea Table</td>
         <td>Wooden</td>
         <td>Furniture</td>
