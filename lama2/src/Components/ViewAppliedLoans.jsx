@@ -1,5 +1,6 @@
 import React from 'react';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import axios from 'axios';
 
 export default function ViewAppliedLoans() {
   return (
@@ -13,47 +14,24 @@ export default function ViewAppliedLoans() {
       <tr>
         <th scope='col'>Loan Id</th>
         <th scope='col'>Loan Type</th>
+        <th scope='col'>Item Id</th>
         <th scope='col'>Duration</th>
         <th scope='col'>Card Issue Date</th>
       </tr>
     </MDBTableHead>
     <MDBTableBody>
+      {
+        AppliedLoan.map((appliedloan)=>{
+        const{loanId,loanType,itemId, duration, cardIssueDate} = appliedloan;
       <tr>
-        <td>2651</td>
-        <td>Furniture</td>
-        <td>2 Month</td>
-        <td>23-06-2003</td>
+        <td>{loanId}</td>
+        <td>{loanType}</td>
+        <td>{itemId}</td>
+        <td>{duration}</td>
+        <td>{cardIssueDate}</td>
       </tr>
-      <tr>
-        <td>2651</td>
-        <td>Furniture</td>
-        <td>2 Month</td>
-        <td>23-06-2003</td>
-      </tr>
-      <tr>
-        <td>2651</td>
-        <td>Furniture</td>
-        <td>2 Month</td>
-        <td>23-06-2003</td>
-      </tr>
-      <tr>
-        <td>2651</td>
-        <td>Furniture</td>
-        <td>2 Month</td>
-        <td>23-06-2003</td>
-      </tr>
-      <tr>
-        <td>2651</td>
-        <td>Furniture</td>
-        <td>2 Month</td>
-        <td>23-06-2003</td>
-      </tr>
-      <tr>
-        <td>2651</td>
-        <td>Furniture</td>
-        <td>2 Month</td>
-        <td>23-06-2003</td>
-      </tr>
+    })
+ }
 
     </MDBTableBody>
   </MDBTable>
