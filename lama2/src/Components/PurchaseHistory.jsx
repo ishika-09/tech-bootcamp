@@ -1,7 +1,16 @@
-import React from 'react';
-import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import React, {useState, useEffect} from 'react';
+import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import axios from 'axios';
+
 
 export default function PurchaseHistory() {
+  const [purchaseHistory, setPurchaseHistory] = useState([]);
+
+  useEffect(() => {
+    axios.get("/user/purchase")
+    .then((response) => setPurchaseHistory(response))
+  }, [])
+  
   return (
     <>
     <h3 align="middle" className="mt-3 fw-bolder">Items Purchased</h3>
@@ -20,38 +29,19 @@ export default function PurchaseHistory() {
       </tr>
     </MDBTableHead>
     <MDBTableBody>
-      <tr>
-        <td>896754</td>
-        <td>568658</td>
-        <td>Tea Table</td>
-        <td>Wooden</td>
-        <td>Furniture</td>
-        <td>5000</td>
-      </tr>
-      <tr>
-        <td>896754</td>
-        <td>568658</td>
-        <td>Tea Table</td>
-        <td>Wooden</td>
-        <td>Furniture</td>
-        <td>5000</td>
-      </tr>
-      <tr>
-        <td>896754</td>
-        <td>568658</td>
-        <td>Tea Table</td>
-        <td>Wooden</td>
-        <td>Furniture</td>
-        <td>5000</td>
-      </tr>
-      <tr>
-        <td>896754</td>
-        <td>568658</td>
-        <td>Tea Table</td>
-        <td>Wooden</td>
-        <td>Furniture</td>
-        <td>5000</td>
-      </tr>
+      {
+        purchaseHistory.map((item) => {
+          const {itemID, lonaCardID, description, itemMake, itemCategory, itemValuation} = item;
+          <tr>
+            <td>{itemID}</td>
+            <td>{lonaCardID}</td>
+            <td>{description}</td>
+            <td>{itemMake}</td>
+            <td>{itemCategory}</td>
+            <td>{itemValuation}</td>
+          </tr>
+        })
+      }
     </MDBTableBody>
   </MDBTable>
     </>
