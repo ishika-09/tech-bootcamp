@@ -1,8 +1,17 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import axios from 'axios';
 
 export default function ViewItems() {
-  return (
+  const[viewItems, setviewItems] = useState([]);
+  const[error, setError] = useState("");
+
+  useEffect(()=>{
+    axios.get("/")
+    .then((response)=>setviewItems(response.data))
+    .catch((err)=> setError())
+  },[]);
+    return (
     <>
     <h3 align="middle" className="mt-3 fw-bolder">Item Master Data Details</h3>
     <h5 align="middle" className="py-1">Efficiency Unleashed: Masterful Items Management Simplified</h5>
@@ -22,97 +31,32 @@ export default function ViewItems() {
       </tr>
     </MDBTableHead>
     <MDBTableBody>
-      <tr>
-        <td>896754</td>
-        <td>Tea Table</td>
-        <td><MDBBadge color='success' rounded size='sm'>Available</MDBBadge></td>
-        <td>Wooden</td>
-        <td>Furniture</td>
-        <td>5000</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
-      <tr>
-        <td>896754</td>
-        <td>Tea Table</td>
-        <td><MDBBadge color='danger' rounded size='sm'>Out of Stock</MDBBadge></td>
-        <td>Wooden</td>
-        <td>Furniture</td>
-        <td>5000</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
-      <tr>
-        <td>896754</td>
-        <td>Tea Table</td>
-        <td><MDBBadge color='success' rounded size='sm'>Available</MDBBadge></td>
-        <td>Wooden</td>
-        <td>Furniture</td>
-        <td>5000</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
-      <tr>
-        <td>896754</td>
-        <td>Tea Table</td>
-        <td><MDBBadge color='success' rounded size='sm'>Available</MDBBadge></td>
-        <td>Wooden</td>
-        <td>Furniture</td>
-        <td>5000</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
-
-      <tr>
-        <td>896754</td>
-        <td>Tea Table</td>
-        <td><MDBBadge color='success' rounded size='sm'>Available</MDBBadge></td>
-        <td>Wooden</td>
-        <td>Furniture</td>
-        <td>5000</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
+     {
+      viewItems.map((item)=>{
+        const {itemId, description, itemStatus, itemMake, itemCategory, itemValuation}=item;
+        <tr>
+          <td>{itemID}</td>
+          <td>{description}</td>
+          <td>{itemStatus}</td>
+          <td>{itemMake}</td>
+          <td>{itemCategory}</td>
+          <td>{itemValuation}</td>
+           <td>
+           <MDBBtn outline color='warning' rounded size='sm'>
+             Edit
+           </MDBBtn>
+           </td>
+           <td>
+           <MDBBtn outline color='danger' rounded size='sm'>
+             Delete
+           </MDBBtn>
+           </td>
+           </tr>
+     })
+     
+      
+    
+    }
 
     </MDBTableBody>
   </MDBTable>

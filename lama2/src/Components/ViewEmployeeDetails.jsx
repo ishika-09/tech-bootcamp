@@ -1,7 +1,17 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import axios from 'axios';
 
 export default function ViewEmployeeDetails() {
+  const[viewEmployee, setviewEmployee]= useState([]);
+  const[error,setError] = useState("");
+
+  useEffect(()=>{
+    axios.get("/")
+    .then((response)=>setviewEmployee(response.data))
+    .catch((err)=>setError(err.message))
+  },[]);
+
   return (
     <>
     <h3 align="middle" className="mt-3 fw-bolder">Customer Master Data Details</h3>
@@ -23,14 +33,19 @@ export default function ViewEmployeeDetails() {
       </tr>
     </MDBTableHead>
     <MDBTableBody>
+      {
+        viewEmployee.map((employee)=>{
+          const {employeeId, employeeName, department, designation, doj, dob, gender}=employee;
+        
+      
       <tr>
-        <td>78657</td>
-        <td>Siddhesh</td>
-        <td>DTI</td>
-        <td>Program Associate</td>
-        <td>24-07-2023</td>
-        <td>25--8-2000</td>
-        <td>Male</td>
+        <td>{employeeId}</td>
+        <td>{employeeName}</td>
+        <td>{department}</td>
+        <td>{designation}</td>
+        <td>{dob}</td>
+        <td>{doj}</td>
+        <td>{gender}</td>
         <td>
           <MDBBtn outline color='warning' rounded size='sm'>
             Edit
@@ -42,139 +57,9 @@ export default function ViewEmployeeDetails() {
           </MDBBtn>
         </td>
       </tr>
-      <tr>
-        <td>78657</td>
-        <td>Siddhesh</td>
-        <td>DTI</td>
-        <td>Program Associate</td>
-        <td>24-07-2023</td>
-        <td>25--8-2000</td>
-        <td>Male</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
-      <tr>
-        <td>78657</td>
-        <td>Siddhesh</td>
-        <td>DTI</td>
-        <td>Program Associate</td>
-        <td>24-07-2023</td>
-        <td>25--8-2000</td>
-        <td>Male</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
-      <tr>
-        <td>78657</td>
-        <td>Siddhesh</td>
-        <td>DTI</td>
-        <td>Program Associate</td>
-        <td>24-07-2023</td>
-        <td>25--8-2000</td>
-        <td>Male</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
-      <tr>
-        <td>78657</td>
-        <td>Siddhesh</td>
-        <td>DTI</td>
-        <td>Program Associate</td>
-        <td>24-07-2023</td>
-        <td>25--8-2000</td>
-        <td>Male</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
-      <tr>
-        <td>78657</td>
-        <td>Siddhesh</td>
-        <td>DTI</td>
-        <td>Program Associate</td>
-        <td>24-07-2023</td>
-        <td>25--8-2000</td>
-        <td>Male</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
-      <tr>
-        <td>78657</td>
-        <td>Siddhesh</td>
-        <td>DTI</td>
-        <td>Program Associate</td>
-        <td>24-07-2023</td>
-        <td>25--8-2000</td>
-        <td>Male</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
-      <tr>
-        <td>78657</td>
-        <td>Siddhesh</td>
-        <td>DTI</td>
-        <td>Program Associate</td>
-        <td>24-07-2023</td>
-        <td>25--8-2000</td>
-        <td>Male</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
+      })
+    }
+    
     </MDBTableBody>
   </MDBTable>
     </>
