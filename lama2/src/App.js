@@ -17,6 +17,7 @@ import PendingLoanRequests from './Components/PendingLoanRequests';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ApplyLoanCard from './Components/ApplyLoanCard';
 import UserSignUp from './Components/UserSignUp';
+import ViewUserItems from './Components/viewUserItems';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
       <Route path="/viewItems" element={<ViewItems/>}/>
       <Route path="/viewAppliedLoans" element={<ViewAppliedLoans/>}/>
       <Route path="/purchaseHistory" element={<PurchaseHistory/>}/>
+      <Route path="/viewUserItems" element={<ViewUserItems/>}/>
     </Routes> 
     </BrowserRouter>
     <Footer/>

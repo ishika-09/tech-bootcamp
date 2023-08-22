@@ -14,7 +14,7 @@ export default function UserDashboard() {
     <h5 align="middle" className="py-1">Your Financial Command Center: Loans, Purchases, All in One Place</h5>
     <hr/>
     <div className="container d-flex">  
-    <MDBCard className="m-5">
+    <MDBCard className="m-3">
       <MDBCardBody>
         <MDBCardTitle className="fw-bold">View Loans History</MDBCardTitle>
         <hr/>
@@ -24,7 +24,7 @@ export default function UserDashboard() {
         <MDBBtn href="/viewAppliedLoans" className='w-100 my-2'>Explore</MDBBtn>
       </MDBCardBody>
     </MDBCard>
-    <MDBCard className="m-5">
+    <MDBCard className="m-3">
       <MDBCardBody>
         <MDBCardTitle className="fw-bold">Apply Loan Card</MDBCardTitle>
         <hr/>
@@ -34,7 +34,17 @@ export default function UserDashboard() {
         <MDBBtn href="/applyLoanCard" className='w-100 my-2'>Apply</MDBBtn>
       </MDBCardBody>
     </MDBCard>
-    <MDBCard className="m-5">
+    <MDBCard className="m-3">
+      <MDBCardBody>
+        <MDBCardTitle className="fw-bold">Purchase Items</MDBCardTitle>
+        <hr/>
+        <MDBCardText>
+        Walk through the available items and avail the loan card. Don't miss
+        </MDBCardText>
+        <MDBBtn href="/viewUserItems" className='w-100 my-2'>View Items</MDBBtn>
+      </MDBCardBody>
+    </MDBCard>
+    <MDBCard className="m-3">
       <MDBCardBody>
         <MDBCardTitle className="fw-bold">Purchase History</MDBCardTitle>
         <hr/>
