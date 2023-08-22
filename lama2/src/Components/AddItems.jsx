@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBInput, MDBRadio, MDBRange } from 'mdb-react-ui-kit';
 import Cart from '../Assets/Images/cart.jpg';
-import axios from axios;
+import axios from 'axios';
 
 function AddItems() {
 
-  const [itemCategory, setItemCategory] = userState("");
+  const [itemCategory, setItemCategory] = useState("");
   const [itemDescription, setItemDescription] = useState("");
   const [itemValue, setItemValue] = useState(0);
   const [itemStatus, setItemStatus] = useState("");
@@ -14,12 +14,11 @@ function AddItems() {
   function handleSubmit(){
     axios.post(backendURL,
       {
-        dob : dob,
-        doj : doj,
-        name : name,
-        designation : designation,
-        department : department,
-        gender : gender
+        itemCategory : itemCategory,
+        itemDescription : itemDescription,
+        itemValue : itemValue,
+        itemStatus : itemStatus,
+        itemMake : itemMake
       },{headers:{"Content-Type" : "application/json"}})
       .then((response) => {console.log("Item added !!")});
   }
