@@ -1,7 +1,17 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import axios from 'axios';
 
 export default function ViewLoanCards() {
+  const[viewLoanCard, setLoanCard] = useState([]);
+  const[error, setError] = useState("");
+
+  useEffect(()=>{
+    axios.get("/")
+    .then((response)=>setViewLoanCards(response.data))
+    .catch((err)=> setError(err.message))
+  },[]);
+
   return (
     <>
     <h3 align="middle" className="mt-3 fw-bolder">View Approved Loan Cards</h3>
@@ -19,20 +29,19 @@ export default function ViewLoanCards() {
       </tr>
     </MDBTableHead>
     <MDBTableBody>
+      {
+        ViewLoan.map((loan) => {
+        const{employeeId, loadId, loanType, duration, itemId}=loan;
       <tr>
-        <td>2345</td>
-        <td>2651</td>
-        <td>Furniture</td>
-        <td>2 Month</td>
-        <td>902378</td>
+        <td>{employeeId}</td>
+        <td>{loanId}</td>
+        <td>{loanType}</td>
+        <td>{duration}</td>
+        <td>{itemId}</td>
       </tr>
-      <tr>
-        <td>2345</td>
-        <td>2651</td>
-        <td>Furniture</td>
-        <td>2 Month</td>
-        <td>902378</td>
-      </tr>
+        })
+      }
+       
     </MDBTableBody>
   </MDBTable>
     </>
