@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import axios from 'axios';
 
@@ -29,13 +29,8 @@ export default function ViewAppliedLoans() {
     </MDBTableHead>
     <MDBTableBody>
       {
-<<<<<<< HEAD
         appliedLoan.map((appliedloan)=>{
         const{loanId,loanType,itemId, duration, cardIssueDate} = appliedloan;
-=======
-        AppliedLoan.map((appliedloan)=>{
-        const {loanId,loanType,itemId, duration, cardIssueDate} = appliedloan;
->>>>>>> 86a47f248038427f1dbd8b8716c5d126dc3f5acc
       <tr>
         <td>{loanId}</td>
         <td>{loanType}</td>
@@ -43,8 +38,8 @@ export default function ViewAppliedLoans() {
         <td>{duration}</td>
         <td>{cardIssueDate}</td>
       </tr>
-    })
- }
+       })
+     }
 
     </MDBTableBody>
   </MDBTable>
