@@ -8,7 +8,7 @@ export default function PurchaseHistory() {
 
   useEffect(() => {
     axios.get("/user/purchase")
-    .then((response) => setPurchaseHistory(response))
+    .then((response) => setPurchaseHistory(response.data))
   }, [])
   
   return (
