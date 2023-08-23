@@ -3,12 +3,12 @@ import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-reac
 import axios from 'axios';
 
 export default function ViewLoanCards() {
-  const[viewLoanCard, setLoanCard] = useState([]);
+  const[viewloan, setloan] = useState([]);
   const[error, setError] = useState("");
 
   useEffect(()=>{
     axios.get("/")
-    .then((response)=>setViewLoanCards(response.data))
+    .then((response)=>setloan(response.data))
     .catch((err)=> setError(err.message))
   },[]);
 
@@ -30,8 +30,8 @@ export default function ViewLoanCards() {
     </MDBTableHead>
     <MDBTableBody>
       {
-        ViewLoan.map((loan) => {
-        const{employeeId, loadId, loanType, duration, itemId}=loan;
+        viewloan.map((loan) => {
+        const{employeeId, loanId, loanType, duration, itemId}=loan;
       <tr>
         <td>{employeeId}</td>
         <td>{loanId}</td>
