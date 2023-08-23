@@ -9,13 +9,13 @@ import com.example.demo.model.LoanCard;
 
 public interface LoanCardRepository extends JpaRepository<LoanCard, Integer>{
 
-	@Query (value = "SELECT loanCard FROM loancard loanCard WHERE loanCard.valid = 0" , nativeQuery = true)
+	@Query (value = "SELECT * FROM loancard WHERE valid = 0" , nativeQuery = true)
 	List<LoanCard> findAllPending();
 	
-	@Query (value = "SELECT loanCard FROM loancard loanCard WHERE loanCard.valid = 1" ,nativeQuery = true)
+	@Query (value = "SELECT * FROM loancard WHERE valid = 1" ,nativeQuery = true)
 	List<LoanCard> findAllValid();
 
-	@Query (value = "SELECT loanCard FROM loancard loanCard WHERE loanCard.user_id = ?1" ,nativeQuery = true)
+	@Query (value = "SELECT * FROM loancard WHERE user_id = ?1" ,nativeQuery = true)
 	List<LoanCard> findAllActive(String user_id);
 
 }
