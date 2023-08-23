@@ -68,6 +68,7 @@ public class UserServiceImpl implements UserService {
 //		if(user1.getPassword().equals(userDto.getPassword()))
 //			return 1;
 		return "logged in";
+
 	}
 	@Override
 	public UserDto findUserById(String id) {
@@ -123,4 +124,19 @@ public class UserServiceImpl implements UserService {
 			deleteUserById(userDto.getId());
 	}
 	
+
+	@Override
+	public int resetPassword(UserDto userDto) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		Optional <User> user = userRepository.findById(userDto.getId());
+		System.out.println(user);
+		if (user.isEmpty())
+			return 0;
+		User user1 = user.get();
+		if(userDto.getDob().equals(user1.getDob())) {
+			user1.setPassword(userDto.getPassword());
+			return 1;
+		}
+		return 0;	
+	}
 }

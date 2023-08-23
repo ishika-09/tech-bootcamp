@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.LoanCard;
 import com.example.demo.repo.LoanCardRepository;
-import com.example.demo.dto.AdminDto;
 import com.example.demo.dto.LoanCardDto;
 import lombok.AllArgsConstructor;
 
@@ -61,6 +59,13 @@ public class LoanCardServiceImpl implements LoanCardService {
 		return l;
 	}
 	
+	@Override
+	public List<LoanCardDto> getAllActiveLoanCards(String user_id){
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		List<LoanCard> loanCard = loanCardRepository.findAllActive(user_id);
+		List<LoanCardDto> l = modelMapper.map(loanCard, new TypeToken<List<LoanCardDto>>(){}.getType());
+		return l;
+	}
 	@Override
 	public List<LoanCardDto> getAllValidLoanCards(){
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);

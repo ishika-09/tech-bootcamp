@@ -10,9 +10,11 @@ public interface UserService {
 	UserDto createUser(UserDto userDto);
 	List<UserDto> getAllValidUsers();
 	List<UserDto> getAllPendingUsers();
+
 	UserDto findUserById(String id);
 	UserDto deleteUserById(String id);
 	UserDto updateUser(UserDto userDto);
 	String loginUser(LoginRequest loginRequest) throws Exception;
 	void approveUser(UserDto userDto);
+	int resetPassword(UserDto userDto);
 }

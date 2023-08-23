@@ -51,4 +51,10 @@ public class LoanCardController {
 		List<LoanCardDto> l= loanCardService.getAllPendingLoanCards();
 		return l;
 	}
+	
+	@GetMapping("/allActive/{user_id}")
+	public List<LoanCardDto> getAllActiveLoanCard(@PathVariable("user_id") String user_id){
+		List<LoanCardDto> l =loanCardService.getAllActiveLoanCards(user_id);
+		return l;
+	}
 }

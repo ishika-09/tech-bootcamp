@@ -9,6 +9,7 @@ public interface LoanCardService {
 	LoanCardDto createLoanCard(LoanCardDto loanCardDto);
 	List<LoanCardDto> getAllPendingLoanCards();
 	List<LoanCardDto> getAllValidLoanCards();
+	List<LoanCardDto> getAllActiveLoanCards(String user_id);
 	LoanCardDto findLoanCardById(int id);
 	LoanCardDto deleteLoanCardById(int id);
 	LoanCardDto updateLoanCard(LoanCardDto loanCardDto);
