@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.LoanCardDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.payload.request.LoginRequest;
 import com.example.demo.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -28,28 +30,33 @@ public class UserController {
 		return userService.createUser(userDto);
 	}
 	@PostMapping("/login")
-	public int loginUser(@RequestBody UserDto userDto) {
-		return userService.loginUser(userDto);
+	public String loginUser(@RequestBody LoginRequest loginRequest ) throws Exception {
+		return userService.loginUser(loginRequest);
 	}
 	
 	@GetMapping("/{id}")
-	public UserDto findUser(@PathVariable("id") int id) {
+	public UserDto findUser(@PathVariable("id") String id) {
 
 		UserDto o = userService.findUserById(id);
 		
 		return o;
 	}
 	
-	@GetMapping("/all")
-	public List<UserDto> getAllUser() {
+	@GetMapping("/allValid")
+	public List<UserDto> getAllValidUser() {
 
-		List<UserDto> l = userService.getAllUsers();
+		List<UserDto> l = userService.getAllValidUsers();
 		
+		return l;
+	}
+	@GetMapping("/allPending")
+	public List<UserDto> getAllPendingUser(){
+		List<UserDto> l= userService.getAllPendingUsers();
 		return l;
 	}
 	
 	@DeleteMapping("/{id}")
-	public UserDto deleteUser(@PathVariable("id") int id){
+	public UserDto deleteUser(@PathVariable("id") String id){
 		UserDto o = userService.deleteUserById(id);
 		
 		return o;

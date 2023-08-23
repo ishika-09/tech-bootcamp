@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/loanCards")
 public class LoanCardController {
 	private final LoanCardService loanCardService;
-	@PostMapping
+	@PostMapping("/apply")
 	public LoanCardDto createLoanCard(@RequestBody LoanCardDto loanCardDto) {
 		return loanCardService.createLoanCard(loanCardDto);
 	}
@@ -40,9 +40,15 @@ public class LoanCardController {
 		return o;
 	}
 	
-	@GetMapping("/all")
-	public List<LoanCardDto> getAllLoanCard(){
-		List<LoanCardDto> l= loanCardService.getAllLoanCards();
+	@GetMapping("/allPending")
+	public List<LoanCardDto> getAllPendingLoanCard(){
+		List<LoanCardDto> l= loanCardService.getAllPendingLoanCards();
+		return l;
+	}
+	
+	@GetMapping("/allApproved")
+	public List<LoanCardDto> getAllValidLoanCard(){
+		List<LoanCardDto> l= loanCardService.getAllPendingLoanCards();
 		return l;
 	}
 }

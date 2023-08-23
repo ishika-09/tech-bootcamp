@@ -28,7 +28,7 @@ import lombok.Setter;
 public class User {
 	@Id
 	@Column(name = "id")
-	private int id;
+	private String id;
 	@Column(name = "name" , nullable = false)
 	private String name;
 	@Column(name = "designation" , nullable = false)

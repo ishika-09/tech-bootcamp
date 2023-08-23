@@ -54,10 +54,33 @@ public class LoanCardServiceImpl implements LoanCardService {
 	}
 	
 	@Override
-	public List<LoanCardDto> getAllLoanCards(){
+	public List<LoanCardDto> getAllPendingLoanCards(){
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		List<LoanCard> loanCard = loanCardRepository.findAll();
+		List<LoanCard> loanCard = loanCardRepository.findAllPending();
 		List<LoanCardDto> l = modelMapper.map(loanCard, new TypeToken<List<LoanCardDto>>(){}.getType());
 		return l;
+	}
+	
+	@Override
+	public List<LoanCardDto> getAllValidLoanCards(){
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		List<LoanCard> loanCard = loanCardRepository.findAllValid();
+		List<LoanCardDto> l = modelMapper.map(loanCard, new TypeToken<List<LoanCardDto>>(){}.getType());
+		return l;
+	}
+	
+	@Override
+	public void approveLoanCard(LoanCardDto loanCardDto) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		Optional <LoanCard> loanCard = loanCardRepository.findById(loanCardDto.getId());
+		if (loanCard == null)
+			return;
+		LoanCard loanCard1 = loanCard.get();
+		if(loanCardDto.getValid() == 1) {
+			loanCard1.setValid(1);
+			loanCardRepository.save(loanCard1);
+		}
+		else
+			deleteLoanCardById(loanCardDto.getId());
 	}
 }

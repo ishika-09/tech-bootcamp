@@ -14,7 +14,8 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
-      
+
+    
   
       
 management:
