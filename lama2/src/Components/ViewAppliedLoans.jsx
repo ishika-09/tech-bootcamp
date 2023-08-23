@@ -29,8 +29,8 @@ export default function ViewAppliedLoans() {
     </MDBTableHead>
     <MDBTableBody>
       {
-        appliedLoan.map((appliedloan)=>{
-        const{loanId,loanType,itemId, duration, cardIssueDate} = appliedloan;
+        appliedLoan.map((appliedLoan)=>{
+        const{loanId,loanType,itemId, duration, cardIssueDate} = appliedLoan;
       <tr>
         <td>{loanId}</td>
         <td>{loanType}</td>
