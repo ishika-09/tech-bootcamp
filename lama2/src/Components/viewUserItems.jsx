@@ -26,7 +26,7 @@ export default function ViewUserItems() {
                 <MDBCardText>
                 Crafted for style and function, its premium materials and spacious design provide the perfect setting for tea essentials.
                 </MDBCardText>
-                <MDBBtn color="warning" outline><b>$30</b></MDBBtn>
+                <MDBBtn color="warning" outline><b> ₹ 3000</b></MDBBtn>
                 <MDBCardText className='my-2'><MDBBadge className='my-2' color='info' light>Item ID : 74682</MDBBadge><MDBBadge className='ml-2' outline>Copy it! <MDBIcon fas icon="paste"/></MDBBadge></MDBCardText>
             </MDBCardBody>
             </MDBCard>
@@ -39,7 +39,7 @@ export default function ViewUserItems() {
                 <MDBBadge className='my-2' color='info' light>Electrical</MDBBadge>
                 <MDBCardText>
                 With its sleek design and powerful airflow, it's the perfect addition to any room.                </MDBCardText>
-                <MDBBtn color="warning" outline><b>$10</b></MDBBtn>
+                <MDBBtn color="warning" outline><b> ₹ 1000</b></MDBBtn>
                 <MDBCardText className='my-2'><MDBBadge className='my-2' color='info' light>Item ID : 78609</MDBBadge><MDBBadge className='ml-2' outline>Copy it! <MDBIcon fas icon="paste"/></MDBBadge></MDBCardText>
             </MDBCardBody>
             </MDBCard>

@@ -30,7 +30,12 @@ function BasicExample() {
             <Button className="m-2" variant="danger" href="/signup">Sign Up</Button>
             <span className='text-white float-right'>
               {/* <img src={Man} width="40" height="40"/> */}
-              {/* <span className='align-middle'>Welcome, Siddhesh</span> */}
+             
+            </span>
+            <Button className="m-2" variant="danger" href="/login">Login</Button>
+            <span className='text-white float-right'>
+              {/* <img src={Man} width="40" height="40"/> */}
+             
             </span>
           </Nav>
         </Navbar.Collapse>
