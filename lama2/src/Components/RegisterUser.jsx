@@ -8,6 +8,7 @@ import axios from 'axios';
 function RegisterUser() 
 {
   const [designation,setDesignation] = useState("");
+  const [userId, setUserId] = useState("");
   const [department, setDepartment] = useState("");
   const [dob,setDob] = useState(new Date());
   const [doj,setDoj] = useState(new Date());
@@ -20,6 +21,7 @@ function RegisterUser()
         dob : dob,
         doj : doj,
         name : name,
+        userId : userId,
         designation : designation,
         department : department,
         gender : gender
@@ -42,6 +44,7 @@ function RegisterUser()
             <h3>Customer Master Data Details</h3>
             <br/>
             <MDBInput wrapperClass='mb-4' onChange={e => setName(e.target.value)} value={name} label='Employee Name' id='userUSername' name="userUSername" type='text' size="md"/>
+            <MDBInput wrapperClass='mb-4' onChange={e => setUserId(e.target.value)} value={userId} label='User ID' id='userId' name="userId" type='text' size="md"/>
             <select label="Designation" name="Designation" id="designation" onChange={e => setDesignation(e.target.value)} class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
               <option value="Program Associate">Program Associate</option>
               <option value="Software Engineer">Software Engineer</option>

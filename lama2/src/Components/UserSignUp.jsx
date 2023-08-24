@@ -9,6 +9,7 @@ function UserSignUp()
 {
   const [designation,setDesignation] = useState("");
   const [department, setDepartment] = useState("");
+  const [id, setid] = useState("");
   const [dob,setDob] = useState(new Date());
   const [doj,setDoj] = useState(new Date());
   const [name, setName] = useState("");
@@ -20,6 +21,7 @@ function UserSignUp()
       {
         name : name,
         designation : designation,
+        id : id,
         department : department,
         dob : dob,
         doj : doj,
@@ -45,6 +47,7 @@ function UserSignUp()
             <br/>
             <MDBInput wrapperClass='mb-4' onChange={e => setName(e.target.value)} value={name} label='Employee Name' id='userUSername' name="userUSername" type='text' size="md"/>
             <MDBInput wrapperClass='mb-4'  onChange={e => setPassword(e.target.value)} value={password} label='Password' id='userPassword' name="userPassword" type='password'/>
+            <MDBInput wrapperClass='mb-4'  onChange={e => setid(e.target.value)} value={id} label='User Id' id='id' name="id" type='number'/>
             <select label="Designation" name="Designation" id="designation" onChange={e => setDesignation(e.target.value)} class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
               <option value="Program Associate">Program Associate</option>
               <option value="Software Engineer">Software Engineer</option>

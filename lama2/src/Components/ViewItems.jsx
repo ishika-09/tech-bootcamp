@@ -35,7 +35,7 @@ export default function ViewItems() {
       viewItems.map((item)=>{
         const {itemId, description, itemStatus, itemMake, itemCategory, itemValuation}=item;
         <tr>
-          <td>{itemID}</td>
+          <td>{itemId}</td>
           <td>{description}</td>
           <td>{itemStatus}</td>
           <td>{itemMake}</td>
