@@ -7,10 +7,12 @@ export default function ViewAppliedLoans() {
   const[error,setError] = useState("");
 
   useEffect(()=>{
-    axios.get("/")
+    const id = sessionStorage.getItem("username");
+    axios.get(`http://localhost:8080/users/allValid/${id}`)
     .then((response)=>setappliedLoan(response.data))
     .catch((err)=>setError(err.message))
   },[]);
+
   return (
     <>
     <h3 align="middle" className="mt-3 fw-bolder">Loan Cards Availed</h3>
