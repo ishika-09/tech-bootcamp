@@ -24,7 +24,7 @@ import com.example.demo.security.jwt.AuthTokenFilter;
 import com.example.demo.service.CustomUserDetailsService;
 
 @Configuration
-@EnableMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 // (securedEnabled = true,
 // jsr250Enabled = true,
 // prePostEnabled = true) // by default
@@ -68,8 +68,9 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 		http.csrf(csrf -> csrf.disable())
 				.cors().disable()
 				.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-				.authorizeHttpRequests(auth -> auth.antMatchers("/users/**").permitAll()
-						.antMatchers(HttpMethod.OPTIONS).permitAll())
+				.authorizeHttpRequests(auth -> auth.antMatchers("/users/login").permitAll()
+						.antMatchers(HttpMethod.OPTIONS).permitAll()
+//						.anyRequest().authenticated())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
 

@@ -48,7 +48,6 @@ public class AdminController {
 	}
 	
 	@GetMapping("/{id}")
-	@PreAuthorize("hasRole('admin')")
 	public AdminDto findAdmin(@PathVariable("id") int id) {
 
 		AdminDto o = adminService.findAdminById(id);
@@ -57,7 +56,6 @@ public class AdminController {
 	}
 
 	@DeleteMapping("/{id}")
-	@PreAuthorize("hasRole('admin')")
 	public AdminDto deleteAdmin(@PathVariable("id") int id){
 		AdminDto o = adminService.deleteAdminById(id);
 		
@@ -65,7 +63,6 @@ public class AdminController {
 	}
 	
 	@GetMapping("/all")
-	@PreAuthorize("hasRole('admin')")
 	public List<AdminDto> getAllAdmin() {
 
 		List<AdminDto> l = adminService.getAllAdmins();
@@ -74,13 +71,11 @@ public class AdminController {
 	}
 	
 	@PutMapping("/approveLoan")
-	@PreAuthorize("hasRole('admin')")
 	public void approveLoan(@RequestBody LoanCard loanCard){
 		loanCardService.approveLoanCard(loanCard);
 	}
 	
 	@PutMapping("/approveUser")
-	@PreAuthorize("hasRole('admin')")
 	public void approveUser(@RequestBody UserDto userDto) {
 		userService.approveUser(userDto);
 	}
