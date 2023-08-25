@@ -9,7 +9,7 @@ function ApplyLoanCard() {
   const [loanDuration, setloanDuration] = useState(0);
   const [interest, setinterest] = useState(0);
   const [itemID, setItemID] = useState("");
-  const backendURL = "http://localhost:8081/loancards/apply"
+  const backendURL = "http://localhost:8081/loanCards/apply"
 
   function handleSubmit(){
     axios.post(backendURL,
