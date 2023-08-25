@@ -3,12 +3,12 @@ import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-reac
 import axios from 'axios';
 
 export default function ViewAppliedLoans() {
-  const{appliedLoan,setappliedLoan}=useState([]);
+  const[appliedLoan,setappliedLoan]=useState([]);
   const[error,setError] = useState("");
 
   useEffect(()=>{
     const id = sessionStorage.getItem("username");
-    axios.get(`http://localhost:8080/users/allValid/${id}`)
+    axios.get(`http://localhost:8080/users/allactive/${id}`)
     .then((response)=>setappliedLoan(response.data))
     .catch((err)=>setError(err.message))
   },[]);
@@ -31,8 +31,8 @@ export default function ViewAppliedLoans() {
     </MDBTableHead>
     <MDBTableBody>
       {
-        appliedLoan.map((appliedLoan)=>{
-        const{loanId,loanType,itemId, duration, cardIssueDate} = appliedLoan;
+        Array.from(appliedLoan).map((loan)=>{
+        const{loanId,loanType,itemId, duration, cardIssueDate} = loan;
       <tr>
         <td>{loanId}</td>
         <td>{loanType}</td>

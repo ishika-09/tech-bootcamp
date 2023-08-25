@@ -32,7 +32,7 @@ export default function ViewItems() {
     </MDBTableHead>
     <MDBTableBody>
      {
-      viewItems.map((item)=>{
+      Array.from(viewItems).map((item)=>{
         const {itemId, description, itemStatus, itemMake, itemCategory, itemValuation}=item;
         <tr>
           <td>{itemId}</td>
