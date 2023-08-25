@@ -34,7 +34,7 @@ export default function ViewEmployeeDetails() {
     </MDBTableHead>
     <MDBTableBody>
       {
-        viewEmployee.map((employee)=>{
+        Array.from(viewEmployee).map((employee)=>{
           const {employeeId, employeeName, department, designation, doj, dob, gender}=employee;
         
       

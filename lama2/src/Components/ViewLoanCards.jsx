@@ -30,7 +30,7 @@ export default function ViewLoanCards() {
     </MDBTableHead>
     <MDBTableBody>
       {
-        viewloan.map((loan) => {
+        Array.from(viewloan).map((loan) => {
         const{employeeId, loanId, loanType, duration, itemId}=loan;
       <tr>
         <td>{employeeId}</td>
