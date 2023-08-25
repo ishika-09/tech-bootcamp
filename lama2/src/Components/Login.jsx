@@ -61,7 +61,7 @@ function Login() {
 
             <MDBTabsPane show={justifyActive === 'tab1'}>
 
-            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='userUsername' type='text'/>
+            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='userUsername' type='number'/>
             <MDBInput wrapperClass='mb-4' onChange={e=> setPasssword(e.target.value)} value = {password} label='Password' id='userPassword' type='password'/>
 
             <div className="d-flex justify-content-between mx-4 mb-4">
@@ -80,7 +80,7 @@ function Login() {
 
             <MDBTabsPane show={justifyActive === 'tab2'}>
 
-            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='adminUsername' type='text'/>
+            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='adminUsername' type='number'/>
             <MDBInput wrapperClass='mb-4' onChange={e=> setPasssword(e.target.value)} value = {password} label='Password' id='adminPassword' type='password'/>
 
             <div className="d-flex justify-content-between mx-4 mb-4">

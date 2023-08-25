@@ -7,14 +7,14 @@ import axios from 'axios';
 
 function UserSignUp() 
 {
-  const [designation,setDesignation] = useState("");
-  const [department, setDepartment] = useState("");
+  const [designation,setDesignation] = useState("Program Associate");
+  const [department, setDepartment] = useState("DTI");
   //const [id, setid] = useState(0);
   const [dob,setDob] = useState(new Date());
   const [doj,setDoj] = useState(new Date());
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("Female");
   const [contact, setContact] = useState();
   const backendURL = "http://localhost:8081/users/register";
   function handleSubmit(){
@@ -30,7 +30,8 @@ function UserSignUp()
         gender : gender,
         password : password
       },{headers:{"Content-Type" : "application/json"}})
-      .then((response) => {console.log("Employee registered !!")});
+      .then((response) => {console.log("Employee registered !!");
+      window.location.href='/login'});
   }
   function handleGenderChange(e){
     if(e.target.value=="option1")

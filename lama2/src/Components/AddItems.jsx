@@ -8,26 +8,26 @@ function AddItems() {
   const [itemCategory, setItemCategory] = useState("");
   const [itemDescription, setItemDescription] = useState("");
   const [itemValue, setItemValue] = useState(0);
-  const [itemStatus, setItemStatus] = useState("");
+  // const [itemStatus, setItemStatus] = useState("");
   const [itemMake, setItemMake] = useState("");
-  const backendURL = "http://localhost:8081/items/add";
+  const backendURL = "http://localhost:8081/items";
   function handleSubmit(){
     axios.post(backendURL,
       {
         itemCategory : itemCategory,
         itemDescription : itemDescription,
         itemValue : itemValue,
-        itemStatus : itemStatus,
+        // itemStatus : itemStatus,
         itemMake : itemMake
       },{headers:{"Content-Type" : "application/json"}})
       .then((response) => {console.log("Item added !!")});
   }
-  function handleGenderChange(e){
-    if(e.target.value=="option1")
-      setItemStatus("Available")
-    else
-      setItemStatus("OutOfStock")
-  }
+  // function handleGenderChange(e){
+  //   if(e.target.value=="option1")
+  //     setItemStatus("Available")
+  //   else
+  //     setItemStatus("OutOfStock")
+  // }
 
 
   return (
@@ -47,8 +47,8 @@ function AddItems() {
             </select>
             <MDBInput wrapperClass='mb-4' label='Item Description' onChange={e => setItemDescription(e.target.value)} id='formControlLg' type='textarea' size="md"/>
             <MDBInput wrapperClass='mb-4' label='Item Value' onChange={e => setItemValue(e.target.value)} id='formControlLg' type='text' size="md"/>
-            <MDBRadio name='inlineRadio' onSelect={e => handleGenderChange(e)} id='inlineRadio1' value='option1' label='Available' inline />
-            <MDBRadio name='inlineRadio'onSelect={e => handleGenderChange(e)}  id='inlineRadio2' value='option2' label='OutOfStock' inline />
+            {/* <MDBRadio name='inlineRadio' onSelect={e => handleGenderChange(e)} id='inlineRadio1' value='option1' label='Available' inline />
+            <MDBRadio name='inlineRadio'onSelect={e => handleGenderChange(e)}  id='inlineRadio2' value='option2' label='OutOfStock' inline /> */}
             <MDBInput wrapperClass='mt-2 mb-4' label='Item Make' onChange={e => setItemMake(e.target.value)} id='formControlLg' type='text' size="md"/>
             <MDBBtn className="mb-4 w-100" type="submit" onClick={handleSubmit}>Add Item Details</MDBBtn>    
           </div>
