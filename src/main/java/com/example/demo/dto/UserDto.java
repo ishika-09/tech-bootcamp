@@ -11,7 +11,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class UserDto {
-	private String id;
+	private int id;
 	private String name;
 	private String designation;
 	private String department;

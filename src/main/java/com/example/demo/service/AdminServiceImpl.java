@@ -9,10 +9,8 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Admin;
-import com.example.demo.model.LoanCard;
 import com.example.demo.repo.AdminRepository;
 import com.example.demo.dto.AdminDto;
-import com.example.demo.dto.LoanCardDto;
 
 import lombok.AllArgsConstructor;
 

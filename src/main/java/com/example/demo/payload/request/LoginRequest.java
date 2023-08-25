@@ -4,16 +4,16 @@ import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {
 	@NotBlank
-  private String id;
+  private int id;
 
 	@NotBlank
 	private String password;
 
-	public String getid() {
+	public int getid() {
 		return id;
 	}
 
-	public void setid(String id) {
+	public void setid(int id) {
 		this.id = id;
 	}
 

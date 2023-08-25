@@ -3,6 +3,7 @@ package com.example.demo.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.AdminDto;
-import com.example.demo.dto.LoanCardDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.model.LoanCard;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.LoanCardService;
 import com.example.demo.service.UserService;
@@ -42,10 +43,12 @@ public class AdminController {
 	
 	@PostMapping("/login")
 	public int loginAdmin(@RequestBody AdminDto adminDto) {
+		System.out.println(adminDto);
 		return adminService.loginAdmin(adminDto);
 	}
 	
 	@GetMapping("/{id}")
+	@PreAuthorize("hasRole('admin')")
 	public AdminDto findAdmin(@PathVariable("id") int id) {
 
 		AdminDto o = adminService.findAdminById(id);
@@ -54,6 +57,7 @@ public class AdminController {
 	}
 
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('admin')")
 	public AdminDto deleteAdmin(@PathVariable("id") int id){
 		AdminDto o = adminService.deleteAdminById(id);
 		
@@ -61,6 +65,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/all")
+	@PreAuthorize("hasRole('admin')")
 	public List<AdminDto> getAllAdmin() {
 
 		List<AdminDto> l = adminService.getAllAdmins();
@@ -69,11 +74,13 @@ public class AdminController {
 	}
 	
 	@PutMapping("/approveLoan")
-	public void approveLoan(@RequestBody LoanCardDto loanCardDto){
-		loanCardService.approveLoanCard(loanCardDto);
+	@PreAuthorize("hasRole('admin')")
+	public void approveLoan(@RequestBody LoanCard loanCard){
+		loanCardService.approveLoanCard(loanCard);
 	}
 	
 	@PutMapping("/approveUser")
+	@PreAuthorize("hasRole('admin')")
 	public void approveUser(@RequestBody UserDto userDto) {
 		userService.approveUser(userDto);
 	}

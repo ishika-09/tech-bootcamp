@@ -2,6 +2,7 @@ package com.example.demo.rest;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,11 +23,13 @@ public class ItemController {
 
 	private final ItemService itemService;
 	@PostMapping
+	@PreAuthorize("hasRole('admin')")
 	public ItemDto createItem(@RequestBody ItemDto itemDto) {
 		return itemService.createItem(itemDto);
 	}
 	
 	@GetMapping("/{id}")
+	@PreAuthorize("hasRole('admin')")
 	public ItemDto findItem(@PathVariable("id") int id) {
 
 		ItemDto o = itemService.findItemById(id);
@@ -35,6 +38,7 @@ public class ItemController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('admin')")
 	public ItemDto deleteItem(@PathVariable("id") int id){
 		ItemDto o = itemService.deleteItemById(id);
 		
@@ -42,6 +46,7 @@ public class ItemController {
 	}
 	
 	@GetMapping("/all")
+	@PreAuthorize("hasRole('admin')")
 	public List<ItemDto> getAllItem(){
 		List<ItemDto> l= itemService.getAllItems();
 		return l;

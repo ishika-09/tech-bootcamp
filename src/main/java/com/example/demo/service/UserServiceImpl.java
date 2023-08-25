@@ -1,26 +1,30 @@
 package com.example.demo.service;
 
-import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-import javax.crypto.SecretKey;
-
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
+//import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.CustomUserDetails;
 import com.example.demo.model.User;
 import com.example.demo.payload.request.LoginRequest;
+import com.example.demo.payload.response.JwtResponse;
 import com.example.demo.repo.UserRepository;
+import com.example.demo.security.jwt.JwtUtils;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+//import io.jsonwebtoken.Jwts;
+//import io.jsonwebtoken.SignatureAlgorithm;
 
 import com.example.demo.dto.UserDto;
 import lombok.RequiredArgsConstructor;
@@ -31,47 +35,38 @@ public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
 	private final ModelMapper modelMapper;
-	private int jwtExpirationMs = 1*60*60;
-	private String secret = "df6b9fb15cfdbb7527be5a8a6e39f39e572c8ddb943fbc79a943438e9d3d85ebfc2ccf9e0eccd9346026c0b6876e0e01556fe56f135582c05fbdbb505d46755a";
+	@Autowired
+	JwtUtils jwtUtils;
 	
+	@Autowired
+	PasswordEncoder encoder;
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	@Override
 	public UserDto createUser(UserDto userDto) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		userDto.setPassword(encoder.encode(userDto.getPassword()));
 		User user = modelMapper.map(userDto, User.class);
 		User user2= userRepository.save(user);
 		
 		return modelMapper.map(user2, UserDto.class);
 	}
 	@Override
-	public String loginUser(LoginRequest loginRequest) throws Exception{
-		try {
-			this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getid(), loginRequest.getPassword()));
-		}catch (BadCredentialsException e) {
-			throw new Exception("Bad Credentials!");
-		}
-		String tokenString = Jwts.builder()
-        .setSubject((loginRequest.getid()))
-        .setIssuedAt(new Date())
-        .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-        .signWith(SignatureAlgorithm.HS512,secret)
-        .compact();
-//		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-//		Optional <User> user = userRepository.findById(loginRequest.getid());
-//		if (user == null)
-//			return 0;
-//		User user1 = user.get();
-//		if(user1.getValid() == 0)
-//			return 0;
-//		if(user1.getPassword().equals(userDto.getPassword()))
-//			return 1;
-		return "logged in";
+	public ResponseEntity<?> loginUser(LoginRequest loginRequest){
+		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(Integer.toString(loginRequest.getid()), loginRequest.getPassword()));
+		
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		String jwt = jwtUtils.generateJwtToken(authentication);
+
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+		List<String> roles = Arrays.asList("user");
+		return ResponseEntity.ok(
+				new JwtResponse(jwt, userDetails.getUsername(), roles));
 
 	}
 	@Override
-	public UserDto findUserById(String id) {
+	public UserDto findUserById(int id) {
 		// TODO Auto-generated method stub
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		Optional<User> user = userRepository.findById(id);
@@ -86,7 +81,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto deleteUserById(String id) {
+	public UserDto deleteUserById(int id) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		Optional <User> user = userRepository.findById(id);
 		userRepository.deleteById(id);

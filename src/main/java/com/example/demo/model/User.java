@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +25,8 @@ import lombok.Setter;
 public class User {
 	@Id
 	@Column(name = "id")
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	@Column(name = "name" , nullable = false)
 	private String name;
 	@Column(name = "designation" , nullable = false)
@@ -47,8 +45,8 @@ public class User {
 	private long contact;
 	@Column (name = "valid" , nullable = false)
 	private int valid = 0;
-	@JsonManagedReference
-	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	
+	@OneToMany(mappedBy="id", fetch=FetchType.LAZY)
 	private List<LoanCard> loanCards;
 	
 	@Override

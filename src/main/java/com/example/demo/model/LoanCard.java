@@ -2,9 +2,9 @@ package com.example.demo.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,12 +35,12 @@ public class LoanCard {
 	private String type;
 	@Column(name = "interest" , nullable = false)
 	private float interest;
-	@OneToOne
-	@JoinColumn(name = "item_id" , nullable = false, referencedColumnName="id")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "item_id" , referencedColumnName = "id")
 	private Item item;
 	@JsonBackReference
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name = "user_id" , nullable = false, referencedColumnName="id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id" , nullable = false, referencedColumnName = "id")
 	private User user;
 	@Column (name ="issue_date" , nullable = false)
 	private Date issue_date;

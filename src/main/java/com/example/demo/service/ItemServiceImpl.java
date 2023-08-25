@@ -19,6 +19,7 @@ public class ItemServiceImpl implements ItemService {
 
 	private final ItemRepository itemRepository;
 	private final ModelMapper modelMapper;
+	
 	@Override
 	public ItemDto createItem(ItemDto itemDto) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);

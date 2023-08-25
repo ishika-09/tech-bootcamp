@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.example.demo.model.User;
 
 //@Repository
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Query (value = "SELECT * FROM user WHERE valid = 0" , nativeQuery = true)
 	List<User> findAllPending();

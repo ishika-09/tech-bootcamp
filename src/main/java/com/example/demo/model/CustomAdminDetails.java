@@ -4,17 +4,17 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.*;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class CustomUserDetails implements UserDetails{
+public class CustomAdminDetails implements UserDetails{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private User user;
+	private Admin admin;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -25,13 +25,13 @@ public class CustomUserDetails implements UserDetails{
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return user.getPassword();
+		return admin.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return Integer.toString(user.getId());
+		return Integer.toString(admin.getId());
 	}
 
 	@Override

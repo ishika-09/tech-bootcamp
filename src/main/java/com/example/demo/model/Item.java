@@ -2,9 +2,11 @@ package com.example.demo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -33,7 +35,8 @@ public class Item {
 	private String category;
 	@Column (name = "value" , nullable = false)
 	private int value;
-	
+	@OneToOne(fetch = FetchType.LAZY)
+	LoanCard LoanCard;
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", make=" + make + ", description=" + description + ", issue_status=" + issue_status
