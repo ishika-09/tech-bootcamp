@@ -34,9 +34,9 @@ function UserSignUp()
   }
   function handleGenderChange(e){
     if(e.target.value=="option1")
-      setGender("Male")
+      setGender("Male");
     else
-      setGender("Female")
+      setGender("Female");
   }
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom">
