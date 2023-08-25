@@ -59,7 +59,6 @@ public class LoanCardController {
 		return l;
 	}
 	
-	@PreAuthorize("hasRole('admin') or hasRole('user')")
 	@GetMapping("/allActive/{user_id}")
 	public List<LoanCard> getAllActiveLoanCard(@PathVariable("user_id") String user_id){
 		List<LoanCard> l =loanCardService.getAllActiveLoanCards(user_id);

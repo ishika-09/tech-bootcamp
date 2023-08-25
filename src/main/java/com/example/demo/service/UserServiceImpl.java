@@ -129,7 +129,7 @@ public class UserServiceImpl implements UserService {
 			return 0;
 		User user1 = user.get();
 		if(userDto.getDob().equals(user1.getDob())) {
-			user1.setPassword(userDto.getPassword());
+			user1.setPassword(encoder.encode(userDto.getPassword()));
 			return 1;
 		}
 		return 0;	

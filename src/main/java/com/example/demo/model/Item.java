@@ -35,8 +35,7 @@ public class Item {
 	private String category;
 	@Column (name = "value" , nullable = false)
 	private int value;
-	@OneToOne(fetch = FetchType.LAZY)
-	LoanCard LoanCard;
+	
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", make=" + make + ", description=" + description + ", issue_status=" + issue_status

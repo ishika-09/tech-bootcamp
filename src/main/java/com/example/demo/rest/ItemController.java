@@ -23,7 +23,6 @@ public class ItemController {
 
 	private final ItemService itemService;
 	@PostMapping
-	@PreAuthorize("hasRole('admin')")
 	public ItemDto createItem(@RequestBody ItemDto itemDto) {
 		return itemService.createItem(itemDto);
 	}
