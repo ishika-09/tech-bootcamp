@@ -9,22 +9,24 @@ function UserSignUp()
 {
   const [designation,setDesignation] = useState("");
   const [department, setDepartment] = useState("");
-  const [id, setid] = useState("");
+  //const [id, setid] = useState(0);
   const [dob,setDob] = useState(new Date());
   const [doj,setDoj] = useState(new Date());
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState("");
+  const [contact, setContact] = useState();
   const backendURL = "http://localhost:8081/users/register";
   function handleSubmit(){
     axios.post(backendURL,
       {
         name : name,
         designation : designation,
-        id : id,
+       // id : id,
         department : department,
         dob : dob,
         doj : doj,
+        contact : contact,
         gender : gender,
         password : password
       },{headers:{"Content-Type" : "application/json"}})
@@ -46,8 +48,10 @@ function UserSignUp()
             <h3>Customer Sign Up</h3>
             <br/>
             <MDBInput wrapperClass='mb-4' onChange={e => setName(e.target.value)} value={name} label='Employee Name' id='userUSername' name="userUSername" type='text' size="md"/>
-            <MDBInput wrapperClass='mb-4'  onChange={e => setPassword(e.target.value)} value={password} label='Password' id='userPassword' name="userPassword" type='password'/>
-            <MDBInput wrapperClass='mb-4'  onChange={e => setid(e.target.value)} value={id} label='User Id' id='id' name="id" type='number'/>
+            
+           <MDBInput wrapperClass='mb-4'  onChange={e => setPassword(e.target.value)} value={password} label='Password' id='userPassword' name="userPassword" type='password'/>
+           <MDBInput wrapperClass='mb-4'  onChange={e => setContact(e.target.value)} value={contact} label='Contact No.' id='contact' name="contact" type='number'/>
+            {/* <MDBInput wrapperClass='mb-4'  onChange={e => setid(e.target.value)} value={id} label='User Id' id='id' name="id" type='number'/> */}
             <select label="Designation" name="Designation" id="designation" onChange={e => setDesignation(e.target.value)} class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
               <option value="Program Associate">Program Associate</option>
               <option value="Software Engineer">Software Engineer</option>

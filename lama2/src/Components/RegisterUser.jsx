@@ -8,11 +8,12 @@ import axios from 'axios';
 function RegisterUser() 
 {
   const [designation,setDesignation] = useState("");
-  const [userId, setUserId] = useState("");
   const [department, setDepartment] = useState("");
+ // const [id, setid] = useState(0);
   const [dob,setDob] = useState(new Date());
   const [doj,setDoj] = useState(new Date());
   const [name, setName] = useState("");
+  const [contact, setContact] = useState();
   const [gender, setGender] = useState("");
   const backendURL = "http://localhost:8081/users/register";
   function handleSubmit(){
@@ -21,9 +22,10 @@ function RegisterUser()
         dob : dob,
         doj : doj,
         name : name,
-        userId : userId,
         designation : designation,
         department : department,
+        contact : contact,
+        //id : id,
         gender : gender
       },{headers:{"Content-Type" : "application/json"}})
       .then((response) => {console.log("Employee registered !!")});
@@ -44,7 +46,8 @@ function RegisterUser()
             <h3>Customer Master Data Details</h3>
             <br/>
             <MDBInput wrapperClass='mb-4' onChange={e => setName(e.target.value)} value={name} label='Employee Name' id='userUSername' name="userUSername" type='text' size="md"/>
-            <MDBInput wrapperClass='mb-4' onChange={e => setUserId(e.target.value)} value={userId} label='User ID' id='userId' name="userId" type='text' size="md"/>
+            {/* <MDBInput wrapperClass='mb-4' onChange={e => setid(e.target.value)} value={id} label='User ID' id='id' name="id" type='text' size="md"/> */}
+            <MDBInput wrapperClass='mb-4' onChange={e => setContact(e.target.value)} value={contact} label='Contact No.' id='contact' name="contact" type='number' size="md"/>
             <select label="Designation" name="Designation" id="designation" onChange={e => setDesignation(e.target.value)} class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
               <option value="Program Associate">Program Associate</option>
               <option value="Software Engineer">Software Engineer</option>
