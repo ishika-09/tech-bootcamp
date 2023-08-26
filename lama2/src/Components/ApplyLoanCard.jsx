@@ -9,6 +9,7 @@ function ApplyLoanCard() {
   const [loanDuration, setloanDuration] = useState(0);
   const [interest, setinterest] = useState(0);
   const [itemID, setItemID] = useState("");
+  const [issue_date, setissue_date] = useState(new Date());
   const backendURL = "http://localhost:8081/loanCards/apply"
 
   function handleSubmit(){
@@ -18,7 +19,8 @@ function ApplyLoanCard() {
         loanType: loanType,
         loanDuration: loanDuration,
         interest: interest,
-        itemID : itemID
+        itemID : itemID,
+        issue_date: issue_date
 
       },{headers:{"Content-Type" : "application/json"}})
       .then((response) => {console.log("Loan Card Added !!")});
@@ -40,13 +42,14 @@ function ApplyLoanCard() {
             <h3>Loan Card</h3>
             <br/>
             <MDBInput wrapperClass='mb-4' onChange={e => setemployeeId(e.target.value)} value={employeeId} label='Employee ID' id='employeeId' name="employeeId" type='text' size="md"/>
-            <select label="Loan Type" name="loanType" id="loanType" onChange={e => setLoanType(e.target.value)} class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+            <select label="Loan Type" name="loanType" id="loanType" onChange={e => setLoanType(e.target.value)} class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">6
               <option value="Furniture">Furniture</option>
               <option value="Crockery ">Crockery</option>
               <option value="Electrical">Electrical</option>
               <option value="Electronic">Electronic</option>
               <option value="Plastic">Plastic</option>
             </select>
+            <MDBInput wrapperClass='mb-4' onChange={e=> setissue_date(e.target.value)} value={issue_date} label='Issue Date' id='issue_date' name='issue_date' type='date' size='md'/>
             <MDBInput wrapperClass='mb-4' onChange={e => setloanDuration(e.target.value)} value={loanDuration} label='Loan Duration (in months)' id='loanDuration' name="loanDuration" type='number' size="md"/>
             <MDBBtn onClick={getInterest}>Show Interest Rate</MDBBtn>
             <br/>
