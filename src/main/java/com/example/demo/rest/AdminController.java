@@ -3,6 +3,7 @@ package com.example.demo.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,12 +43,13 @@ public class AdminController {
 	}
 	
 	@PostMapping("/login")
-	public int loginAdmin(@RequestBody AdminDto adminDto) {
+	public ResponseEntity<?> loginAdmin(@RequestBody AdminDto adminDto) {
 		System.out.println(adminDto);
 		return adminService.loginAdmin(adminDto);
 	}
 	
 	@GetMapping("/{id}")
+	@PreAuthorize("hasRole = 'admin'")
 	public AdminDto findAdmin(@PathVariable("id") int id) {
 
 		AdminDto o = adminService.findAdminById(id);

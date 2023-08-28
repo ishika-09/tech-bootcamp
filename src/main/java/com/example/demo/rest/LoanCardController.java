@@ -24,7 +24,7 @@ public class LoanCardController {
 	
 	@PostMapping("/apply")
 	public LoanCard createLoanCard(@RequestBody LoanCard loanCard) {
-		System.out.println("request body" + loanCard);
+//		System.out.println("request body" + loanCard);
 		return loanCardService.createLoanCard(loanCard);
 	}
 	

@@ -89,13 +89,17 @@ public class LoanCardServiceImpl implements LoanCardService {
 		Optional <LoanCard> loanCard1 = loanCardRepository.findById(loanCard.getId());
 		if (loanCard1.isEmpty())
 			return;
+		Item item = loanCard.getItem();
 		LoanCard loanCard2 = loanCard1.get();
 		if(loanCard.getValid() == 1) {
 			loanCard2.setValid(1);
+			item.setIssue_status("Y");
 			loanCardRepository.save(loanCard2);
 		}
-		else
+		else {
 			deleteLoanCardById(loanCard.getId());
+			item.setIssue_status("N");
+		}
 	}
 
 	@Override

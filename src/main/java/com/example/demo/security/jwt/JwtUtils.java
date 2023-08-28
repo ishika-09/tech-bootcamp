@@ -23,7 +23,7 @@ public class JwtUtils {
   private String jwtSecret = "df6b9fb15cfdbb7527be5a8a6e39f39e572c8ddb943fbc79a943438e9d3d85ebfc2ccf9e0eccd9346026c0b6876e0e01556fe56f135582c05fbdbb505d46755a";
 
 //  @Value("${app.jwtExpirationMs}")
-  private int jwtExpirationMs = 1*60*60;
+  private int jwtExpirationMs = 1*60*60*1000;
 
   public String generateJwtToken(Authentication authentication) {
 

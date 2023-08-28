@@ -55,7 +55,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public List<ItemDto> getAllItems(){
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		List<Item> item = itemRepository.findAll();
+		List<Item> item = itemRepository.findAllAvailable();
 		List<ItemDto> l = modelMapper.map(item, new TypeToken<List<ItemDto>>(){}.getType());
 		return l;
 	}
