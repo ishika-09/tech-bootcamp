@@ -1,13 +1,18 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 //import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 //import org.modelmapper.TypeToken;
 //import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.ItemDto;
+import com.example.demo.model.Item;
 import com.example.demo.model.LoanCard;
 import com.example.demo.repo.LoanCardRepository;
 //import com.example.demo.dto.LoanCard;
@@ -18,7 +23,7 @@ import lombok.AllArgsConstructor;
 public class LoanCardServiceImpl implements LoanCardService {
 
 	private final LoanCardRepository loanCardRepository;
-//	private final ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
 	@Override
 	public LoanCard createLoanCard(LoanCard loanCard) {
 //		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
@@ -64,7 +69,7 @@ public class LoanCardServiceImpl implements LoanCardService {
 	}
 	
 	@Override
-	public List<LoanCard> getAllActiveLoanCards(String user_id){
+	public List<LoanCard> getAllActiveLoanCards(int user_id){
 //		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		List<LoanCard> loanCard = loanCardRepository.findAllActive(user_id);
 //		List<LoanCard> l = modelMapper.map(loanCard, new TypeToken<List<LoanCard>>(){}.getType());
@@ -91,5 +96,18 @@ public class LoanCardServiceImpl implements LoanCardService {
 		}
 		else
 			deleteLoanCardById(loanCard.getId());
+	}
+
+	@Override
+	public List<ItemDto> getAllPurchasedItem(int id) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		List<LoanCard> l = loanCardRepository.findAllActive(id);
+		List<ItemDto> items = new ArrayList<ItemDto>();
+		for(int i=0;i<l.size();i++)
+		{
+			ItemDto itemDto = modelMapper.map(l.get(i).getItem(), ItemDto.class);
+			items.add(itemDto);
+		}
+		return items;
 	}
 }

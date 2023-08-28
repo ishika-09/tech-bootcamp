@@ -69,7 +69,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 				.cors().disable()
 				.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
 				.authorizeHttpRequests(auth -> auth.antMatchers("/users/login").permitAll()
-						.antMatchers(HttpMethod.OPTIONS).permitAll()
+						.antMatchers(HttpMethod.OPTIONS).permitAll())
 //						.anyRequest().authenticated())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

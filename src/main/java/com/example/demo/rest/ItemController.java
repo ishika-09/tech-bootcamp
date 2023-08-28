@@ -3,6 +3,7 @@ package com.example.demo.rest;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,15 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.ItemDto;
 import com.example.demo.service.ItemService;
+import com.example.demo.service.LoanCardService;
 
 import lombok.AllArgsConstructor;
 
+@CrossOrigin(origins="http://localhost:3000")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/items")
 public class ItemController {
 
 	private final ItemService itemService;
+	private final LoanCardService LoanCardService;
 	@PostMapping
 	public ItemDto createItem(@RequestBody ItemDto itemDto) {
 		return itemService.createItem(itemDto);
@@ -49,5 +53,11 @@ public class ItemController {
 	public List<ItemDto> getAllItem(){
 		List<ItemDto> l= itemService.getAllItems();
 		return l;
+	}
+	
+	@GetMapping("/allPurchased/{id}")
+	public List<ItemDto> getAllPurchasedItem(@PathVariable("id") int id){
+		List<ItemDto> list = LoanCardService.getAllPurchasedItem(id);
+		return null;
 	}
 }

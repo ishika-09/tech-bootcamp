@@ -16,6 +16,6 @@ public interface LoanCardRepository extends JpaRepository<LoanCard, Integer>{
 	List<LoanCard> findAllValid();
 
 	@Query (value = "SELECT * FROM loancard WHERE user_id = ?1" ,nativeQuery = true)
-	List<LoanCard> findAllActive(String user_id);
+	List<LoanCard> findAllActive(int id);
 
 }

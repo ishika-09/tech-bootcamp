@@ -13,10 +13,10 @@ public interface UserService {
 	List<UserDto> getAllValidUsers();
 	List<UserDto> getAllPendingUsers();
 
-	UserDto findUserById(int id);
 	UserDto deleteUserById(int id);
 	UserDto updateUser(UserDto userDto);
 	ResponseEntity<?> loginUser(LoginRequest loginRequest) throws Exception;
 	void approveUser(UserDto userDto);
 	int resetPassword(UserDto userDto);
+	UserDto findUserById(int id);
 }
