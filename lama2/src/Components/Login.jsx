@@ -24,17 +24,16 @@ function Login() {
         id:username,
         password:password
       },{headers:{"Content-Type":"application/json"}})
-      .then(()=> {
+      .then((response)=> {
         console.log("loginSuccessful");
+        sessionStorage.setItem("username", response.data.username);
+        sessionStorage.setItem("role", response.data.roles);
+        sessionStorage.setItem("authToken",response.data.accessToken);
         if(justifyActive === "tab1"){
-          sessionStorage.setItem("username", username);
-          sessionStorage.setItem("role", 'user');
+          
           window.location.href = '/userDashboard';
         }
         else{
-          sessionStorage.setItem("username", username);
-          sessionStorage.setItem("role", 'admin');
-          console.log(username);
           window.location.href = '/adminDashboard';
         }
         

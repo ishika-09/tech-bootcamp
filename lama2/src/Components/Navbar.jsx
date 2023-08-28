@@ -7,6 +7,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Wallet from "../Assets/Images/wallet.png"
 import Man from "../Assets/Images/man.png"
 import Button from 'react-bootstrap/Button';
+import {FcBusinessman} from 'react-icons/fc';
+import {IconContext} from 'react-icons';
 
 function BasicExample() {
   return (
@@ -27,14 +29,21 @@ function BasicExample() {
             <Nav.Link href="/" className='text-white ml-auto'><Button className="primary"><b>Home</b></Button></Nav.Link>
             {sessionStorage.getItem('username') ? 
                   <>
-                   {sessionStorage.getItem("role") == 'user' ? <Nav.Link href="userDashboard/" className='text-white'><Button className="primary">Dashboard</Button></Nav.Link>: <Nav.Link href="/adminDashboard" className='text-white'><Button className="primary">Dashboard</Button></Nav.Link>}
+                   {sessionStorage.getItem("role") == 'user' ? <Nav.Link href="userDashboard/" className='text-white'><Button className="primary"><b>Dashboard</b></Button></Nav.Link>: <Nav.Link href="/adminDashboard" className='text-white'><Button className="primary"><b>Dashboard</b></Button></Nav.Link>}
+                   <Button><b>Hi, {sessionStorage.getItem('username')}</b>
+                   <IconContext.Provider value={{ size: '3em'}}>
+                    <span>
+                      <FcBusinessman />
+                    </span>
+                  </IconContext.Provider>
+                   </Button>
                    <Button className="m-2" variant="danger" href="/logout"><b>Logout</b></Button>
                   </> : 
                   <>
                     <Button className="m-2" variant="danger" href="/login"><b>Login</b></Button>
                   </>
 }
-            
+
             
             
           </Nav>

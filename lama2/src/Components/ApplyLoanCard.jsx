@@ -4,7 +4,7 @@ import Card from '../Assets/Images/Credit-card.jpg';
 import axios from 'axios';
 
 function ApplyLoanCard() {
-  const [employeeId, setemployeeId] = useState("");
+  const [employeeId, setemployeeId] = useState(sessionStorage.getItem("username"));
   const [loanType, setLoanType] = useState("");
   const [loanDuration, setloanDuration] = useState(0);
   const [interest, setinterest] = useState(0);
@@ -23,7 +23,7 @@ function ApplyLoanCard() {
         issue_date: issue_date,
         issue_status:"P"
 
-      },{headers:{"Content-Type" : "application/json"}})
+      },{headers:{"Content-Type" : "application/json","Authorization" : "Bearer "+sessionStorage.getItem("authToken")}})
       .then((response) => {console.log("Loan Card Added !!");
       window.location.href='/userDashboard';});
   }
@@ -44,7 +44,7 @@ function ApplyLoanCard() {
           <div className='w- 100 m-5'>
             <h3 className="mt-4 pt-4 fw-bolder">Apply Loan Card</h3>
             <br/>
-            <MDBInput wrapperClass='mb-4' onChange={e => setemployeeId(e.target.value)} value={employeeId} label='Employee ID' id='employeeId' name="employeeId" type='text' size="md"/>
+            <MDBInput wrapperClass='mb-4' onChange={e => setemployeeId(e.target.value)} value={sessionStorage.getItem("username")} label='Employee ID' id='employeeId' name="employeeId" type='text' size="md" disabled/>
             <select label="Loan Type" name="loanType" id="loanType" onChange={e => setLoanType(e.target.value)} class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">6
               <option value="Furniture">Furniture</option>
               <option value="Crockery ">Crockery</option>
