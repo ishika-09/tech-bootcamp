@@ -17,6 +17,8 @@ export default function ViewItems() {
       axios.delete("http://localhost:8081/items/"+itemId)
         .then(response => console.log("Item Deleted !!"))
         .catch((err)=> setError(err.message))
+        setviewItems(prevItems => prevItems.filter(item=>item.id!==itemId));
+       
     }
 
     function handleEdit(itemId, description, itemStatus, itemMake, itemCategory, itemValuation){

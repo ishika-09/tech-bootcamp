@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function AddItems() {
 
-  const [itemCategory, setItemCategory] = useState("");
+  const [itemCategory, setItemCategory] = useState("Furniture");
   //const [itemId, setItemId] = useState();
   const [itemDescription, setItemDescription] = useState("");
   const [itemValue, setItemValue] = useState(0);
