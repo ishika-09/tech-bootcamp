@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function AddItems() {
 
-  const [itemCategory, setItemCategory] = useState("");
+  const [itemCategory, setItemCategory] = useState("Furniture");
   //const [itemId, setItemId] = useState();
   const [itemDescription, setItemDescription] = useState("");
   const [itemValue, setItemValue] = useState(0);
@@ -41,7 +41,7 @@ function AddItems() {
               <option value="Electronic">Electronic</option>
               <option value="Plastic">Plastic</option>
             </select>
-            <MDBInput wrapperClass='mb-4' label='Item Description' onChange={e => setItemDescription(e.target.value)} id='formControlLg' type='textarea' size="md"/>
+            <MDBInput wrapperClass='mb-4' label='Item Description' onChange={e => setItemDescription(e.target.value)} id='formControlLg' type='text' size="md"/>
             <MDBInput wrapperClass='mb-4' label='Item Value' onChange={e => setItemValue(e.target.value)} id='formControlLg' type='text' size="md"/>
             <MDBInput wrapperClass='mt-2 mb-4' label='Item Make' onChange={e => setItemMake(e.target.value)} id='formControlLg' type='text' size="md"/>
             <MDBBtn className="mb-4 w-100" type="submit" onClick={handleSubmit}>Add Item Details</MDBBtn>    

@@ -37,7 +37,6 @@ export default function PendingLoanRequests() {
       <tr>
         <th scope='col'>Employee ID</th>
         <th scope='col'>Item ID</th>
-        <th scope='col'>Item Valuation</th>
         <td scope="col">Loan ID</td>
         <th scope='col'>Loan Type</th>
         <th scope='col'>Loan Duration</th>
