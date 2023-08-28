@@ -7,7 +7,7 @@ export default function ViewLoanCards() {
   const[error, setError] = useState("");
 
   useEffect(()=>{
-    axios.get("/")
+    axios.get("http://localhost:8080/loanCards/allValid")
     .then((response)=>setloan(response.data))
     .catch((err)=> setError(err.message))
   },[]);

@@ -15,12 +15,13 @@ function ApplyLoanCard() {
   function handleSubmit(){
     axios.post(backendURL,
       {
-        employeeId: employeeId,
-        loanType: loanType,
-        loanDuration: loanDuration,
+        user:{id: employeeId},
+        type: loanType,
+        duration: loanDuration,
         interest: interest,
-        itemID : itemID,
-        issue_date: issue_date
+        item : {id: itemID},
+        issue_date: issue_date,
+        issue_status:"P"
 
       },{headers:{"Content-Type" : "application/json"}})
       .then((response) => {console.log("Loan Card Added !!")});

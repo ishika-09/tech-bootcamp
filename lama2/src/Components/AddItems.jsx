@@ -6,10 +6,10 @@ import axios from 'axios';
 function AddItems() {
 
   const [itemCategory, setItemCategory] = useState("");
+  //const [itemId, setItemId] = useState();
   const [itemDescription, setItemDescription] = useState("");
   const [itemValue, setItemValue] = useState(0);
   const [itemMake, setItemMake] = useState("");
-  const [itemImg, setItemImg] = useState("");
   const backendURL = "http://localhost:8081/items";
   function handleSubmit(){
     axios.post(backendURL,
@@ -18,7 +18,7 @@ function AddItems() {
         description : itemDescription,
         value : itemValue,
         make : itemMake,
-        itemImg: itemImg
+        issue_status: "N"
       },{headers:{"Content-Type" : "application/json"}})
       .then((response) => {console.log("Item added !!")});
   }
@@ -41,7 +41,6 @@ function AddItems() {
               <option value="Plastic">Plastic</option>
             </select>
             <MDBInput wrapperClass='mb-4' label='Item Description' onChange={e => setItemDescription(e.target.value)} id='formControlLg' type='textarea' size="md"/>
-            <MDBInput wrapperClass='mb-4' label='Item Image URL' onChange={e => setItemImg(e.target.value)} id='formControlLg' type='textarea' size="md"/>
             <MDBInput wrapperClass='mb-4' label='Item Value' onChange={e => setItemValue(e.target.value)} id='formControlLg' type='text' size="md"/>
             <MDBInput wrapperClass='mt-2 mb-4' label='Item Make' onChange={e => setItemMake(e.target.value)} id='formControlLg' type='text' size="md"/>
             <MDBBtn className="mb-4 w-100" type="submit" onClick={handleSubmit}>Add Item Details</MDBBtn>    

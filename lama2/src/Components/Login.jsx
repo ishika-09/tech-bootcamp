@@ -3,7 +3,7 @@ import {MDBContainer, MDBTabs, MDBTabsItem, MDBTabsLink, MDBTabsContent,  MDBCol
 import axios from 'axios';
 function Login() {
     const [justifyActive, setJustifyActive] = useState('tab1');;
-    const [username, setUsername] = useState();
+    const [username, setUsername] = useState(0);
     const [password, setPasssword] = useState("");
     const [backendURL,setBackendURL] = useState("http://localhost:8081/users/login");
 
