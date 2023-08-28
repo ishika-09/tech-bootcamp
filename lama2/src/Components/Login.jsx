@@ -30,7 +30,6 @@ function Login() {
           sessionStorage.setItem("username", username);
           sessionStorage.setItem("role", 'user');
           window.location.href = '/userDashboard';
-          
         }
         else{
           sessionStorage.setItem("username", username);

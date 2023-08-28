@@ -23,15 +23,15 @@ function BasicExample() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className='align-items-end'>
-          <Nav className="me-auto">
-            <Nav.Link href="/" className='text-white'>Home</Nav.Link>
+          <Nav className="ms-auto">
+            <Nav.Link href="/" className='text-white ml-auto'><Button className="primary"><b>Home</b></Button></Nav.Link>
             {sessionStorage.getItem('username') ? 
                   <>
-                   {sessionStorage.getItem("role") == 'user' ? <Nav.Link href="userDashboard/" className='text-white'>Dashboard</Nav.Link>: <Nav.Link href="/adminDashboard" className='text-white'>Dashboard</Nav.Link>}
-                   <Button className="m-2" variant="danger" href="/logout">Logout</Button>
+                   {sessionStorage.getItem("role") == 'user' ? <Nav.Link href="userDashboard/" className='text-white'><Button className="primary">Dashboard</Button></Nav.Link>: <Nav.Link href="/adminDashboard" className='text-white'><Button className="primary">Dashboard</Button></Nav.Link>}
+                   <Button className="m-2" variant="danger" href="/logout"><b>Logout</b></Button>
                   </> : 
                   <>
-                    <Button className="m-2" variant="danger" href="/login">Login</Button>
+                    <Button className="m-2" variant="danger" href="/login"><b>Login</b></Button>
                   </>
 }
             
