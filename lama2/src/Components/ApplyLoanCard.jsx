@@ -20,7 +20,8 @@ function ApplyLoanCard() {
         duration: loanDuration,
         interest: interest,
         item : {id: itemID},
-        issue_date: issue_date
+        issue_date: issue_date,
+        issue_status:"P"
 
       },{headers:{"Content-Type" : "application/json"}})
       .then((response) => {console.log("Loan Card Added !!")});
