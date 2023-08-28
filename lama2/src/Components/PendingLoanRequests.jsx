@@ -5,20 +5,28 @@ import axios from 'axios';
 export default function PendingLoanRequests() {
   const [pendingLoans, setPendingLoans] = useState([]);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
   const backendURL = 'http://localhost:8081/loanCards/allPending';
 
   useEffect(() => {
     axios.get(backendURL)
-      .then(response => setPendingLoans(response.data))
-      .catch(error => setError(error.message));
+      .then(response => {
+        setPendingLoans(response.data);
+        setLoading(false);
+      })
+      .catch(error => {
+        setError(error.message);
+        setLoading(false);
+      });
   }, []);
 
   function handleApprove(employeeID, itemID, loanID, loanType, loanDuration, valid) {
+    setLoading(true);
     axios.put(
       'http://localhost:8081/admins/approveLoan',
       {
-        user_id: employeeID,
-        item_id: itemID,
+        user:{id: employeeID},
+        item : {id: itemID},
         id: loanID,
         type: loanType,
         duration: loanDuration,
@@ -28,13 +36,20 @@ export default function PendingLoanRequests() {
     )
       .then(response => {
         console.log('Loan Card Approved/Rejected !!');
-        // Assuming you want to refresh the pending loans after an action
+        // Fetch pending loans again after the action is completed
         axios.get(backendURL)
-          .then(response => setPendingLoans(response.data))
-          .catch(error => setError(error.message));
+          .then(response => {
+            setPendingLoans(response.data);
+            setLoading(false);
+          })
+          .catch(error => {
+            setError(error.message);
+            setLoading(false);
+          });
       })
       .catch(err => {
         setError(err.message);
+        setLoading(false);
       });
   }
 
@@ -46,58 +61,62 @@ export default function PendingLoanRequests() {
       <h5 align="middle" className="py-1">
         Seamless Control: Elevate Loan Card Management Efficiency
       </h5>
-      <hr></hr>
-      <MDBTable align="middle" className="container" striped hover>
-        <MDBTableHead>
-          <tr>
-            <th scope="col">Employee ID</th>
-            <th scope="col">Item ID</th>
-            <th scope="col">Loan ID</th>
-            <th scope="col">Loan Type</th>
-            <th scope="col">Loan Duration</th>
-            <th scope="col">Action</th>
-          </tr>
-        </MDBTableHead>
-        <MDBTableBody>
-          {pendingLoans.map(pendingLoan => {
-            const { user_id, item_id, type, id, duration } = pendingLoan;
-            return (
-              <tr key={id}>
-                <td>{user_id}</td>
-                <td>{item_id}</td>
-                <td>{id}</td>
-                <td>{type}</td>
-                <td>{duration}</td>
-                <td>
-                  <MDBBtn
-                    outline
-                    color="warning"
-                    rounded
-                    size="sm"
-                    className="mr-1"
-                    onClick={() =>
-                      handleApprove(user_id, item_id, id, type, duration, true)
-                    }
-                  >
-                    Approve
-                  </MDBBtn>
-                  <MDBBtn
-                    outline
-                    color="danger"
-                    rounded
-                    size="sm"
-                    onClick={() =>
-                      handleApprove(user_id, item_id, id, type, duration, false)
-                    }
-                  >
-                    Reject
-                  </MDBBtn>
-                </td>
-              </tr>
-            );
-          })}
-        </MDBTableBody>
-      </MDBTable>
+      <hr />
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <MDBTable align="middle" className="container" striped hover>
+          <MDBTableHead>
+            <tr>
+              <th scope="col">Employee ID</th>
+              <th scope="col">Item ID</th>
+              <th scope="col">Loan ID</th>
+              <th scope="col">Loan Type</th>
+              <th scope="col">Loan Duration(in months)</th>
+              <th scope="col">Action</th>
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody>
+            {pendingLoans.map(pendingLoan => {
+              const { user_id, item, type, id, duration } = pendingLoan;
+              return (
+                <tr key={id}>
+                  <td>{user_id}</td>
+                  <td>{item.id}</td>
+                  <td>{id}</td>
+                  <td>{type}</td>
+                  <td>{duration}</td>
+                  <td>
+                    <MDBBtn
+                      outline
+                      color="warning"
+                      rounded
+                      size="sm"
+                      className="mr-1"
+                      onClick={(e) =>
+                        handleApprove(user_id, item.id, id, type, duration, 1)
+                      }
+                    >
+                      Approve
+                    </MDBBtn>
+                    <MDBBtn
+                      outline
+                      color="danger"
+                      rounded
+                      size="sm"
+                      onClick={() =>
+                        handleApprove(user_id, item.id, id, type, duration, 0)
+                      }
+                    >
+                      Reject
+                    </MDBBtn>
+                  </td>
+                </tr>
+              );
+            })}
+          </MDBTableBody>
+        </MDBTable>
+      )}
     </>
   );
 }

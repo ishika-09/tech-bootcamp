@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function ApplyLoanCard() {
   const [employeeId, setemployeeId] = useState(sessionStorage.getItem("username"));
-  const [loanType, setLoanType] = useState("");
+  const [loanType, setLoanType] = useState("Furniture");
   const [loanDuration, setloanDuration] = useState(0);
   const [interest, setinterest] = useState(0);
   const [itemID, setItemID] = useState("");
@@ -23,7 +23,7 @@ function ApplyLoanCard() {
         issue_date: issue_date,
         issue_status:"P"
 
-      },{headers:{"Content-Type" : "application/json","Authorization" : "Bearer "+sessionStorage.getItem("authToken")}})
+      },{headers:{"Content-Type" : "application/json"}})
       .then((response) => {console.log("Loan Card Added !!");
       window.location.href='/userDashboard';});
   }
