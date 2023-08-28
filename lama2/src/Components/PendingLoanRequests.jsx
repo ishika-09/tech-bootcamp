@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export default function PendingLoanRequests() {
   const [pendingLoans, setPendingLoans] = useState([]);
-  const [action, setAction] = useState(true);
+  const [error, setError] = useState("");
   const backendURL = "http://localhost:8081/loan";
 
   useEffect(() => {
@@ -12,16 +12,18 @@ export default function PendingLoanRequests() {
     .then(response => setPendingLoans(response.data));
   }, []);
   
-  function handleApprove(employeeID, itemID, loanType, loanDuration, isApproved){
+  function handleApprove(employeeID, itemID, loanID, loanType, loanDuration, isApproved){
     axios.put(backendURL,
       {
         employeeID : employeeID,
         itemID : itemID,
+        loanID: loanID,
         loanType : loanType,
         loanDuration : loanDuration,
         isApproved : isApproved
       },{headers:{"Content-Type" : "application/json"}})
-      .then((response) => {console.log("Loan Card Approved !!")});
+      .then((response) => {console.log("Loan Card Approved/Rejected !!")})
+      .error((err) => setError(err))
   }
 
   return (
@@ -34,8 +36,9 @@ export default function PendingLoanRequests() {
     <MDBTableHead>
       <tr>
         <th scope='col'>Employee ID</th>
-        <th scope='col'>Item Id</th>
+        <th scope='col'>Item ID</th>
         <th scope='col'>Item Valuation</th>
+        <td scope="col">Loan ID</td>
         <th scope='col'>Loan Type</th>
         <th scope='col'>Loan Duration</th>
         <th scope='col'>Action</th>
@@ -43,19 +46,21 @@ export default function PendingLoanRequests() {
     </MDBTableHead>
     <MDBTableBody>
       {
-        pendingLoans.map((pendingLoan) => {
-          const { employeeID, itemID, itemValuation, loanType, loanDuration} = pendingLoan;
+         Array.from(pendingLoans).map((pendingLoan) => {
+          // Added LoanID here
+          const { employeeID, itemID, itemValuation, loanType, loanID, loanDuration} = pendingLoan;
           <tr>
             <td>{employeeID}</td>
             <td>{itemID}</td>
             <td>{itemValuation}</td>
+            <td>{loanID}</td>
             <td>{loanType}</td>
             <td>{loanDuration}</td>
             <td>
-              <MDBBtn outline color='warning' rounded size='sm' className='mr-1' onClick={()=>handleApprove(employeeID, itemID, loanType, loanDuration, true)}>
+              <MDBBtn outline color='warning' rounded size='sm' className='mr-1' onClick={()=>handleApprove(employeeID, itemID, loanID, loanType, loanDuration, true)}>
                 Approve
               </MDBBtn>
-              <MDBBtn outline color='danger' rounded size='sm' onClick={()=>handleApprove(employeeID, itemID, loanType, loanDuration, false)}>
+              <MDBBtn outline color='danger' rounded size='sm' onClick={()=>handleApprove(employeeID, itemID, loanID, loanType, loanDuration, false)}>
                 Reject
               </MDBBtn>
             </td>

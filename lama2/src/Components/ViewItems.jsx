@@ -1,16 +1,28 @@
 import React,{useEffect, useState} from 'react';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import axios from 'axios';
+import EditItem from './EditItem';
 
 export default function ViewItems() {
-  const[viewItems, setviewItems] = useState([]);
-  const[error, setError] = useState("");
+    const[viewItems, setviewItems] = useState([]);
+    const[error, setError] = useState("");
 
-  useEffect(()=>{
-    axios.get("/")
-    .then((response)=>setviewItems(response.data))
-    .catch((err)=> setError())
-  },[]);
+    useEffect(()=>{
+      axios.get("/")
+      .then((response)=>setviewItems(response.data))
+      .catch((err)=> setError(err.message))
+    },[]);
+
+    function handleDelete(itemId){
+      axios.delete("http://localhost:8081/loan/"+itemId)
+        .then(response => console.log("Item Deleted !!"))
+        .catch((err)=> setError(err.message))
+    }
+
+    function handleEdit(itemId, description, itemStatus, itemMake, itemCategory, itemValuation){
+      
+    }
+
     return (
     <>
     <h3 align="middle" className="mt-3 fw-bolder">Item Master Data Details</h3>
@@ -47,7 +59,7 @@ export default function ViewItems() {
            </MDBBtn>
            </td>
            <td>
-           <MDBBtn outline color='danger' rounded size='sm'>
+           <MDBBtn outline color='danger' rounded size='sm' onClick={() => handleDelete(itemId)}>
              Delete
            </MDBBtn>
            </td>

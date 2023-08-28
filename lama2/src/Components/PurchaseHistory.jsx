@@ -5,10 +5,12 @@ import axios from 'axios';
 
 export default function PurchaseHistory() {
   const [purchaseHistory, setPurchaseHistory] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     axios.get("/user/purchase")
     .then((response) => setPurchaseHistory(response.data))
+    .catch((err)=> setError(err.message))
   }, [])
   
   return (
@@ -30,7 +32,7 @@ export default function PurchaseHistory() {
     </MDBTableHead>
     <MDBTableBody>
       {
-        purchaseHistory.map((item) => {
+        Array.from(purchaseHistory).map((item) => {
           const {itemID, lonaCardID, description, itemMake, itemCategory, itemValuation} = item;
           <tr>
             <td>{itemID}</td>

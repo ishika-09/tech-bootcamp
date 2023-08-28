@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import {
   MDBCard,
   MDBCardImage,
@@ -11,39 +11,44 @@ import {
   MDBRow,
   MDBCol
 } from 'mdb-react-ui-kit';
+import copy from 'copy-to-clipboard';
+import axios from 'axios';
 
 export default function ViewUserItems() {
-    const [text, setText] = useState("");
+    
+    function copyToClipboard(itemID){
+        copy(itemID);
+    }
+
+    const[viewItems, setviewItems] = useState([]);
+    const[error, setError] = useState("");
+
+    useEffect(()=>{
+      axios.get("/") // SetEndPoint
+      .then((response)=>setviewItems(response.data))
+      .catch((err)=> setError(err.message))
+    },[]);
 
   return (
     <MDBRow className='container align-items-center'>
+      {Array.from(viewItems).map((item) => {
+        //itemStatus
+        const {itemId, itemTitle, itemImg, description, itemCategory, itemValuation} = item;
         <MDBCol sm="3">
             <MDBCard className="m-3">
-            <MDBCardImage position='top' alt='...' src='https://th.bing.com/th/id/OIP.PayejFry73w7wUy1QPUZJAHaHa?pid=ImgDet&rs=1' />
+            <MDBCardImage position='top' alt='...' src={itemImg} />
             <MDBCardBody>
-                <MDBCardTitle className='fw-bold'>Tea Table</MDBCardTitle>
-                <MDBBadge className='my-2' color='info' light>Furniture</MDBBadge>
+                <MDBCardTitle className='fw-bold'>{itemTitle}</MDBCardTitle>
+                <MDBBadge className='my-2' color='info' light>{itemCategory}</MDBBadge>
                 <MDBCardText>
-                Crafted for style and function, its premium materials and spacious design provide the perfect setting for tea essentials.
+                  {description}
                 </MDBCardText>
-                <MDBBtn color="warning" outline><b> ₹ 3000</b></MDBBtn>
-                <MDBCardText className='my-2'><MDBBadge className='my-2' color='info' light>Item ID : 74682</MDBBadge><MDBBadge className='ml-2' outline>Copy it! <MDBIcon fas icon="paste"/></MDBBadge></MDBCardText>
+                <MDBBtn color="warning" outline><b>${itemValuation}</b></MDBBtn>
+                <MDBCardText className='my-2'><MDBBadge className='my-2' color='info' light>Item ID : {itemId}</MDBBadge><MDBBtn className='mx-2 btn-sm btn-rounded' outline onClick={() => copyToClipboard(itemId)}>Copy it! <MDBIcon fas icon="paste"/></MDBBtn></MDBCardText>
             </MDBCardBody>
             </MDBCard>
         </MDBCol>
-        <MDBCol sm="3">
-            <MDBCard className="m-3">
-            <MDBCardImage position='top' alt='...' src='https://th.bing.com/th/id/OIP.hSdbO35ZecmUvGWn2EuM9wHaHa?pid=ImgDet&rs=1' />
-            <MDBCardBody>
-                <MDBCardTitle className='fw-bold'>Table Fan</MDBCardTitle>
-                <MDBBadge className='my-2' color='info' light>Electrical</MDBBadge>
-                <MDBCardText>
-                With its sleek design and powerful airflow, it's the perfect addition to any room.                </MDBCardText>
-                <MDBBtn color="warning" outline><b> ₹ 1000</b></MDBBtn>
-                <MDBCardText className='my-2'><MDBBadge className='my-2' color='info' light>Item ID : 78609</MDBBadge><MDBBadge className='ml-2' outline>Copy it! <MDBIcon fas icon="paste"/></MDBBadge></MDBCardText>
-            </MDBCardBody>
-            </MDBCard>
-        </MDBCol>
+        })}
     </MDBRow>
   );
 }

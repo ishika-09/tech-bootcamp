@@ -72,6 +72,9 @@ function UserSignUp()
             <MDBRadio name='inlineRadio' onSelect={e => handleGenderChange(e)} id='inlineRadio1' value='option1' label='Male' inline />
             <MDBRadio name='inlineRadio'onSelect={e => handleGenderChange(e)} id='inlineRadio2' value='option2' label='Female' inline />
             <br/><br/>
+            <div class="text-center">
+                  <p>Already a member? <a href="/login">Sign In</a></p>
+            </div>
             <MDBBtn type="submit" onClick ={handleSubmit
             } className="mb-4 w-100">Sign Up</MDBBtn>    
           </div>

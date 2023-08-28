@@ -39,7 +39,7 @@ function ApplyLoanCard() {
         </MDBCol>
         <MDBCol col='4' md='6'>
           <div className='w- 100 m-5'>
-            <h3>Loan Card</h3>
+            <h3 className="mt-4 pt-4 fw-bolder">Apply Loan Card</h3>
             <br/>
             <MDBInput wrapperClass='mb-4' onChange={e => setemployeeId(e.target.value)} value={employeeId} label='Employee ID' id='employeeId' name="employeeId" type='text' size="md"/>
             <select label="Loan Type" name="loanType" id="loanType" onChange={e => setLoanType(e.target.value)} class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">6

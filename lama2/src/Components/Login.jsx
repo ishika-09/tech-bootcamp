@@ -65,10 +65,9 @@ function Login() {
             <MDBInput wrapperClass='mb-4' onChange={e=> setPasssword(e.target.value)} value = {password} label='Password' id='userPassword' type='password'/>
 
             <div className="d-flex justify-content-between mx-4 mb-4">
-                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-                <a href="!#">Forgot password?</a>
-            </div>
-            <div class="text-center">
+                {/* <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' /> */}
+                <a href="/forgotPassword">Forgot password?</a>
+
                   <p>Not a member? <a href="/signup">Register</a></p>
             </div>
 
@@ -84,8 +83,8 @@ function Login() {
             <MDBInput wrapperClass='mb-4' onChange={e=> setPasssword(e.target.value)} value = {password} label='Password' id='adminPassword' type='password'/>
 
             <div className="d-flex justify-content-between mx-4 mb-4">
-                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-                <a href="!#">Forgot password?</a>
+                {/* <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' /> */}
+                {/* <a href="!#">Forgot password?</a> */}
             </div>
 
             {/* <MDBBtn className="mb-4 w-100">Sign In</MDBBtn> */}
