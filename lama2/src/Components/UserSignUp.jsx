@@ -22,7 +22,6 @@ function UserSignUp()
       {
         name : name,
         designation : designation,
-       // id : id,
         department : department,
         dob : dob,
         doj : doj,
@@ -30,8 +29,9 @@ function UserSignUp()
         gender : gender,
         password : password
       },{headers:{"Content-Type" : "application/json"}})
-      .then((response) => {console.log("Employee registered !!");
-      window.location.href='/login'});
+      .then((response) => {
+        window.location.href='/login'
+      });
   }
   function handleGenderChange(e){
     if(e.target.value=="option1")

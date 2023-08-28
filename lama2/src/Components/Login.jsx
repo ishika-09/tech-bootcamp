@@ -29,10 +29,17 @@ function Login() {
       },{headers:{"Content-Type":"application/json"}})
       .then(()=> {
         console.log("loginSuccessful");
-        if(justifyActive === "tab1")
+        if(justifyActive === "tab1"){
+          sessionStorage.setItem("username", username);
+          sessionStorage.setItem("role", 'user');
           window.location.href = '/userDashboard';
-        else
+          
+        }
+        else{
+          sessionStorage.setItem("username", username);
+          sessionStorage.setItem("role", 'admin');
           window.location.href = '/adminDashboard';
+        }
         
     });
     }

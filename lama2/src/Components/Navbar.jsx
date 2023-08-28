@@ -25,18 +25,18 @@ function BasicExample() {
         <Navbar.Collapse id="basic-navbar-nav" className='align-items-end'>
           <Nav className="me-auto">
             <Nav.Link href="/" className='text-white'>Home</Nav.Link>
-            {/* <Button className="m-2" variant="light" href="/login">Login</Button> */}
-            {/* <Button className="m-2" variant="danger">Logout</Button> */}
-            <Button className="m-2" variant="danger" href="/signup">Sign Up</Button>
-            <span className='text-white float-right'>
-              {/* <img src={Man} width="40" height="40"/> */}
-             
-            </span>
-            <Button className="m-2" variant="danger" href="/login">Login</Button>
-            <span className='text-white float-right'>
-              {/* <img src={Man} width="40" height="40"/> */}
-             
-            </span>
+            {sessionStorage.getItem('username') ? 
+                  <>
+                   {sessionStorage.getItem("role") == 'user' ? <Nav.Link href="userDashboard/" className='text-white'>Dashboard</Nav.Link>: <Nav.Link href="/adminDashboard" className='text-white'>Dashboard</Nav.Link>}
+                   <Button className="m-2" variant="danger" href="/logout">Logout</Button>
+                  </> : 
+                  <>
+                    <Button className="m-2" variant="danger" href="/login">Login</Button>
+                  </>
+}
+            
+            
+            
           </Nav>
         </Navbar.Collapse>
       </Container>
