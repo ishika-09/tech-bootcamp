@@ -15,11 +15,11 @@ function ApplyLoanCard() {
   function handleSubmit(){
     axios.post(backendURL,
       {
-        employeeId: employeeId,
-        loanType: loanType,
-        loanDuration: loanDuration,
+        user:{id: employeeId},
+        type: loanType,
+        duration: loanDuration,
         interest: interest,
-        itemID : itemID,
+        item : {id: itemID},
         issue_date: issue_date
 
       },{headers:{"Content-Type" : "application/json"}})
