@@ -2,11 +2,9 @@ package com.example.demo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +25,7 @@ public class Item {
 	private int id;
 	@Column(name = "make" , nullable = false)
 	private String make;
-	@Column(name = "descrption" , nullable = false)
+	@Column(name = "description" , nullable = false)
 	private String description;
 	@Column(name = "issue_status" , nullable = false)
 	private String issue_status;

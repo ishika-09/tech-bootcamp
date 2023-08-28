@@ -68,11 +68,18 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 		http.csrf(csrf -> csrf.disable())
 				.cors().disable()
 				.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-				.authorizeHttpRequests(auth -> auth.antMatchers("/users/login", "admins/login").permitAll()
-//						.antMatchers("/users/**").hasRole("admin")
+				.authorizeHttpRequests()
+				.antMatchers("/users/login","/users/register","/admins/login").
+				.antMatchers("/users/**").authenticated()
+				.antMatchers("/loanCards/**").authenticated()
+				.antMatchers("/items/**").authenticated()
+				.antMatchers("/admins/**").authenticated()
+
+//						.antMatchers("/users/**").hasAuthority("admin"))
 //						.antMatchers
-						.antMatchers(HttpMethod.OPTIONS).permitAll())
+//						.antMatchers(HttpMethod.OPTIONS).permitAll())
 //						.anyRequest().authenticated())
+				.and()
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
 
