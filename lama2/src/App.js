@@ -19,6 +19,7 @@ import ApplyLoanCard from './Components/ApplyLoanCard';
 import UserSignUp from './Components/UserSignUp';
 import ViewUserItems from './Components/viewUserItems';
 import ForgotPassword from './Components/ForgotPassword';
+import Logout from './Components/Logout';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
     <Routes>
       <Route path="/" Component={Home}/>
       <Route path="/login" Component={Login}/>
+      <Route path="/logout" Component={Logout}/>
       <Route path="/registerUser" Component={RegisterUser}/>
       <Route path="/signup" Component={UserSignUp}/>
       <Route path="/addItem" Component={AddItems}/>
