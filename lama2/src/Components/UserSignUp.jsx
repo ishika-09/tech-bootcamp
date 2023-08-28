@@ -28,7 +28,8 @@ function UserSignUp()
         doj : doj,
         contact : contact,
         gender : gender,
-        password : password
+        password : password,
+        valid:1
       },{headers:{"Content-Type" : "application/json"}})
       .then((response) => {console.log("Employee registered !!");
       window.location.href='/login'});

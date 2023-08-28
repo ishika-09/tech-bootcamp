@@ -15,6 +15,7 @@ function RegisterUser()
   const [name, setName] = useState("");
   const [contact, setContact] = useState();
   const [gender, setGender] = useState("");
+
   const backendURL = "http://localhost:8081/users/register";
   function handleSubmit(){
     axios.post(backendURL,
@@ -25,6 +26,7 @@ function RegisterUser()
         designation : designation,
         department : department,
         contact : contact,
+        valid:1,
         //id : id,
         gender : gender
       },{headers:{"Content-Type" : "application/json"}})
