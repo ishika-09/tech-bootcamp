@@ -5,7 +5,7 @@ import axios from 'axios';
 export default function PendingLoanRequests() {
   const [pendingLoans, setPendingLoans] = useState([]);
   const [error, setError] = useState("");
-  const backendURL = "http://localhost:8081/loan";
+  const backendURL = "http://localhost:8081/loanCards/allPending";
 
   useEffect(() => {
     axios.get(backendURL)
@@ -15,11 +15,11 @@ export default function PendingLoanRequests() {
   function handleApprove(employeeID, itemID, loanID, loanType, loanDuration, isApproved){
     axios.put(backendURL,
       {
-        employeeID : employeeID,
-        itemID : itemID,
-        loanID: loanID,
-        loanType : loanType,
-        loanDuration : loanDuration,
+        user_id : employeeID,
+        item_id : itemID,
+        id: loanID,
+        type : loanType,
+        duration : loanDuration,
         isApproved : isApproved
       },{headers:{"Content-Type" : "application/json"}})
       .then((response) => {console.log("Loan Card Approved/Rejected !!")})
@@ -48,23 +48,25 @@ export default function PendingLoanRequests() {
       {
          Array.from(pendingLoans).map((pendingLoan) => {
           // Added LoanID here
-          const { employeeID, itemID, itemValuation, loanType, loanID, loanDuration} = pendingLoan;
-          <tr>
-            <td>{employeeID}</td>
-            <td>{itemID}</td>
-            <td>{itemValuation}</td>
-            <td>{loanID}</td>
-            <td>{loanType}</td>
-            <td>{loanDuration}</td>
+          const { user_id, item_id, type, id, duration} = pendingLoan;
+          return(
+            <tr>
+            <td>{user_id}</td>
+            <td>{item_id}</td>
+            <td>{id}</td>
+            <td>{type}</td>
+            <td>{duration}</td>
             <td>
-              <MDBBtn outline color='warning' rounded size='sm' className='mr-1' onClick={()=>handleApprove(employeeID, itemID, loanID, loanType, loanDuration, true)}>
+              <MDBBtn outline color='warning' rounded size='sm' className='mr-1' onClick={()=>handleApprove(user_id, item_id, id, type, duration, true)}>
                 Approve
               </MDBBtn>
-              <MDBBtn outline color='danger' rounded size='sm' onClick={()=>handleApprove(employeeID, itemID, loanID, loanType, loanDuration, false)}>
+              <MDBBtn outline color='danger' rounded size='sm' onClick={()=>handleApprove(user_id, item_id, id, type, duration, false)}>
                 Reject
               </MDBBtn>
             </td>
           </tr>
+          )
+          
 })
       }
     </MDBTableBody>

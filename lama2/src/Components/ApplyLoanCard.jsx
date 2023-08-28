@@ -24,7 +24,8 @@ function ApplyLoanCard() {
         issue_status:"P"
 
       },{headers:{"Content-Type" : "application/json"}})
-      .then((response) => {console.log("Loan Card Added !!")});
+      .then((response) => {console.log("Loan Card Added !!");
+      window.location.href='/userDashboard';});
   }
 
   const getInterest = () => {

@@ -3,20 +3,17 @@ import {MDBContainer, MDBTabs, MDBTabsItem, MDBTabsLink, MDBTabsContent,  MDBCol
 import axios from 'axios';
 function Login() {
     const [justifyActive, setJustifyActive] = useState('tab1');;
-    const [username, setUsername] = useState(0);
+    const [username, setUsername] = useState();
     const [password, setPasssword] = useState("");
     const [backendURL,setBackendURL] = useState("http://localhost:8081/users/login");
 
     const handleJustifyClick = (value) => {
-
+      setJustifyActive(value);
       if(justifyActive === "tab1")
         setBackendURL("http://localhost:8081/users/login");
       else
         setBackendURL("http://localhost:8081/admins/login");
-      if (value === justifyActive) {
-        return;
-      }
-      setJustifyActive(value);
+      
     };
     
     
@@ -38,6 +35,7 @@ function Login() {
         else{
           sessionStorage.setItem("username", username);
           sessionStorage.setItem("role", 'admin');
+          console.log(username);
           window.location.href = '/adminDashboard';
         }
         

@@ -8,13 +8,13 @@ export default function ViewItems() {
     const[error, setError] = useState("");
 
     useEffect(()=>{
-      axios.get("/")
+      axios.get("http://localhost:8081/items/all")
       .then((response)=>setviewItems(response.data))
       .catch((err)=> setError(err.message))
     },[]);
 
     function handleDelete(itemId){
-      axios.delete("http://localhost:8081/loan/"+itemId)
+      axios.delete("http://localhost:8081/items/"+itemId)
         .then(response => console.log("Item Deleted !!"))
         .catch((err)=> setError(err.message))
     }
@@ -45,25 +45,28 @@ export default function ViewItems() {
     <MDBTableBody>
      {
       Array.from(viewItems).map((item)=>{
-        const {itemId, description, itemStatus, itemMake, itemCategory, itemValuation}=item;
-        <tr>
-          <td>{itemId}</td>
+        const {id, description, issue_status, make, category, value}=item;
+        return(
+          <tr>
+          <td>{id}</td>
           <td>{description}</td>
-          <td>{itemStatus}</td>
-          <td>{itemMake}</td>
-          <td>{itemCategory}</td>
-          <td>{itemValuation}</td>
+          <td>{issue_status}</td>
+          <td>{make}</td>
+          <td>{category}</td>
+          <td>{value}</td>
            <td>
            <MDBBtn outline color='warning' rounded size='sm'>
              Edit
            </MDBBtn>
            </td>
            <td>
-           <MDBBtn outline color='danger' rounded size='sm' onClick={() => handleDelete(itemId)}>
+           <MDBBtn outline color='danger' rounded size='sm' onClick={() => handleDelete(id)}>
              Delete
            </MDBBtn>
            </td>
            </tr>
+        )
+        
      })
      
       

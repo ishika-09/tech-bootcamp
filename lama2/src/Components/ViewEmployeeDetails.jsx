@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import {MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import axios from 'axios';
 
 export default function ViewEmployeeDetails() {
@@ -7,9 +7,9 @@ export default function ViewEmployeeDetails() {
   const[error,setError] = useState("");
 
   useEffect(()=>{
-    axios.get("http://localhost:8080/users/allValid")
-    .then((response)=>setviewEmployee(response.data))
-    .catch((err)=>setError(err.message))
+    axios.get("http://localhost:8081/users/allValid")
+    .then((response)=>{setviewEmployee(response.data);console.log(response.data)})
+    .catch((err)=>{setError(err.message); console.log(err.message)})
   },[]);
 
   return (
@@ -35,28 +35,31 @@ export default function ViewEmployeeDetails() {
     <MDBTableBody>
       {
         Array.from(viewEmployee).map((employee)=>{
-          const {employeeId, employeeName, department, designation, doj, dob, gender}=employee;
+          const {id, name, department, designation, doj, dob, gender}=employee;
         
+          return (
+            <tr>
+              <td>{id}</td>
+              <td>{name}</td>
+              <td>{department}</td>
+              <td>{designation}</td>
+              <td>{dob}</td>
+              <td>{doj}</td>
+              <td>{gender}</td>
+              <td>
+                <MDBBtn outline color='warning' rounded size='sm'>
+                  Edit
+                </MDBBtn>
+                </td>
+                <td>
+                <MDBBtn outline color='danger' rounded size='sm'>
+                  Delete
+                </MDBBtn>
+              </td>
+            </tr>
+          )
       
-      <tr>
-        <td>{employeeId}</td>
-        <td>{employeeName}</td>
-        <td>{department}</td>
-        <td>{designation}</td>
-        <td>{dob}</td>
-        <td>{doj}</td>
-        <td>{gender}</td>
-        <td>
-          <MDBBtn outline color='warning' rounded size='sm'>
-            Edit
-          </MDBBtn>
-          </td>
-          <td>
-          <MDBBtn outline color='danger' rounded size='sm'>
-            Delete
-          </MDBBtn>
-        </td>
-      </tr>
+      
       })
     }
     

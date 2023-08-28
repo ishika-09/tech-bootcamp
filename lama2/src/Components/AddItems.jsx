@@ -20,7 +20,8 @@ function AddItems() {
         make : itemMake,
         issue_status: "N"
       },{headers:{"Content-Type" : "application/json"}})
-      .then((response) => {console.log("Item added !!")});
+      .then((response) => {console.log("Item added !!");
+      window.location.href='/adminDashboard';});
   }
 
 

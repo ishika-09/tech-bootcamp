@@ -8,7 +8,7 @@ export default function ViewLoanCards() {
 
   useEffect(()=>{
     axios.get("http://localhost:8080/loanCards/allValid")
-    .then((response)=>setloan(response.data))
+    .then((response)=>setloan(response.json))
     .catch((err)=> setError(err.message))
   },[]);
 
