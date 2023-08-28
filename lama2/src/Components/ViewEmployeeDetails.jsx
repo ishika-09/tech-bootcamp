@@ -7,7 +7,7 @@ export default function ViewEmployeeDetails() {
   const[error,setError] = useState("");
 
   useEffect(()=>{
-    axios.get("/")
+    axios.get("http://localhost:8080/users/allValid")
     .then((response)=>setviewEmployee(response.data))
     .catch((err)=>setError(err.message))
   },[]);
