@@ -59,6 +59,8 @@ public class LoanCardServiceImpl implements LoanCardService {
 	@Override
 	public LoanCard updateLoanCard(LoanCard loanCard) {
 		// TODO Auto-generated method stub
+		if(loanCardRepository.findById(loanCard.getId()).isPresent()) {
+			loanCardRepository.save(loanCard);
 		return null;
 	}
 
