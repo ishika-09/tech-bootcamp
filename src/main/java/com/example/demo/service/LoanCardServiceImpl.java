@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 //import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.beans.factory.annotation.Autowired;
 //import org.modelmapper.TypeToken;
 //import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,10 @@ import com.example.demo.dto.ItemDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.model.Item;
 import com.example.demo.model.LoanCard;
+<<<<<<< HEAD
+=======
 import com.example.demo.model.User;
+>>>>>>> 83ebb6c88295e9524e21b43b452f10dc20657ce4
 import com.example.demo.repo.ItemRepository;
 import com.example.demo.repo.LoanCardRepository;
 import com.example.demo.repo.UserRepository;
@@ -29,8 +33,14 @@ public class LoanCardServiceImpl implements LoanCardService {
 
 	private final LoanCardRepository loanCardRepository;
 	private final ModelMapper modelMapper;
+<<<<<<< HEAD
+	
+	@Autowired
+	private final ItemRepository itemRepository;
+=======
 	private final ItemRepository itemRepository;
 	private final UserRepository userRepository;
+>>>>>>> 83ebb6c88295e9524e21b43b452f10dc20657ce4
 	@Override
 	public LoanCard createLoanCard(LoanCard loanCard) {
 //		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);

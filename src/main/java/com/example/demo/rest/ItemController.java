@@ -59,6 +59,6 @@ public class ItemController {
 	@PreAuthorize("hasAuthority('user')")
 	public List<ItemDto> getAllPurchasedItem(@PathVariable("id") int id){
 		List<ItemDto> list = LoanCardService.getAllPurchasedItem(id);
-		return null;
+		return list;
 	}
 }
