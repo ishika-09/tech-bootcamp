@@ -10,6 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AdminDto {
-	private int id;
+	private String id;
 	private String password;
 }

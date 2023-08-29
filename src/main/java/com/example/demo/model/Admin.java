@@ -21,7 +21,7 @@ import lombok.Setter;
 public class Admin {
 	@Id
 	@Column(name = "id")
-	private int id;
+	private String id;
 	@Column(name="password", nullable=false)
 	private String password;
 	

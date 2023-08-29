@@ -3,6 +3,7 @@ package com.example.demo.rest;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,6 +39,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAnyAuthority('user','admin')")
 	public UserDto findUser(@PathVariable("id") int id) {
 
 		UserDto o = userService.findUserById(id);
@@ -46,6 +48,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/allValid")
+	@PreAuthorize("hasAuthority('admin')")
 	public List<UserDto> getAllValidUser() {
 
 		List<UserDto> l = userService.getAllValidUsers();
@@ -53,12 +56,14 @@ public class UserController {
 		return l;
 	}
 	@GetMapping("/allPending")
+	@PreAuthorize("hasAuthority('admin')")
 	public List<UserDto> getAllPendingUser(){
 		List<UserDto> l= userService.getAllPendingUsers();
 		return l;
 	}
 	
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasAuthority('admin')")
 	public UserDto deleteUser(@PathVariable("id") int id){
 		UserDto o = userService.deleteUserById(id);
 		
@@ -66,6 +71,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/resetPassword")
+	@PreAuthorize("hasAuthority('admin')")
 	public int resetUserPassword(@RequestBody UserDto userDto ) {
 		return userService.resetPassword(userDto);
 	}

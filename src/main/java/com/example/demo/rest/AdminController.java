@@ -37,20 +37,20 @@ public class AdminController {
 	@Autowired
 	private final UserService userService;
 	
-	@PostMapping
-	public AdminDto createAdmin(@RequestBody AdminDto adminDto) {
-		return adminService.createAdmin(adminDto);
-	}
+//	@PostMapping
+//	public AdminDto createAdmin(@RequestBody AdminDto adminDto) {
+//		return adminService.createAdmin(adminDto);
+//	}
 	
 	@PostMapping("/login")
+	@PreAuthorize("hasAuthority('admin')")
 	public ResponseEntity<?> loginAdmin(@RequestBody AdminDto adminDto) {
-		System.out.println(adminDto);
 		return adminService.loginAdmin(adminDto);
 	}
 	
 	@GetMapping("/{id}")
-	@PreAuthorize("hasRole = 'admin'")
-	public AdminDto findAdmin(@PathVariable("id") int id) {
+	@PreAuthorize("hasAuthority('admin')")
+	public AdminDto findAdmin(@PathVariable("id") String id) {
 
 		AdminDto o = adminService.findAdminById(id);
 		
@@ -58,13 +58,15 @@ public class AdminController {
 	}
 
 	@DeleteMapping("/{id}")
-	public AdminDto deleteAdmin(@PathVariable("id") int id){
+	@PreAuthorize("hasAuthority('admin')")
+	public AdminDto deleteAdmin(@PathVariable("id") String id){
 		AdminDto o = adminService.deleteAdminById(id);
 		
 		return o;
 	}
 	
 	@GetMapping("/all")
+	@PreAuthorize("hasAuthority('admin')")
 	public List<AdminDto> getAllAdmin() {
 
 		List<AdminDto> l = adminService.getAllAdmins();
@@ -73,11 +75,13 @@ public class AdminController {
 	}
 	
 	@PutMapping("/approveLoan")
+	@PreAuthorize("hasAuthority('admin')")
 	public void approveLoan(@RequestBody LoanCard loanCard){
 		loanCardService.approveLoanCard(loanCard);
 	}
 	
 	@PutMapping("/approveUser")
+	@PreAuthorize("hasAuthority('admin')")
 	public void approveUser(@RequestBody UserDto userDto) {
 		userService.approveUser(userDto);
 	}

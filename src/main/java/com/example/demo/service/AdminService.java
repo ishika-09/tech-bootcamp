@@ -10,8 +10,8 @@ public interface AdminService {
 	
 	AdminDto createAdmin(AdminDto adminDto);
 	List<AdminDto> getAllAdmins();
-	AdminDto findAdminById(int id);
-	AdminDto deleteAdminById(int id);
+	AdminDto findAdminById(String id);
+	AdminDto deleteAdminById(String id);
 	AdminDto updateAdmin(AdminDto adminDto);
 	ResponseEntity<?> loginAdmin(AdminDto adminDto);
 }

@@ -9,7 +9,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.http.HttpMethod;
 
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 //import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -68,11 +67,13 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 		http.csrf(csrf -> csrf.disable())
 				.cors().disable()
 				.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-				.authorizeHttpRequests(auth -> auth.antMatchers("/users/login", "admins/login").permitAll()
-//						.antMatchers("/users/**").hasRole("admin")
-//						.antMatchers
-						.antMatchers(HttpMethod.OPTIONS).permitAll())
-//						.anyRequest().authenticated())
+				.authorizeHttpRequests()
+				.antMatchers("/users/login","/users/register","/admins/login").permitAll()
+				.antMatchers("/users").authenticated()
+				.antMatchers("/loanCards").authenticated()
+				.antMatchers("/items").authenticated()
+				.antMatchers("/admins").authenticated()
+				.and()
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
 
@@ -83,81 +84,3 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 		return http.build();
 	}
 }
-
-//@Configuration
-//@EnableWebSecurity
-//// (securedEnabled = true,
-//// jsr250Enabled = true,
-//// prePostEnabled = true) // by default
-//public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-//	
-//	@Autowired
-//	private CustomUserDetailsService userService;
-//
-//	@Autowired
-//	private AuthEntryPointJwt unauthorizedHandler;
-//	
-//	@Override
-//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		// TODO Auto-generated method stub
-//		auth.userDetailsService(userService);
-//	}
-//	
-//	
-//    @Bean
-//    AuthTokenFilter authenticationJwtTokenFilter() {
-//		return new AuthTokenFilter();
-//	}
-//
-//
-//    @Bean
-//    DaoAuthenticationProvider authenticationProvider() {
-//		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-//		authProvider.setUserDetailsService(userService);
-//		authProvider.setPasswordEncoder(passwordEncoder());
-//
-//		return authProvider;
-//	}
-//
-//
-//    @Bean
-//    AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-//		return authConfig.getAuthenticationManager();
-//	}
-//
-//    @Bean
-//    PasswordEncoder passwordEncoder() {
-//		return NoOpPasswordEncoder.getInstance();
-//	}
-//    @Bean
-//    public AuthenticationManager authenticationManagerBean() throws Exception{
-//    	return super.authenticationManagerBean();
-//    }
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//		http.csrf(csrf -> csrf.disable())
-//			.cors().disable()
-//			.authorizeRequests()
-//			.antMatchers("/login").permitAll()
-//			.antMatchers(HttpMethod.OPTIONS).permitAll()
-//			//.anyRequest().authenticated()
-//			.and()
-//			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//		
-//	}
-//    
-//    @Bean
-//    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//		http.csrf(csrf -> csrf.disable())
-//				.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-//				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//				.authorizeHttpRequests(auth -> auth.antMatchers("/api/auth/**").permitAll()
-//						.antMatchers("/api/test/**").permitAll().anyRequest().authenticated());
-//
-//		http.authenticationProvider(authenticationProvider());
-//
-//		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-//
-//		return http.build();
-//	}
-//}

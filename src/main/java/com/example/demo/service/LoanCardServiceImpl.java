@@ -13,10 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.ItemDto;
+import com.example.demo.dto.UserDto;
 import com.example.demo.model.Item;
 import com.example.demo.model.LoanCard;
+<<<<<<< HEAD
+=======
+import com.example.demo.model.User;
+>>>>>>> 83ebb6c88295e9524e21b43b452f10dc20657ce4
 import com.example.demo.repo.ItemRepository;
 import com.example.demo.repo.LoanCardRepository;
+import com.example.demo.repo.UserRepository;
+
 //import com.example.demo.dto.LoanCard;
 import lombok.AllArgsConstructor;
 
@@ -26,17 +33,24 @@ public class LoanCardServiceImpl implements LoanCardService {
 
 	private final LoanCardRepository loanCardRepository;
 	private final ModelMapper modelMapper;
+<<<<<<< HEAD
 	
 	@Autowired
 	private final ItemRepository itemRepository;
+=======
+	private final ItemRepository itemRepository;
+	private final UserRepository userRepository;
+>>>>>>> 83ebb6c88295e9524e21b43b452f10dc20657ce4
 	@Override
 	public LoanCard createLoanCard(LoanCard loanCard) {
 //		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 //		LoanCard loanCard = modelMapper.map(loanCard, LoanCard.class);
 //		System.out.println("itemid" + loanCard.getItem());
-		System.out.println("loancard = " + loanCard);
+		Optional<Item> itemOptional = itemRepository.findById(loanCard.getItem().getId());
+		Item item = itemOptional.get();
+		item.setIssue_status("P");
+		itemRepository.save(item);
 		LoanCard loanCard2= loanCardRepository.save(loanCard);
-		System.out.println("loancard2 " + loanCard2);
 		return loanCard2;
 //		return modelMapper.map(loanCard2, LoanCard.class);
 	}
@@ -46,6 +60,8 @@ public class LoanCardServiceImpl implements LoanCardService {
 		// TODO Auto-generated method stub
 //		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		Optional<LoanCard> loanCard = loanCardRepository.findById(id);
+		Optional<User> userOptional = userRepository.findById(loanCard.get().getUser().getId());
+		loanCard.get().setUser(userOptional.get());
 		return loanCard.get();
 //		return modelMapper.map(loanCard, LoanCard.class);
 	}
@@ -94,8 +110,9 @@ public class LoanCardServiceImpl implements LoanCardService {
 		Optional <LoanCard> loanCard1 = loanCardRepository.findById(loanCard.getId());
 		if (loanCard1.isEmpty())
 			return;
-		Optional<Item> item1 = itemRepository.findById(loanCard.getItem().getId());
-		Item item = item1.get();
+		Item item = loanCard.getItem();
+		Optional<Item> iOptional = itemRepository.findById(item.getId());
+		item = iOptional.get();
 		LoanCard loanCard2 = loanCard1.get();
 		if(loanCard.getValid() == 1) {
 			loanCard2.setValid(1);
@@ -116,8 +133,11 @@ public class LoanCardServiceImpl implements LoanCardService {
 		List<ItemDto> items = new ArrayList<ItemDto>();
 		for(int i=0;i<l.size();i++)
 		{
+			if(l.get(i).getValid()==1) {
 			ItemDto itemDto = modelMapper.map(l.get(i).getItem(), ItemDto.class);
-			items.add(itemDto);
+			Optional<Item> o = itemRepository.findById(itemDto.getId());
+			items.add(modelMapper.map(o, ItemDto.class));
+			}
 		}
 		return items;
 	}
