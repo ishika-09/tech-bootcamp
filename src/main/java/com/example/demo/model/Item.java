@@ -27,7 +27,7 @@ public class Item {
 	private int id;
 	@Column(name = "make" , nullable = false)
 	private String make;
-	@Column(name = "descrption" , nullable = false)
+	@Column(name = "description" , nullable = false)
 	private String description;
 	@Column(name = "issue_status" , nullable = false)
 	private String issue_status;

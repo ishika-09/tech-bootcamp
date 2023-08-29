@@ -51,7 +51,7 @@ public class LoanCardController {
 	
 	@GetMapping("/allApproved")
 	public List<LoanCard> getAllValidLoanCard(){
-		List<LoanCard> l= loanCardService.getAllPendingLoanCards();
+		List<LoanCard> l= loanCardService.getAllValidLoanCards();
 		return l;
 	}
 	

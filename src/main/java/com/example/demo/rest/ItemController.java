@@ -32,7 +32,6 @@ public class ItemController {
 	}
 	
 	@GetMapping("/{id}")
-	@PreAuthorize("hasRole('admin')")
 	public ItemDto findItem(@PathVariable("id") int id) {
 
 		ItemDto o = itemService.findItemById(id);
@@ -41,7 +40,6 @@ public class ItemController {
 	}
 	
 	@DeleteMapping("/{id}")
-	@PreAuthorize("hasRole('admin')")
 	public ItemDto deleteItem(@PathVariable("id") int id){
 		ItemDto o = itemService.deleteItemById(id);
 		
@@ -49,7 +47,6 @@ public class ItemController {
 	}
 	
 	@GetMapping("/all")
-	@PreAuthorize("hasRole('admin')")
 	public List<ItemDto> getAllItem(){
 		List<ItemDto> l= itemService.getAllItems();
 		return l;

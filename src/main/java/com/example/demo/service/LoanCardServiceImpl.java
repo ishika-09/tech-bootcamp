@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 //import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.beans.factory.annotation.Autowired;
 //import org.modelmapper.TypeToken;
 //import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dto.ItemDto;
 import com.example.demo.model.Item;
 import com.example.demo.model.LoanCard;
+import com.example.demo.repo.ItemRepository;
 import com.example.demo.repo.LoanCardRepository;
 //import com.example.demo.dto.LoanCard;
 import lombok.AllArgsConstructor;
@@ -24,6 +26,9 @@ public class LoanCardServiceImpl implements LoanCardService {
 
 	private final LoanCardRepository loanCardRepository;
 	private final ModelMapper modelMapper;
+	
+	@Autowired
+	private final ItemRepository itemRepository;
 	@Override
 	public LoanCard createLoanCard(LoanCard loanCard) {
 //		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
@@ -89,7 +94,8 @@ public class LoanCardServiceImpl implements LoanCardService {
 		Optional <LoanCard> loanCard1 = loanCardRepository.findById(loanCard.getId());
 		if (loanCard1.isEmpty())
 			return;
-		Item item = loanCard.getItem();
+		Optional<Item> item1 = itemRepository.findById(loanCard.getItem().getId());
+		Item item = item1.get();
 		LoanCard loanCard2 = loanCard1.get();
 		if(loanCard.getValid() == 1) {
 			loanCard2.setValid(1);
@@ -100,6 +106,7 @@ public class LoanCardServiceImpl implements LoanCardService {
 			deleteLoanCardById(loanCard.getId());
 			item.setIssue_status("N");
 		}
+		itemRepository.save(item);
 	}
 
 	@Override
