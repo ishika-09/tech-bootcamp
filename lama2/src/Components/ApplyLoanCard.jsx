@@ -35,7 +35,8 @@ function ApplyLoanCard() {
   }
 
   const getInterest = () => {
-    const calculatedInterest = (loanDuration*1.5)/10+7;
+    const rateOfInterest =0.5;
+    const calculatedInterest = (loanDuration*rateOfInterest + 7);
     setinterest(calculatedInterest);
     return calculatedInterest
   };
