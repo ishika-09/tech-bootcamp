@@ -72,7 +72,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 				.antMatchers("/users").authenticated()
 				.antMatchers("/loanCards").authenticated()
 				.antMatchers("/items").authenticated()
-				.antMatchers("/admins/**").authenticated()
+//				.antMatchers("/admins/**").authenticated()
 				.and()
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

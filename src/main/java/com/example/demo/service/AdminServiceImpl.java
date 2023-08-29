@@ -32,13 +32,12 @@ public class AdminServiceImpl implements AdminService {
 
 	private final AdminRepository adminRepository;
 	private final ModelMapper modelMapper;
-	@Autowired
-	PasswordEncoder encoder;
+
 	@Override
 	public AdminDto createAdmin(AdminDto adminDto) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		Admin admin = modelMapper.map(adminDto, Admin.class);
-		admin.setPassword(encoder.encode(admin.getPassword()));
+		admin.setPassword(admin.getPassword());
 		Admin admin2= adminRepository.save(admin);
 		
 		return modelMapper.map(admin2, AdminDto.class);

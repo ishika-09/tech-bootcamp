@@ -43,7 +43,6 @@ public class AdminController {
 	}
 	
 	@PostMapping("/login")
-	@PreAuthorize("hasAuthority('admin')")
 	public ResponseEntity<?> loginAdmin(@RequestBody AdminDto adminDto) {
 		return adminService.loginAdmin(adminDto);
 	}
