@@ -15,6 +15,11 @@ import copy from 'copy-to-clipboard';
 import axios from 'axios';
 
 export default function ViewUserItems() {
+
+  const imgs = {'Tea Table' : 'https://th.bing.com/th/id/OIP.PayejFry73w7wUy1QPUZJAHaHa?pid=ImgDet&rs=1',
+  'Glass' : 'https://i.pinimg.com/originals/02/87/78/028778e231bd05469505be626b565504.jpg',
+  'Fan' : 'https://i5.walmartimages.com/asr/8df4c075-3bb5-4f5b-baf9-4a4129c44a8f_1.0fa04fc43559001e7c86dee1fe2a4333.jpeg'
+  }
     
     function copyToClipboard(itemID){
         copy(itemID);
@@ -35,10 +40,10 @@ export default function ViewUserItems() {
   return (
     <MDBRow className='container align-items-center'>
        {viewItems.map(item => {
-            const { id, description, img, issue_status, make, category, value } = item;
+            const { id, description, issue_status, make, category, value } = item;
         <MDBCol sm="3">
             <MDBCard className="m-3" ke={id}>
-            <MDBCardImage position='top' alt='...' src={img} />
+            <MDBCardImage position='top' alt='...' src={imgs[description]} />
             <MDBCardBody>
                 <MDBCardTitle className='fw-bold'>{description}</MDBCardTitle>
                 <MDBBadge className='my-2' color='info' light>{category}</MDBBadge>

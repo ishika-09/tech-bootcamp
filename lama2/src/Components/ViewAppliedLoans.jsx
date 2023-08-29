@@ -27,18 +27,20 @@ export default function ViewAppliedLoans() {
         <th scope='col'>Item Id</th>
         <th scope='col'>Duration</th>
         <th scope='col'>Card Issue Date</th>
+        <th scope='col'>Status</th>
       </tr>
     </MDBTableHead>
     <MDBTableBody>
       {
         Array.from(appliedLoan).map((loan)=>{
-        const{loanId,loanType,itemId, duration, cardIssueDate} = loan;
+        const{loanId,loanType,itemId, duration, cardIssueDate, issue_status} = loan;
       <tr>
         <td>{loanId}</td>
         <td>{loanType}</td>
         <td>{itemId}</td>
         <td>{duration}</td>
         <td>{cardIssueDate}</td>
+        <td><MDBBadge color={issue_status == 'Y' ? "success" : (issue_status == 'N' ?  'danger' : 'info')} >{issue_status == 'Y' ? 'Approved' : (issue_status == 'N' ?  'Rejected' : 'Processing')}</MDBBadge></td>
       </tr>
        })
      }
