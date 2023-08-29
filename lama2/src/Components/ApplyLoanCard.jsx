@@ -55,10 +55,10 @@ function ApplyLoanCard() {
             <MDBInput wrapperClass='mb-4' onChange={e=> setissue_date(e.target.value)} value={issue_date} label='Issue Date' id='issue_date' name='issue_date' type='date' size='md'/>
             <MDBInput wrapperClass='mb-4' onChange={e => {setloanDuration(e.target.value); getInterest();}} value={loanDuration} label='Loan Duration (in months)' id='loanDuration' name="loanDuration" type='number' size="md"/>
             {/* <MDBBtn onClick={getInterest}>Show Interest Rate</MDBBtn> */}
-            <br/>
+            {/* <br/> */}
             <MDBInput  wrapperClass='mb-4' value={interest} label='Interest Rate' id='interest_rate' disabled name='interest_rate' type='text' size='md'/>
             <MDBInput label='Paste Item ID' onChange={e => setItemID(e.target.value)} id='formControlLg' type='text' size="md"/>
-            {/* <br/> */}
+            <br/>
             <MDBBtn className="mb-4 w-100" type="submit" onClick ={handleSubmit}>Apply</MDBBtn>    
           </div>
 

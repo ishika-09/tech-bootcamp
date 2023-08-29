@@ -21,8 +21,8 @@ export default function ViewItems() {
        
     }
 
-    function handleEdit(itemId, description, itemStatus, itemMake, itemCategory, itemValuation){
-      
+    function handleEdit(itemId){
+      <EditItem itemId={itemId}/>
     }
 
     return (
@@ -57,7 +57,7 @@ export default function ViewItems() {
           <td>{category}</td>
           <td>{value}</td>
            <td>
-           <MDBBtn outline color='warning' rounded size='sm'>
+           <MDBBtn outline color='warning' rounded size='sm' onClick={() => handleEdit(id)}>
              Edit
            </MDBBtn>
            </td>
