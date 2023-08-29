@@ -20,6 +20,8 @@ import UserSignUp from './Components/UserSignUp';
 import ViewUserItems from './Components/viewUserItems';
 import ForgotPassword from './Components/ForgotPassword';
 import Logout from './Components/Logout';
+import EditItem from './Components/EditItem';
+import EditCustomerDetails from './Components/EditCustomerDetails';
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
       <Route path="/purchaseHistory" element={<PurchaseHistory/>}/>
       <Route path="/viewUserItems" element={<ViewUserItems/>}/>
       <Route path="/forgotPassword" element={<ForgotPassword/>}/>
+      <Route path="/editItem" element={<EditItem/>}/>
+      <Route path="/editCustomer" element={<EditCustomerDetails/>}/>
     </Routes> 
     </BrowserRouter>
     <Footer/>

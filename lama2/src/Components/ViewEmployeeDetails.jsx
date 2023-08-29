@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import axios from 'axios';
+import EditCustomerDetails from './EditCustomerDetails';
 
 export default function ViewEmployeeDetails() {
   const [viewEmployee, setViewEmployee] = useState([]);
@@ -27,6 +28,9 @@ export default function ViewEmployeeDetails() {
         setViewEmployee(prevEmployee => prevEmployee.filter(employee => employee.id !== employeeId));
       })
       .catch(err => setError(err.message));
+  }
+  function handleEdit(employeeId) {
+    window.location.href = "http://localhost:3000/editCustomer?id=" + employeeId;
   }
 
   return (
@@ -62,7 +66,7 @@ export default function ViewEmployeeDetails() {
                 <td>{doj}</td>
                 <td>{gender}</td>
                 <td>
-                  <MDBBtn outline color='warning' rounded size='sm'>
+                  <MDBBtn outline color='warning' rounded size='sm' onClick={() => handleEdit(id)}>
                     Edit
                   </MDBBtn>
                 </td>

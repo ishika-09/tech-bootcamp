@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import axios from 'axios';
+import EditItem from './EditItem';
 
 export default function ViewItems() {
   const [viewItems, setViewItems] = useState([]);
@@ -28,7 +29,12 @@ export default function ViewItems() {
       });
   }
 
-  return (
+  function handleEdit(itemId){
+    window.location.href = "http://localhost:3000/editCustomer?id=" + itemId;
+  }
+    
+
+    return (
     <>
       <h3 align="middle" className="mt-3 fw-bolder">Available Item Details</h3>
       <h5 align="middle" className="py-1">Efficiency Unleashed: Masterful Items Management Simplified</h5>
@@ -59,7 +65,7 @@ export default function ViewItems() {
                 <td>{category}</td>
                 <td>{value}</td>
                 <td>
-                  <MDBBtn outline color='warning' rounded size='sm'>
+                  <MDBBtn outline color='warning' rounded size='sm' onClick={() => handleEdit(id)}>
                     Edit
                   </MDBBtn>
                 </td>
