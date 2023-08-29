@@ -40,7 +40,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public AdminDto findAdminById(int id) {
+	public AdminDto findAdminById(String id) {
 		// TODO Auto-generated method stub
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		Optional<Admin> admin = adminRepository.findById(id);
@@ -55,7 +55,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public AdminDto deleteAdminById(int id) {
+	public AdminDto deleteAdminById(String id) {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		Optional <Admin> admin = adminRepository.findById(id);
 		adminRepository.deleteById(id);
@@ -73,14 +73,14 @@ public class AdminServiceImpl implements AdminService {
 		{
 		
 		String adminTokenString =  Jwts.builder()
-		        .setSubject(Integer.toString(adminDto.getId()))
+		        .setSubject(adminDto.getId())
 		        .setIssuedAt(new Date())
 		        .setExpiration(new Date((new Date()).getTime() + (1*60*60*1000)))
 		        .signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode("df6b9fb15cfdbb7527be5a8a6e39f39e572c8ddb943fbc79a943438e9d3d85ebfc2ccf9e0eccd9346026c0b6876e0e01556fe56f135582c05fbdbb505d46755a")), SignatureAlgorithm.HS256)
 		        .compact();
 		List<String> roles = Arrays.asList("admin");
 		return ResponseEntity.ok(
-				new JwtResponse(adminTokenString, Integer.toString(adminDto.getId()), roles));
+				new JwtResponse(adminTokenString, adminDto.getId(), roles));
 		}
 		return (ResponseEntity<?>) ResponseEntity.badRequest();
 	}

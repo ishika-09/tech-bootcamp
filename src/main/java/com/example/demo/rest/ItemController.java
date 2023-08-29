@@ -32,7 +32,7 @@ public class ItemController {
 	}
 	
 	@GetMapping("/{id}")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasAuthority('admin')")
 	public ItemDto findItem(@PathVariable("id") int id) {
 
 		ItemDto o = itemService.findItemById(id);
@@ -41,7 +41,7 @@ public class ItemController {
 	}
 	
 	@DeleteMapping("/{id}")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasAuthority('admin')")
 	public ItemDto deleteItem(@PathVariable("id") int id){
 		ItemDto o = itemService.deleteItemById(id);
 		
@@ -49,13 +49,14 @@ public class ItemController {
 	}
 	
 	@GetMapping("/all")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasAuthority('admin')")
 	public List<ItemDto> getAllItem(){
 		List<ItemDto> l= itemService.getAllItems();
 		return l;
 	}
 	
 	@GetMapping("/allPurchased/{id}")
+	@PreAuthorize("hasAuthority('user')")
 	public List<ItemDto> getAllPurchasedItem(@PathVariable("id") int id){
 		List<ItemDto> list = LoanCardService.getAllPurchasedItem(id);
 		return null;
