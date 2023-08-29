@@ -130,6 +130,7 @@ public class UserServiceImpl implements UserService {
 		User user1 = user.get();
 		if(userDto.getDob().equals(user1.getDob())) {
 			user1.setPassword(encoder.encode(userDto.getPassword()));
+			userRepository.save(user1);
 			return 1;
 		}
 		return 0;	

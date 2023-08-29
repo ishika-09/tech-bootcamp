@@ -71,6 +71,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/resetPassword")
+	@PreAuthorize("hasAuthority('admin')")
 	public int resetUserPassword(@RequestBody UserDto userDto ) {
 		return userService.resetPassword(userDto);
 	}
