@@ -3,15 +3,16 @@ import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBInput, MDBRadio, MDBRange } fro
 import Cart from '../Assets/Images/cart.jpg';
 import axios from 'axios';
 
-function EditItem(props) {
-
+function EditItem() {
+  const queryParams = new URLSearchParams(window.location.search);
+  const id = queryParams.get("id"); 
   const [item, setItem] = useState({});
   const [itemCategory, setItemCategory] = useState("");
   const [itemDescription, setItemDescription] = useState("");
   const [itemValue, setItemValue] = useState(0);
   const [itemMake, setItemMake] = useState("");
   const [itemImg, setItemImg] = useState("");
-  const backendURL = "http://localhost:8081/items/" + props.itemId;
+  const backendURL = "http://localhost:8081/items/" + id;
   function handleSubmit(){
     axios.put(backendURL,{
         itemCategory: itemCategory,
@@ -23,10 +24,9 @@ function EditItem(props) {
     .then((response) => console.log("Item Updated"));
   }
 
-  axios.get(backendURL)
-  .then(response => setItem(response.data))
-
   useEffect(() => {
+    axios.get(backendURL)
+   .then(response => setItem(response.data));
     setItemCategory(item.itemCategory);
     setItemDescription(item.itemDescription);
     setItemValue(item.itemValue);

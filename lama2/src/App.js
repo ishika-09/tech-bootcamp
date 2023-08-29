@@ -46,8 +46,8 @@ function App() {
       <Route path="/purchaseHistory" element={<PurchaseHistory/>}/>
       <Route path="/viewUserItems" element={<ViewUserItems/>}/>
       <Route path="/forgotPassword" element={<ForgotPassword/>}/>
-      <Route path="/editItem" element={EditItem}/>
-      <Route path="/editCustomer" element={EditCustomerDetails}/>
+      <Route path="/editItem" element={<EditItem/>}/>
+      <Route path="/editCustomer" element={<EditCustomerDetails/>}/>
     </Routes> 
     </BrowserRouter>
     <Footer/>
