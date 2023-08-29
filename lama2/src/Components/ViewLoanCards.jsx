@@ -7,9 +7,11 @@ export default function ViewLoanCards() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:8081/loanCards/allApproved")
+    axios.get("http://localhost:8081/loanCards/allApproved",
+    {headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}})
       .then(response => {
         setLoan(response.data); 
+        console.log(response.data);
       })
       .catch(err => {
         setError(err.message);
@@ -31,12 +33,12 @@ export default function ViewLoanCards() {
             <th scope='col'>Item Id</th>
           </tr>
         </MDBTableHead>
-        <MDBTableBody>
+          <MDBTableBody>
           {viewloan.map(loan => {
             const { user, id, type, duration, item } = loan;
             return (
               <tr> 
-                <td>{user}</td>
+                <td>{user}</td> 
                 <td>{id}</td>
                 <td>{type}</td>
                 <td>{duration}</td>

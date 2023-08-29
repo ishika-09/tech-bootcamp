@@ -8,7 +8,9 @@ export default function PurchaseHistory() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    axios.get("/user/purchase")
+    const id = sessionStorage.getItem("username");
+    axios.get(`http://localhost:8081/items/allPurchased/${id}`,
+    {headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}})
     .then((response) => setPurchaseHistory(response.data))
     .catch((err)=> setError(err.message))
   }, [])
@@ -23,7 +25,6 @@ export default function PurchaseHistory() {
     <MDBTableHead>
       <tr>
         <th scope='col'>Item Id</th>
-        <th scope='col'>Loan Card Id</th>
         <th scope='col'>Description</th>
         <th scope='col'>Item Make</th>
         <th scope='col'>Item Category</th>
@@ -33,15 +34,17 @@ export default function PurchaseHistory() {
     <MDBTableBody>
       {
         Array.from(purchaseHistory).map((item) => {
-          const {itemID, lonaCardID, description, itemMake, itemCategory, itemValuation} = item;
-          <tr>
-            <td>{itemID}</td>
-            <td>{lonaCardID}</td>
+          const {id, description, make, category, value} = item;
+          return(
+            <tr>
+            <td>{id}</td>
             <td>{description}</td>
-            <td>{itemMake}</td>
-            <td>{itemCategory}</td>
-            <td>{itemValuation}</td>
+            <td>{make}</td>
+            <td>{category}</td>
+            <td>{value}</td>
           </tr>
+          )
+          
         })
       }
     </MDBTableBody>

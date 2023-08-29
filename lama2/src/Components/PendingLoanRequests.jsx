@@ -7,9 +7,15 @@ export default function PendingLoanRequests() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const backendURL = 'http://localhost:8081/loanCards/allPending';
+  const [token, setToken] = useState('Bearer ' + sessionStorage.getItem("authToken"));
 
+useEffect(() => {
+  setToken('Bearer ' + sessionStorage.getItem("authToken"));
+}, [sessionStorage.getItem("authToken")]);
+ 
   useEffect(() => {
-    axios.get(backendURL)
+    axios.get(backendURL,
+    {headers:{"Content-Type" : "application/json", "Authorization" : token}})
       .then(response => {
         setPendingLoans(response.data);
         setLoading(false);
@@ -32,7 +38,7 @@ export default function PendingLoanRequests() {
         duration: loanDuration,
         valid: valid
       },
-      { headers: { 'Content-Type': 'application/json' } }
+      {headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}}
     )
       .then(response => {
         console.log('Loan Card Approved/Rejected !!');

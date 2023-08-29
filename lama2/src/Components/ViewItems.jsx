@@ -7,7 +7,7 @@ export default function ViewItems() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:8081/items/all")
+    axios.get("http://localhost:8081/items/all",{headers:{"Content-Type" : "application/json", Authorization : `Bearer ${sessionStorage.getItem("authToken")}`}})
       .then(response => setViewItems(response.data))
       .catch(err => {
         setError(err.message);
@@ -16,7 +16,8 @@ export default function ViewItems() {
   }, []);
 
   function handleDelete(itemId) {
-    axios.delete("http://localhost:8081/items/" + itemId)
+    axios.delete("http://localhost:8081/items/" + itemId,
+    {headers:{"Content-Type" : "application/json", Authorization : `Bearer ${sessionStorage.getItem("authToken")}`}})
       .then(response => {
         console.log("Item Deleted !!");
         setViewItems(prevItems => prevItems.filter(item => item.id !== itemId));
@@ -29,7 +30,7 @@ export default function ViewItems() {
 
   return (
     <>
-      <h3 align="middle" className="mt-3 fw-bolder">Item Master Data Details</h3>
+      <h3 align="middle" className="mt-3 fw-bolder">Available Item Details</h3>
       <h5 align="middle" className="py-1">Efficiency Unleashed: Masterful Items Management Simplified</h5>
       <hr />
       <MDBTable align='middle' className="container" striped hover>

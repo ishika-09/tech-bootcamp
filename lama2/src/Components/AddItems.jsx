@@ -21,7 +21,7 @@ function AddItems() {
         make : itemMake,
         // itemImg: itemImg,
         issue_status: "N"
-      },{headers:{"Content-Type" : "application/json"}})
+      },{headers:{"Content-Type" : "application/json",'Access-Control-Allow-Origin':'*',Authorization : `Bearer ${sessionStorage.getItem("authToken")}`}})
       .then((response) => {console.log("Item added !!");
       window.location.href='/adminDashboard';});
   }

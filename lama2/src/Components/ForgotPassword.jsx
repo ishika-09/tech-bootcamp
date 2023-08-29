@@ -17,7 +17,7 @@ function ForgotPassword()
         employeeId: employeeId,
         dob: dob,
         newPassword: newPassword
-      },{headers:{"Content-Type" : "application/json"}})
+      },{headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}})
       .then((response) => {console.log("New Password Added !!");
       window.location.href='/login'});
   }

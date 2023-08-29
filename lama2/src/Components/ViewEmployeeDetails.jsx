@@ -7,7 +7,8 @@ export default function ViewEmployeeDetails() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:8081/users/allValid")
+    axios.get("http://localhost:8081/users/allValid",
+    {headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}})
       .then(response => {
         setViewEmployee(response.data);
         console.log(response.data);
@@ -19,7 +20,8 @@ export default function ViewEmployeeDetails() {
   }, []);
 
   function handleDelete(employeeId) {
-    axios.delete("http://localhost:8081/users/" + employeeId)
+    axios.delete("http://localhost:8081/users/" + employeeId,
+    {headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}})
       .then(response => {
         console.log("Employee Deleted !!");
         setViewEmployee(prevEmployee => prevEmployee.filter(employee => employee.id !== employeeId));

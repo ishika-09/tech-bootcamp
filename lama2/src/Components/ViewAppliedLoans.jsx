@@ -8,7 +8,8 @@ export default function ViewAppliedLoans() {
 
   useEffect(()=>{
     const id = sessionStorage.getItem("username");
-    axios.get(`http://localhost:8080/users/allactive/${id}`)
+    axios.get(`http://localhost:8081/loanCards/allActive/${id}`,
+    {headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}})
     .then((response)=>setappliedLoan(response.data))
     .catch((err)=>setError(err.message))
   },[]);
@@ -32,14 +33,17 @@ export default function ViewAppliedLoans() {
     <MDBTableBody>
       {
         Array.from(appliedLoan).map((loan)=>{
-        const{loanId,loanType,itemId, duration, cardIssueDate} = loan;
-      <tr>
-        <td>{loanId}</td>
-        <td>{loanType}</td>
-        <td>{itemId}</td>
+        const{id,type,item, duration, issue_date} = loan;
+      return(
+        <tr>
+        <td>{id}</td>
+        <td>{type}</td>
+        <td>{item.id}</td>
         <td>{duration}</td>
-        <td>{cardIssueDate}</td>
+        <td>{issue_date}</td>
       </tr>
+      )
+      
        })
      }
 

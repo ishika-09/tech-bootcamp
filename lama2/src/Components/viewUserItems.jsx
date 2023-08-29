@@ -24,7 +24,8 @@ export default function ViewUserItems() {
     const[error, setError] = useState("");
 
     useEffect(()=>{
-      axios.get("http://localhost:8081/items/all") // SetEndPoint
+      axios.get("http://localhost:8081/items/all", // SetEndPoint
+      {headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}})
       .then((response)=>setviewItems(response.data))
       .catch((err)=> setError(err.message))
     },[]);

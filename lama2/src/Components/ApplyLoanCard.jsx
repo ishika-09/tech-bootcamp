@@ -10,8 +10,14 @@ function ApplyLoanCard() {
   const [interest, setinterest] = useState(0);
   const [itemID, setItemID] = useState("");
   const [issue_date, setissue_date] = useState(new Date());
-  const backendURL = "http://localhost:8081/loanCards/apply"
-
+  const backendURL = "http://localhost:8081/loanCards/apply";
+  const authToken = "Bearer " + sessionStorage.getItem("authToken");
+  console.log(authToken)
+  const config = {
+    headers:{'Content-Type' : 'application/json','Access-Control-Allow-Origin' : '*',Authorization :`${authToken}`}
+  };
+  console.log(config);
+  console.log(sessionStorage.getItem('authToken'));
   function handleSubmit(){
     axios.post(backendURL,
       {
@@ -23,7 +29,7 @@ function ApplyLoanCard() {
         issue_date: issue_date,
         issue_status:"P"
 
-      },{headers:{"Content-Type" : "application/json"}})
+      },config)
       .then((response) => {console.log("Loan Card Added !!");
       window.location.href='/userDashboard';});
   }

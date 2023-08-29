@@ -49,7 +49,7 @@ export default function AdminDashboard() {
         </MDBCardText>
         <hr/>
         <MDBBtn href="/addItem" className='w-100 my-2'>Add Items</MDBBtn>
-        <MDBBtn href="/viewItems" className='w-100 my-2'>View Items</MDBBtn>
+        <MDBBtn href="/viewItems" className='w-100 my-2'>View Available Items</MDBBtn>
       </MDBCardBody>
     </MDBCard>
     </div>

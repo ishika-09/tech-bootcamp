@@ -26,15 +26,18 @@ function Login() {
       },{headers:{"Content-Type":"application/json"}})
       .then((response)=> {
         console.log("loginSuccessful");
+        console.log(response);
         sessionStorage.setItem("username", response.data.username);
         sessionStorage.setItem("role", response.data.roles);
         sessionStorage.setItem("authToken",response.data.accessToken);
         if(justifyActive === "tab1"){
           
           window.location.href = '/userDashboard';
+          console.log(response);
         }
         else{
           window.location.href = '/adminDashboard';
+          console.log(response);
         }
         
     });
@@ -82,7 +85,7 @@ function Login() {
 
             <MDBTabsPane show={justifyActive === 'tab2'}>
 
-            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='adminUsername' type='number'/>
+            <MDBInput wrapperClass='mb-4' onChange={e=> setUsername(e.target.value)} value = {username} label='Username' id='adminUsername' type='text'/>
             <MDBInput wrapperClass='mb-4' onChange={e=> setPasssword(e.target.value)} value = {password} label='Password' id='adminPassword' type='password'/>
 
             <div className="d-flex justify-content-between mx-4 mb-4">

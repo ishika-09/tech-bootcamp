@@ -13,7 +13,7 @@ function AddLoanCard() {
       {
         loanType: loanType,
         loanDuration: loanDuration
-      },{headers:{"Content-Type" : "application/json"}})
+      },{headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}})
       .then((response) => {console.log("Loan Card Added !!")});
   }
 
