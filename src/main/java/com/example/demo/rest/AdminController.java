@@ -37,10 +37,10 @@ public class AdminController {
 	@Autowired
 	private final UserService userService;
 	
-//	@PostMapping
-//	public AdminDto createAdmin(@RequestBody AdminDto adminDto) {
-//		return adminService.createAdmin(adminDto);
-//	}
+	@PostMapping
+	public AdminDto createAdmin(@RequestBody AdminDto adminDto) {
+		return adminService.createAdmin(adminDto);
+	}
 	
 	@PostMapping("/login")
 	@PreAuthorize("hasAuthority('admin')")

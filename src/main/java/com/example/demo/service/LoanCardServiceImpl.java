@@ -7,19 +7,14 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 //import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.springframework.beans.factory.annotation.Autowired;
 //import org.modelmapper.TypeToken;
 //import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.ItemDto;
-import com.example.demo.dto.UserDto;
 import com.example.demo.model.Item;
 import com.example.demo.model.LoanCard;
-<<<<<<< HEAD
-=======
 import com.example.demo.model.User;
->>>>>>> 83ebb6c88295e9524e21b43b452f10dc20657ce4
 import com.example.demo.repo.ItemRepository;
 import com.example.demo.repo.LoanCardRepository;
 import com.example.demo.repo.UserRepository;
@@ -33,82 +28,61 @@ public class LoanCardServiceImpl implements LoanCardService {
 
 	private final LoanCardRepository loanCardRepository;
 	private final ModelMapper modelMapper;
-<<<<<<< HEAD
-	
-	@Autowired
-	private final ItemRepository itemRepository;
-=======
 	private final ItemRepository itemRepository;
 	private final UserRepository userRepository;
->>>>>>> 83ebb6c88295e9524e21b43b452f10dc20657ce4
+	
 	@Override
 	public LoanCard createLoanCard(LoanCard loanCard) {
-//		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-//		LoanCard loanCard = modelMapper.map(loanCard, LoanCard.class);
-//		System.out.println("itemid" + loanCard.getItem());
 		Optional<Item> itemOptional = itemRepository.findById(loanCard.getItem().getId());
 		Item item = itemOptional.get();
 		item.setIssue_status("P");
 		itemRepository.save(item);
 		LoanCard loanCard2= loanCardRepository.save(loanCard);
 		return loanCard2;
-//		return modelMapper.map(loanCard2, LoanCard.class);
 	}
 
 	@Override
 	public LoanCard findLoanCardById(int id) {
-		// TODO Auto-generated method stub
-//		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		Optional<LoanCard> loanCard = loanCardRepository.findById(id);
+			Optional<LoanCard> loanCard = loanCardRepository.findById(id);
 		Optional<User> userOptional = userRepository.findById(loanCard.get().getUser().getId());
 		loanCard.get().setUser(userOptional.get());
 		return loanCard.get();
-//		return modelMapper.map(loanCard, LoanCard.class);
 	}
 
 	@Override
 	public LoanCard updateLoanCard(LoanCard loanCard) {
-		// TODO Auto-generated method stub
 		if(loanCardRepository.findById(loanCard.getId()).isPresent()) {
-			loanCardRepository.save(loanCard);
+			return loanCardRepository.save(loanCard);
+		}
 		return null;
 	}
 
 	@Override
 	public LoanCard deleteLoanCardById(int id) {
-//		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		Optional <LoanCard> loanCard = loanCardRepository.findById(id);
 		loanCardRepository.deleteById(id);
 		return loanCard.get();
-//		return modelMapper.map(loanCard, LoanCard.class);
 	}
 	
 	@Override
 	public List<LoanCard> getAllPendingLoanCards(){
-//		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		List<LoanCard> loanCard = loanCardRepository.findAllPending();
-//		List<LoanCard> l = modelMapper.map(loanCard, new TypeToken<List<LoanCard>>(){}.getType());
 		return loanCard;
 	}
 	
 	@Override
 	public List<LoanCard> getAllActiveLoanCards(int user_id){
-//		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		List<LoanCard> loanCard = loanCardRepository.findAllActive(user_id);
-//		List<LoanCard> l = modelMapper.map(loanCard, new TypeToken<List<LoanCard>>(){}.getType());
 		return loanCard;
 	}
 	@Override
 	public List<LoanCard> getAllValidLoanCards(){
-//		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		List<LoanCard> loanCard = loanCardRepository.findAllValid();
-//		List<LoanCard> l = modelMapper.map(loanCard, new TypeToken<List<LoanCard>>(){}.getType());
 		return loanCard;
 	}
 	
 	@Override
 	public void approveLoanCard(LoanCard loanCard) {
-//		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		Optional <LoanCard> loanCard1 = loanCardRepository.findById(loanCard.getId());
 		if (loanCard1.isEmpty())
 			return;
