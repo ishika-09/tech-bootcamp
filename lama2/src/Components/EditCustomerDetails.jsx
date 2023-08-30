@@ -17,7 +17,7 @@ function EditCustomerDetails()
   const [name, setName] = useState("");
   const [contact, setContact] = useState();
   const [gender, setGender] = useState("");
-
+  const [error, setError] = useState("")
   const backendURL = "http://localhost:8081/users/" + id;
   function handleSubmit(){
     axios.put(backendURL,
@@ -30,23 +30,33 @@ function EditCustomerDetails()
         contact : contact,
         valid:1,
         gender : gender
-      },{headers:{"Content-Type" : "application/json"}})
+      },{headers:{"Content-Type" : "application/json", Authorization : `Bearer ${sessionStorage.getItem("authToken")}`}})
       .then((response) => {console.log("Employee details edited !!");
-        window.location.href='/adminDashboard'});
+        window.location.href='/adminDashboard'})
+        .catch((err)=> {
+            setError(err.message);
+            console.log(err.message);
+            window.location.href = "http://localhost:3000/error";
+          });
   }
 
-  useEffect(()=> {
-    
     axios.get(backendURL)
-    .then(response => setCustomerDetails(response.data));
-    setName(customerDetails.name);
-    setDepartment(customerDetails.department);
-    setDesignation(customerDetails.designation);
-    setDob(customerDetails.dob);
-    setDoj(customerDetails.doj);
-    setContact(customerDetails.contact);
-    setGender(customerDetails.gender);
-  })
+    .then(response => {
+        setCustomerDetails(response.data);
+        setName(customerDetails.name);
+        setDepartment(customerDetails.department);
+        setDesignation(customerDetails.designation);
+        setDob(customerDetails.dob);
+        setDoj(customerDetails.doj);
+        setContact(customerDetails.contact);
+        setGender(customerDetails.gender);
+    })
+    .catch((err)=> {
+        setError(err.message);
+        console.log(err.message);
+        window.location.href = "http://localhost:3000/error";
+      });
+
 
 
   function handleGenderChange(e){

@@ -20,9 +20,10 @@ useEffect(() => {
         setPendingLoans(response.data);
         setLoading(false);
       })
-      .catch(error => {
-        setError(error.message);
-        setLoading(false);
+      .catch((err)=> {
+        setError(err.message);
+        console.log(err.message);
+        window.location.href = "http://localhost:3000/error";
       });
   }, []);
 

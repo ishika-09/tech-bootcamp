@@ -33,7 +33,10 @@ export default function ViewUserItems() {
       axios.get("http://localhost:8081/items/all", // SetEndPoint
       {headers:{'Content-Type' : 'application/json','Access-Control-Allow-Origin' : '*',Authorization :`${authToken}`}})
       .then((response)=>setviewItems(response.data))
-      .catch((err)=> {setError(err.message);console.log(error)});
+      .catch((err)=> {
+        console.log(err.message);
+        window.location.href = "http://localhost:3000/error";
+      });
     },[]);
 
   return (

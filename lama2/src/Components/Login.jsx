@@ -13,6 +13,7 @@ function Login() {
     const [justifyActive, setJustifyActive] = useState('tab1');;
     const [username, setUsername] = useState();
     const [password, setPasssword] = useState("");
+    const [error, setError] = useState("")
     const [backendURL,setBackendURL] = useState("http://localhost:8081/users/login");
 
     const handleJustifyClick = (value) => {
@@ -57,6 +58,11 @@ function Login() {
           console.log(response);
         }
         
+    })
+    .catch((err)=> {
+      setError(err.message);
+      console.log(err.message);
+      window.location.href = "http://localhost:3000/error";
     });
     }
 

@@ -11,6 +11,7 @@ function AddItems() {
   const [itemValue, setItemValue] = useState(0);
   const [itemMake, setItemMake] = useState("");
   const [itemImg, setItemImg] = useState("");
+  const [error, setError] = useState("")
   const backendURL = "http://localhost:8081/items";
   function handleSubmit(){
     axios.post(backendURL,
@@ -23,7 +24,12 @@ function AddItems() {
         issue_status: "N"
       },{headers:{"Content-Type" : "application/json",'Access-Control-Allow-Origin':'*',Authorization : `Bearer ${sessionStorage.getItem("authToken")}`}})
       .then((response) => {console.log("Item added !!");
-      window.location.href='/adminDashboard';});
+      window.location.href='/adminDashboard';})
+      .catch((err)=> {
+        setError(err.message);
+        console.log(err.message);
+        window.location.href = "http://localhost:3000/error";
+      });
   }
 
 

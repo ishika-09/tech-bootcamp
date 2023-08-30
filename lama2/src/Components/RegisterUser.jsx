@@ -15,6 +15,7 @@ function RegisterUser()
   const [name, setName] = useState("");
   const [contact, setContact] = useState();
   const [gender, setGender] = useState("Female");
+  const [error, setError] = useState("")
 
   const backendURL = "http://localhost:8081/users/register";
   function handleSubmit(){
@@ -31,7 +32,12 @@ function RegisterUser()
         gender : gender
       },{headers:{"Content-Type" : "application/json"}})
       .then((response) => {console.log("Employee registered !!");
-        window.location.href='/adminDashboard'});
+        window.location.href='/adminDashboard'})
+        .catch((err)=> {
+          setError(err.message);
+          console.log(err.message);
+          window.location.href = "http://localhost:3000/error";
+        });
   }
   function handleGenderChange(e){
     if(e.target.value=="option1")

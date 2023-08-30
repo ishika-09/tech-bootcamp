@@ -12,7 +12,11 @@ export default function PurchaseHistory() {
     axios.get(`http://localhost:8081/items/allPurchased/${id}`,
     {headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}})
     .then((response) => setPurchaseHistory(response.data))
-    .catch((err)=> setError(err.message))
+    .catch((err)=> {
+      setError(err.message);
+      console.log(err.message);
+      window.location.href = "http://localhost:3000/error";
+    });
   }, [])
   
   return (
