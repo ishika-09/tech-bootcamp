@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 //import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 //import org.modelmapper.TypeToken;
@@ -12,6 +13,7 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.ItemDto;
+import com.example.demo.dto.LoanCardDto;
 import com.example.demo.model.Item;
 import com.example.demo.model.LoanCard;
 import com.example.demo.model.User;
@@ -32,53 +34,68 @@ public class LoanCardServiceImpl implements LoanCardService {
 	private final UserRepository userRepository;
 	
 	@Override
-	public LoanCard createLoanCard(LoanCard loanCard) {
-		Optional<Item> itemOptional = itemRepository.findById(loanCard.getItem().getId());
+	public LoanCardDto createLoanCard(LoanCardDto loanCardDto) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		Optional<Item> itemOptional = itemRepository.findById(loanCardDto.getItem().getId());
 		Item item = itemOptional.get();
 		item.setIssue_status("P");
 		itemRepository.save(item);
-		LoanCard loanCard2= loanCardRepository.save(loanCard);
-		return loanCard2;
+		LoanCard loanCard2= loanCardRepository.save((modelMapper.map(loanCardDto, LoanCard.class)));
+		return modelMapper.map(loanCard2, LoanCardDto.class);
 	}
 
 	@Override
-	public LoanCard findLoanCardById(int id) {
-			Optional<LoanCard> loanCard = loanCardRepository.findById(id);
+	public LoanCardDto findLoanCardById(int id) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		Optional<LoanCard> loanCard = loanCardRepository.findById(id);
 		Optional<User> userOptional = userRepository.findById(loanCard.get().getUser().getId());
-		loanCard.get().setUser(userOptional.get());
-		return loanCard.get();
+		if(userOptional.isEmpty())
+			return null;
+		LoanCardDto result = modelMapper.map(loanCard.get(), LoanCardDto.class);
+		result.setUser(userOptional.get()); 
+		System.out.println(result);
+		return result;
 	}
 
 	@Override
-	public LoanCard updateLoanCard(LoanCard loanCard) {
-		if(loanCardRepository.findById(loanCard.getId()).isPresent()) {
-			return loanCardRepository.save(loanCard);
+	public LoanCardDto updateLoanCard(LoanCardDto loanCardDto) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		if(loanCardRepository.findById(loanCardDto.getId()).isPresent()) {
+			return modelMapper.map(loanCardRepository.save(modelMapper.map(loanCardDto, LoanCard.class)),LoanCardDto.class);
 		}
 		return null;
 	}
 
 	@Override
-	public LoanCard deleteLoanCardById(int id) {
+	public LoanCardDto deleteLoanCardById(int id) {
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
 		Optional <LoanCard> loanCard = loanCardRepository.findById(id);
 		loanCardRepository.deleteById(id);
-		return loanCard.get();
+		return modelMapper.map(loanCard.get(),LoanCardDto.class);
 	}
 	
 	@Override
-	public List<LoanCard> getAllPendingLoanCards(){
+	public List<LoanCardDto> getAllPendingLoanCards(){
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		List<LoanCard> loanCard = loanCardRepository.findAllPending();
-		return loanCard;
+		List<LoanCardDto> l = modelMapper.map(loanCard, new TypeToken<List<LoanCardDto>>(){}.getType());
+		return l;
 	}
 	
 	@Override
-	public List<LoanCard> getAllActiveLoanCards(int user_id){
+	public List<LoanCardDto> getAllActiveLoanCards(int user_id){
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		List<LoanCard> loanCard = loanCardRepository.findAllActive(user_id);
-		return loanCard;
+		List<LoanCardDto> l = modelMapper.map(loanCard, new TypeToken<List<LoanCardDto>>(){}.getType());
+		return l;
 	}
 	@Override
-	public List<LoanCard> getAllValidLoanCards(){
+	public List<LoanCardDto> getAllValidLoanCards(){
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		List<LoanCard> loanCard = loanCardRepository.findAllValid();
-		return loanCard;
+		List<LoanCardDto> l = modelMapper.map(loanCard, new TypeToken<List<LoanCardDto>>(){}.getType());
+		return l;
 	}
 	
 	@Override
