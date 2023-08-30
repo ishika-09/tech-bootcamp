@@ -1,6 +1,14 @@
 import React, {useState} from 'react';
 import {MDBContainer, MDBTabs, MDBTabsItem, MDBTabsLink, MDBTabsContent,  MDBCol, MDBTabsPane, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+
+
+import 'react-toastify/dist/ReactToastify.css';
+// minified version is also included
+// import 'react-toastify/dist/ReactToastify.min.css';
+
+
 function Login() {
     const [justifyActive, setJustifyActive] = useState('tab1');;
     const [username, setUsername] = useState();
@@ -25,7 +33,16 @@ function Login() {
         password:password
       },{headers:{"Content-Type":"application/json"}})
       .then((response)=> {
-        console.log("loginSuccessful");
+        toast('🦄 Login Successful !', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         console.log(response);
         sessionStorage.setItem("username", response.data.username);
         sessionStorage.setItem("role", response.data.roles);
@@ -45,6 +62,18 @@ function Login() {
 
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom container h-100">
+      <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            />
       <MDBRow>
         <MDBCol col='10' md='6'>
             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" className="img-fluid" alt="Sample image" width="90%"/>
