@@ -35,7 +35,7 @@ public class LoanCardController {
 	public LoanCard findLoanCard(@PathVariable("id") int id) {
 
 		LoanCard o = loanCardService.findLoanCardById(id);
-		
+		System.out.println(o);
 		return o;
 	}
 	

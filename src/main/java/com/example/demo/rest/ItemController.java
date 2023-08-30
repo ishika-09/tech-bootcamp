@@ -27,6 +27,7 @@ public class ItemController {
 	private final ItemService itemService;
 	private final LoanCardService LoanCardService;
 	@PostMapping
+	@PreAuthorize("hasAuthority('admin')")
 	public ItemDto createItem(@RequestBody ItemDto itemDto) {
 		return itemService.createItem(itemDto);
 	}
@@ -49,7 +50,7 @@ public class ItemController {
 	}
 	
 	@GetMapping("/all")
-	@PreAuthorize("hasAuthority('admin')")
+	@PreAuthorize("hasAnyAuthority('admin','user')")
 	public List<ItemDto> getAllItem(){
 		List<ItemDto> l= itemService.getAllItems();
 		return l;
