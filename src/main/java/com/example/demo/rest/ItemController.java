@@ -52,7 +52,7 @@ public class ItemController {
 	}
 	
 	@GetMapping("/all")
-	@PreAuthorize("hasAuthority('admin')")
+	@PreAuthorize("hasAnyAuthority('admin','user')")
 	public List<ItemDto> getAllItem(){
 		List<ItemDto> l= itemService.getAllItems();
 		return l;
