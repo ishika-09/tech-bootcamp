@@ -68,11 +68,11 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 				.cors().disable()
 				.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
 				.authorizeHttpRequests()
-				.antMatchers("/users/login","/users/register","/admins/login","/admins","/users/resetPassword").permitAll()
+				.antMatchers("/users/login","/users/register","/admins/login","/users/resetPassword").permitAll()
 				.antMatchers("/users").authenticated()
 				.antMatchers("/loanCards").authenticated()
 				.antMatchers("/items").authenticated()
-//				.antMatchers("/admins/**").authenticated()
+				.antMatchers("/admins").authenticated()
 				.and()
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
