@@ -2,6 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBInput, MDBRadio, MDBRange } from 'mdb-react-ui-kit';
 import Cart from '../Assets/Images/cart.jpg';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+
+
+import 'react-toastify/dist/ReactToastify.css';
+// minified version is also included
+// import 'react-toastify/dist/ReactToastify.min.css';
 
 function EditItem() {
   const queryParams = new URLSearchParams(window.location.search);
@@ -21,8 +27,30 @@ function EditItem() {
         value: itemValue,
         make: itemMake
     }, {headers:{"Content-Type" : "application/json", Authorization : `Bearer ${sessionStorage.getItem("authToken")}`}})
-    .then((response) => console.log("Item Updated"))
+    .then((response) => {console.log("Item Updated");
+    toast('🦄 Item Updated !', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+    window.location.href='/adminDashboard'
+    })
     .catch((err)=> {
+      toast('🦄 Unable to Update Item !', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
         setError(err.message);
         console.log(err.message);
         window.location.href = "http://localhost:3000/error";
@@ -45,6 +73,18 @@ function EditItem() {
 
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom">
+      <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            />
       <MDBRow>
 
         <MDBCol col='4' md='6'>

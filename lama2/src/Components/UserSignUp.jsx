@@ -3,16 +3,12 @@ import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBInput, MDBRadio, MDBBadge } fro
 import User from '../Assets/Images/userRegister.jpg';
 import { useState } from 'react';
 import axios from 'axios';
-import {
-  MDBModal,
-  MDBModalDialog,
-  MDBModalContent,
-  MDBModalHeader,
-  MDBModalTitle,
-  MDBModalBody,
-  MDBModalFooter,
-} from 'mdb-react-ui-kit';
-import {render} from '@testing-library/react'
+import { ToastContainer, toast } from 'react-toastify';
+
+
+import 'react-toastify/dist/ReactToastify.css';
+// minified version is also included
+// import 'react-toastify/dist/ReactToastify.min.css';
 
 function UserSignUp() 
 {
@@ -42,10 +38,30 @@ function UserSignUp()
         valid:1
       },{headers:{"Content-Type" : "application/json"}})
       .then((response) => {
+        toast('🦄 Sign Up Successful !', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         alert("Login with username as " + response.data.id)
         window.location.href='/login'
       })
       .catch((err)=> {
+        toast('🦄 Sign Up Failed !', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         setError(err.message);
         console.log(err.message);
         window.location.href = "http://localhost:3000/error";
@@ -59,6 +75,18 @@ function UserSignUp()
   }
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom">
+      <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            />
       <MDBRow>
 
 

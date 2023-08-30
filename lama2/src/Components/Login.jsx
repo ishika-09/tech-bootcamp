@@ -60,6 +60,17 @@ function Login() {
         
     })
     .catch((err)=> {
+      toast('🦄 Login Failed !', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+      
       setError(err.message);
       console.log(err.message);
       window.location.href = "http://localhost:3000/error";

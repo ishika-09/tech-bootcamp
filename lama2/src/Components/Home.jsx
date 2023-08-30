@@ -1,13 +1,10 @@
 import Footer from "./Footer";
-import {MDBContainer, MDBRow, MDBCol, MDBBtn} from 'mdb-react-ui-kit';
+import {MDBContainer, MDBRow, MDBCol} from 'mdb-react-ui-kit';
 import Bank from "../Assets/Images/bank.jpg"
 import Wallet from "../Assets/Images/wallet.png"
 import Typewriter from "typewriter-effect";
-import React from 'react';
-
 
 function Home(){
-  
     return (
         <MDBContainer fluid className="p-3 my-5 h-custom">
       <MDBRow>

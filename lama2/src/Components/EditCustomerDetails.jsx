@@ -3,6 +3,12 @@ import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox, MD
 import User from '../Assets/Images/userRegister.jpg';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+
+
+import 'react-toastify/dist/ReactToastify.css';
+// minified version is also included
+// import 'react-toastify/dist/ReactToastify.min.css';
 
 
 function EditCustomerDetails() 
@@ -31,13 +37,34 @@ function EditCustomerDetails()
         valid:1,
         gender : gender
       },{headers:{"Content-Type" : "application/json", Authorization : `Bearer ${sessionStorage.getItem("authToken")}`}})
-      .then((response) => {console.log("Employee details edited !!");
-        window.location.href='/adminDashboard'})
-        .catch((err)=> {
-            setError(err.message);
-            console.log(err.message);
-            window.location.href = "http://localhost:3000/error";
+      .then((response) => {console.log("Customer Updated");
+      toast('🦄 Customer Details Updated !', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+      window.location.href='/adminDashboard'
+      })
+      .catch((err)=> {
+        toast('🦄 Unable to Update Customer !', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
           });
+          setError(err.message);
+          console.log(err.message);
+          window.location.href = "http://localhost:3000/error";
+        });
   }
 
     axios.get(backendURL)
@@ -67,6 +94,18 @@ function EditCustomerDetails()
   }
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom">
+      <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            />
       <MDBRow>
         <MDBCol col='4' md='6'>
           <div className='w- 100 m-5'>

@@ -2,6 +2,12 @@ import React, {useState} from 'react';
 import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBInput, MDBSelect, MDBRange } from 'mdb-react-ui-kit';
 import Card from '../Assets/Images/Credit-card.jpg';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+
+
+import 'react-toastify/dist/ReactToastify.css';
+// minified version is also included
+// import 'react-toastify/dist/ReactToastify.min.css';
 
 function AddLoanCard() {
   const [loanType, setLoanType] = useState("");
@@ -15,8 +21,28 @@ function AddLoanCard() {
         loanType: loanType,
         loanDuration: loanDuration
       },{headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}})
-      .then((response) => {console.log("Loan Card Added !!")})
+      .then((response) => {console.log("Loan Card Added !!");
+      toast('🦄 Loan Card Added !', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });})
       .catch((err)=> {
+        toast('🦄 Unable to add Loan Card !', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         setError(err.message);
         console.log(err.message);
         window.location.href = "http://localhost:3000/error";
@@ -25,6 +51,18 @@ function AddLoanCard() {
 
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom">
+      <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            />
       <MDBRow>
       <MDBCol col='10' md='6'>
           <img src={Card} class="img-fluid" alt="Sample image" width="80%"/>

@@ -3,6 +3,12 @@ import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBSelect, MDBC
 import User from '../Assets/Images/userRegister.jpg';
 import { useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+
+
+import 'react-toastify/dist/ReactToastify.css';
+// minified version is also included
+// import 'react-toastify/dist/ReactToastify.min.css';
 
 
 function ForgotPassword() 
@@ -20,8 +26,29 @@ function ForgotPassword()
         newPassword: newPassword
       },{headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}})
       .then((response) => {console.log("New Password Added !!");
-      window.location.href='/login'})
+      toast('🦄 Password Resetted !', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+      window.location.href='/login'
+    })
       .catch((err)=> {
+        toast('🦄 Unable to Reset Password !', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
         setError(err.message);
         console.log(err.message);
         window.location.href = "http://localhost:3000/error";
@@ -29,6 +56,18 @@ function ForgotPassword()
   }
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom">
+      <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            />
       <MDBRow>
 
 
