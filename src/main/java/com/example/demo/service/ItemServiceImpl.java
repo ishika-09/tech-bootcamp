@@ -41,7 +41,8 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public ItemDto updateItem(ItemDto itemDto) {
 		// TODO Auto-generated method stub
-		return null;
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		return modelMapper.map(itemRepository.save(modelMapper.map(itemDto, Item.class)),ItemDto.class);
 	}
 
 	@Override

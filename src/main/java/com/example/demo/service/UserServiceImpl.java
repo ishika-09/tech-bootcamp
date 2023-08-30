@@ -17,11 +17,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.CustomUserDetails;
+import com.example.demo.model.Item;
 import com.example.demo.model.User;
 import com.example.demo.payload.request.LoginRequest;
 import com.example.demo.payload.response.JwtResponse;
 import com.example.demo.repo.UserRepository;
 import com.example.demo.security.jwt.JwtUtils;
+import com.example.demo.dto.ItemDto;
 
 //import io.jsonwebtoken.Jwts;
 //import io.jsonwebtoken.SignatureAlgorithm;
@@ -77,7 +79,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDto updateUser(UserDto userDto) {
 		// TODO Auto-generated method stub
-		return null;
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		return modelMapper.map(userRepository.save(modelMapper.map(userDto, User.class)),UserDto.class);
 	}
 
 	@Override

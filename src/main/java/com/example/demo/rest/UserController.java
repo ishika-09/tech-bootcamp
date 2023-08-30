@@ -76,7 +76,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/update")
-	@PreAuthorize("hasAuthority('admin")
+	@PreAuthorize("hasAuthority('admin')")
 	public UserDto updateUser(@RequestBody UserDto userDto)
 	{
 		return userService.updateUser(userDto);
