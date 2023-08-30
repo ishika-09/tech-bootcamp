@@ -28,7 +28,7 @@ public class ItemController {
 
 	private final ItemService itemService;
 	private final LoanCardService LoanCardService;
-	@PostMapping
+	@PostMapping("/add")
 	@PreAuthorize("hasAuthority('admin')")
 	public ItemDto createItem(@RequestBody ItemDto itemDto) {
 		return itemService.createItem(itemDto);
