@@ -68,7 +68,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 				.cors().disable()
 				.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
 				.authorizeHttpRequests()
-				.antMatchers("/users/login","/users/register","/admins/login","/admins").permitAll()
+				.antMatchers("/users/login","/users/register","/admins/login","/admins","/users/resetPassword").permitAll()
 				.antMatchers("/users").authenticated()
 				.antMatchers("/loanCards").authenticated()
 				.antMatchers("/items").authenticated()

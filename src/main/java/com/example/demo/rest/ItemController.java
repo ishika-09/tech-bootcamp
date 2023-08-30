@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.ItemDto;
+import com.example.demo.dto.UserDto;
 import com.example.demo.service.ItemService;
 import com.example.demo.service.LoanCardService;
 
@@ -60,5 +62,11 @@ public class ItemController {
 	public List<ItemDto> getAllPurchasedItem(@PathVariable("id") int id){
 		List<ItemDto> list = LoanCardService.getAllPurchasedItem(id);
 		return list;
+	}
+	
+	@PutMapping("/update")
+	@PreAuthorize("hasAuthority('admin')")
+	public ItemDto updateItem(@RequestBody ItemDto itemDto) {
+		return itemService.updateItem(itemDto);
 	}
 }
