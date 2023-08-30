@@ -3,18 +3,19 @@ package com.example.demo.service;
 import java.util.List;
 
 import com.example.demo.dto.ItemDto;
+import com.example.demo.dto.LoanCardDto;
 import com.example.demo.model.LoanCard;
 
 
 public interface LoanCardService {
 	
-	LoanCard createLoanCard(LoanCard loanCard);
-	List<LoanCard> getAllPendingLoanCards();
-	List<LoanCard> getAllValidLoanCards();
-	List<LoanCard> getAllActiveLoanCards(int user_id);
-	LoanCard findLoanCardById(int id);
-	LoanCard deleteLoanCardById(int id);
-	LoanCard updateLoanCard(LoanCard loanCard);
+	LoanCardDto createLoanCard(LoanCardDto loanCardDto);
+	List<LoanCardDto> getAllPendingLoanCards();
+	List<LoanCardDto> getAllValidLoanCards();
+	List<LoanCardDto> getAllActiveLoanCards(int user_id);
+	LoanCardDto findLoanCardById(int id);
+	LoanCardDto deleteLoanCardById(int id);
+	LoanCardDto updateLoanCard(LoanCardDto loanCardDto);
 	void approveLoanCard(LoanCard loanCard);
 	List<ItemDto> getAllPurchasedItem(int id);
 }

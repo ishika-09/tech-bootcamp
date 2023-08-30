@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.LoanCardDto;
 import com.example.demo.model.LoanCard;
 import com.example.demo.service.LoanCardService;
 
@@ -25,46 +26,45 @@ public class LoanCardController {
 	
 	@PostMapping("/apply")
 	@PreAuthorize("hasAuthority('user')")
-	public LoanCard createLoanCard(@RequestBody LoanCard loanCard) {
+	public LoanCardDto createLoanCard(@RequestBody LoanCardDto loanCardDto) {
 //		System.out.println("request body" + loanCard);
-		return loanCardService.createLoanCard(loanCard);
+		return loanCardService.createLoanCard(loanCardDto);
 	}
 	
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAuthority('admin')")
-	public LoanCard findLoanCard(@PathVariable("id") int id) {
+	public LoanCardDto findLoanCard(@PathVariable("id") int id) {
 
-		LoanCard o = loanCardService.findLoanCardById(id);
-		System.out.println(o);
+		LoanCardDto o = loanCardService.findLoanCardById(id);
+		
+
 		return o;
 	}
 	
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasAuthority('admin')")
-	public LoanCard deleteLoanCard(@PathVariable("id") int id){
-		LoanCard o = loanCardService.deleteLoanCardById(id);
-		
-		return o;
+	public LoanCardDto deleteLoanCard(@PathVariable("id") int id){
+		return loanCardService.deleteLoanCardById(id);	
 	}
 	
 	@GetMapping("/allPending")
 	@PreAuthorize("hasAuthority('admin')")
-	public List<LoanCard> getAllPendingLoanCard(){
-		List<LoanCard> l= loanCardService.getAllPendingLoanCards();
+	public List<LoanCardDto> getAllPendingLoanCard(){
+		List<LoanCardDto> l= loanCardService.getAllPendingLoanCards();
 		return l;
 	}
 	
 	@GetMapping("/allApproved")
 	@PreAuthorize("hasAuthority('admin')")
-	public List<LoanCard> getAllValidLoanCard(){
-		List<LoanCard> l= loanCardService.getAllValidLoanCards();
+	public List<LoanCardDto> getAllValidLoanCard(){
+		List<LoanCardDto> l= loanCardService.getAllValidLoanCards();
 		return l;
 	}
 	
 	@GetMapping("/allActive/{user_id}")
 	@PreAuthorize("hasAuthority('user')")
-	public List<LoanCard> getAllActiveLoanCard(@PathVariable("user_id") int user_id){
-		List<LoanCard> l =loanCardService.getAllActiveLoanCards(user_id);
+	public List<LoanCardDto> getAllActiveLoanCard(@PathVariable("user_id") int user_id){
+		List<LoanCardDto> l =loanCardService.getAllActiveLoanCards(user_id);
 		return l;
 	}
 	

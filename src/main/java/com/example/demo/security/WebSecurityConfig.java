@@ -69,10 +69,10 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 				.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
 				.authorizeHttpRequests()
 				.antMatchers("/users/login","/users/register","/admins/login","/admins","/users/resetPassword").permitAll()
-				.antMatchers("/users/").authenticated()
-				.antMatchers("/loanCards/").authenticated()
-				.antMatchers("/items/").authenticated()
-				.antMatchers("/admins/").authenticated()
+				.antMatchers("/users").authenticated()
+				.antMatchers("/loanCards").authenticated()
+				.antMatchers("/items").authenticated()
+//				.antMatchers("/admins/**").authenticated()
 				.and()
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
