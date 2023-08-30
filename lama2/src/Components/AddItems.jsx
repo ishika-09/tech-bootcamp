@@ -18,7 +18,7 @@ function AddItems() {
   const [itemMake, setItemMake] = useState("");
   const [itemImg, setItemImg] = useState("");
   const [error, setError] = useState("")
-  const backendURL = "http://localhost:8081/items";
+  const backendURL = "http://localhost:8081/items/add";
   function handleSubmit(){
     axios.post(backendURL,
       {
