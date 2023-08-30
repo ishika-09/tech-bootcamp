@@ -6,6 +6,7 @@ import axios from 'axios';
 function AddLoanCard() {
   const [loanType, setLoanType] = useState("");
   const [loanDuration, setLoanDuration] = useState(0);
+  const [error, setError] = useState("")
   const backendURL = "http://localhost:8081/loancards/apply"
 
   function handleSubmit(){
@@ -14,7 +15,12 @@ function AddLoanCard() {
         loanType: loanType,
         loanDuration: loanDuration
       },{headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}})
-      .then((response) => {console.log("Loan Card Added !!")});
+      .then((response) => {console.log("Loan Card Added !!")})
+      .catch((err)=> {
+        setError(err.message);
+        console.log(err.message);
+        window.location.href = "http://localhost:3000/error";
+      });
   }
 
   return (

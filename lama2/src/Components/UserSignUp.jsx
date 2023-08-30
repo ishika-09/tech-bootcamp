@@ -1,14 +1,25 @@
 import React from 'react';
-import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBSelect, MDBCheckbox, MDBRadio, MDBDropdownToggle, MDBDropdownItem, MDBDropdownMenu, MDBDropdown } from 'mdb-react-ui-kit';
+import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBInput, MDBRadio, MDBBadge } from 'mdb-react-ui-kit';
 import User from '../Assets/Images/userRegister.jpg';
 import { useState } from 'react';
 import axios from 'axios';
-
+import {
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalTitle,
+  MDBModalBody,
+  MDBModalFooter,
+} from 'mdb-react-ui-kit';
+import {render} from '@testing-library/react'
 
 function UserSignUp() 
 {
+
   const [designation,setDesignation] = useState("Program Associate");
   const [department, setDepartment] = useState("DTI");
+  const [error, setError] = useState("")
   //const [id, setid] = useState(0);
   const [dob,setDob] = useState(new Date());
   const [doj,setDoj] = useState(new Date());
@@ -31,7 +42,13 @@ function UserSignUp()
         valid:1
       },{headers:{"Content-Type" : "application/json"}})
       .then((response) => {
+        alert("Login with username as " + response.data.id)
         window.location.href='/login'
+      })
+      .catch((err)=> {
+        setError(err.message);
+        console.log(err.message);
+        window.location.href = "http://localhost:3000/error";
       });
   }
   function handleGenderChange(e){

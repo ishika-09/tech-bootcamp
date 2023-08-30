@@ -22,6 +22,7 @@ import ForgotPassword from './Components/ForgotPassword';
 import Logout from './Components/Logout';
 import EditItem from './Components/EditItem';
 import EditCustomerDetails from './Components/EditCustomerDetails';
+import ErrorPage from './Components/ErrorPage';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
       <Route path="/forgotPassword" element={<ForgotPassword/>}/>
       <Route path="/editItem" element={<EditItem/>}/>
       <Route path="/editCustomer" element={<EditCustomerDetails/>}/>
+      <Route path="/error" element={<ErrorPage/>}/>
     </Routes> 
     </BrowserRouter>
     <Footer/>

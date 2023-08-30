@@ -11,7 +11,11 @@ export default function ViewAppliedLoans() {
     axios.get(`http://localhost:8081/loanCards/allActive/${id}`,
     {headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}})
     .then((response)=>setappliedLoan(response.data))
-    .catch((err)=>setError(err.message))
+    .catch((err)=> {
+      setError(err.message);
+      console.log(err.message);
+      window.location.href = "http://localhost:3000/error";
+    });
   },[]);
 
   return (

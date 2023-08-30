@@ -14,9 +14,10 @@ export default function ViewEmployeeDetails() {
         setViewEmployee(response.data);
         console.log(response.data);
       })
-      .catch(err => {
+      .catch((err)=> {
         setError(err.message);
         console.log(err.message);
+        window.location.href = "http://localhost:3000/error";
       });
   }, []);
 
@@ -27,7 +28,11 @@ export default function ViewEmployeeDetails() {
         console.log("Employee Deleted !!");
         setViewEmployee(prevEmployee => prevEmployee.filter(employee => employee.id !== employeeId));
       })
-      .catch(err => setError(err.message));
+      .catch((err)=> {
+        setError(err.message);
+        console.log(err.message);
+        window.location.href = "http://localhost:3000/error";
+      });
   }
   function handleEdit(employeeId) {
     window.location.href = "http://localhost:3000/editCustomer?id=" + employeeId;

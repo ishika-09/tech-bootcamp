@@ -10,6 +10,7 @@ function ApplyLoanCard() {
   const [interest, setinterest] = useState(0);
   const [itemID, setItemID] = useState("");
   const [issue_date, setissue_date] = useState(new Date());
+  const [error, setError] = useState("")
   const backendURL = "http://localhost:8081/loanCards/apply";
   const authToken = "Bearer " + sessionStorage.getItem("authToken");
   console.log(authToken)
@@ -31,7 +32,12 @@ function ApplyLoanCard() {
 
       },config)
       .then((response) => {console.log("Loan Card Added !!");
-      window.location.href='/userDashboard';});
+      window.location.href='/userDashboard';})
+      .catch((err)=> {
+        setError(err.message);
+        console.log(err.message);
+        window.location.href = "http://localhost:3000/error";
+      });
   }
 
   const getInterest = () => {

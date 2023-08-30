@@ -14,8 +14,10 @@ export default function ViewLoanCards() {
         console.log(response.data);
       })
       .catch(err => {
-        setError(err.message);
-      });
+        setError(err.message)
+        console.log(err.message);
+        window.location.href = "http://localhost:3000/error";
+        });
   }, []);
 
   return (

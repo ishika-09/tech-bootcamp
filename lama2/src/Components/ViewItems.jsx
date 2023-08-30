@@ -10,9 +10,10 @@ export default function ViewItems() {
   useEffect(() => {
     axios.get("http://localhost:8081/items/all",{headers:{"Content-Type" : "application/json", Authorization : `Bearer ${sessionStorage.getItem("authToken")}`}})
       .then(response => setViewItems(response.data))
-      .catch(err => {
+      .catch((err)=> {
         setError(err.message);
-        console.log("Error fetching items:", err.message);
+        console.log(err.message);
+        window.location.href = "http://localhost:3000/error";
       });
   }, []);
 
@@ -25,12 +26,13 @@ export default function ViewItems() {
       })
       .catch(err => {
         setError(err.message);
-        console.log("Error deleting item:", err.message);
-      });
+          console.log(err.message);
+          window.location.href = "http://localhost:3000/error";
+        });
   }
 
   function handleEdit(itemId){
-    window.location.href = "http://localhost:3000/editCustomer?id=" + itemId;
+    window.location.href = "http://localhost:3000/editItem?id=" + itemId;
   }
     
 

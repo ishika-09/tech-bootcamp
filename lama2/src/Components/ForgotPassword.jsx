@@ -9,6 +9,7 @@ function ForgotPassword()
 {
   const [employeeId, setEmployeeID] = useState("");
   const [dob, setDob] = useState(new Date());
+  const [error, setError] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const backendURL = "http://localhost:8081/users/forgotPassword";
   function handleSubmit(){
@@ -19,7 +20,12 @@ function ForgotPassword()
         newPassword: newPassword
       },{headers:{"Content-Type" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem("authToken")}})
       .then((response) => {console.log("New Password Added !!");
-      window.location.href='/login'});
+      window.location.href='/login'})
+      .catch((err)=> {
+        setError(err.message);
+        console.log(err.message);
+        window.location.href = "http://localhost:3000/error";
+      });
   }
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom">
